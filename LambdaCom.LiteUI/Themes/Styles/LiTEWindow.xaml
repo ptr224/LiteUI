@@ -2,7 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:ld="clr-namespace:LambdaCom.LiteUI">
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="Button.xaml"/>
+        <ResourceDictionary Source="/LambdaCom.LiteUI;component/Themes/Styles/Button.xaml"/>
     </ResourceDictionary.MergedDictionaries>
     <Style x:Key="LiTEWindowButton" TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
         <Setter Property="Width" Value="{DynamicResource WindowButtonWidth}"/>

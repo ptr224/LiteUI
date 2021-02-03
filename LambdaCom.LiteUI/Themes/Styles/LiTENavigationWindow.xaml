@@ -2,7 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:ld="clr-namespace:LambdaCom.LiteUI">
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="LiTEWindow.xaml"/>
+        <ResourceDictionary Source="/LambdaCom.LiteUI;component/Themes/Styles/LiTEWindow.xaml"/>
     </ResourceDictionary.MergedDictionaries>
     <Style TargetType="{x:Type ld:LiTENavigationWindow}">
         <Setter Property="WindowStyle" Value="None"/>
