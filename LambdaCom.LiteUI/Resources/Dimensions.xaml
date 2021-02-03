@@ -1,0 +1,13 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:s="clr-namespace:System;assembly=System.Runtime">
+    <Thickness x:Key="WindowResizeBorderThickness">5,0,5,5</Thickness>
+    <CornerRadius x:Key="WindowCornerSize">5</CornerRadius>
+    <s:Double x:Key="WindowBarHeight">30</s:Double>
+    <s:Double x:Key="WindowButtonWidth">40</s:Double>
+    <Thickness x:Key="WindowContentPadding">10,0,10,10</Thickness>
+    <Thickness x:Key="MaximizedWindowContentPadding">8,5,8,8</Thickness>
+    <s:Double x:Key="WindowTitleFontSize">12</s:Double>
+    <s:Double x:Key="WindowButtonsFontSize">10</s:Double>
+    <s:Double x:Key="WindowToolbarFontSize">16</s:Double>
+</ResourceDictionary>
