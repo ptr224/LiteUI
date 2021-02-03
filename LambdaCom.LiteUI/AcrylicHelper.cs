@@ -81,32 +81,19 @@ namespace LambdaCom.LiteUI
             var accent = new AccentPolicy();
             var accentStructSize = Marshal.SizeOf(accent);
 
-            switch (SystemInfo.Version.Value)
+            accent.AccentState = SystemInfo.Version.Value switch
             {
-                case OSVersion.W10_1903:
-                    accent.AccentState = AccentState.ACCENT_ENABLE_BLURBEHIND;
-                    break;
-                case OSVersion.W10_1809:
-                    accent.AccentState = AccentState.ACCENT_ENABLE_ACRYLICBLURBEHIND;
-                    break;
-                case OSVersion.W10:
-                    accent.AccentState = AccentState.ACCENT_ENABLE_BLURBEHIND;
-                    break;
-                case OSVersion.Old:
-                    accent.AccentState = AccentState.ACCENT_ENABLE_TRANSPARENTGRADIENT;
-                    break;
-            }
+                OSVersion.W10_1903 => AccentState.ACCENT_ENABLE_BLURBEHIND,
+                OSVersion.W10_1809 => AccentState.ACCENT_ENABLE_ACRYLICBLURBEHIND,
+                OSVersion.W10 => AccentState.ACCENT_ENABLE_BLURBEHIND,
+                OSVersion.Old => AccentState.ACCENT_ENABLE_TRANSPARENTGRADIENT,
+                _ => throw new ArgumentOutOfRangeException(nameof(SystemInfo.Version.Value), "Unknown OS version")
+            };
 
-            if (style == AccentFlagsType.Window)
-            {
-                accent.AccentFlags = 2;
-            }
-            else
-            {
-                accent.AccentFlags = 0x20 | 0x40 | 0x80 | 0x100;
-            }
+            accent.AccentFlags = style == AccentFlagsType.Window
+                ? 2
+                : 0x20 | 0x40 | 0x80 | 0x100;
 
-            //accent.GradientColor = 0x99FFFFFF;
             accent.GradientColor = 0x00FFFFFF;
 
             var accentPtr = Marshal.AllocHGlobal(accentStructSize);
@@ -129,7 +116,7 @@ namespace LambdaCom.LiteUI
 
     internal class SystemInfo
     {
-        public static Lazy<OSVersion> Version { get; private set; } = new Lazy<OSVersion>(() => GetVersionInfo());
+        public static Lazy<OSVersion> Version { get; } = new Lazy<OSVersion>(() => GetVersionInfo());
 
         internal static OSVersion GetVersionInfo()
         {
@@ -137,31 +124,22 @@ namespace LambdaCom.LiteUI
 
             if (regkey == null) return default;
 
-
             var majorValue = regkey.GetValue("CurrentMajorVersionNumber");
             var minorValue = regkey.GetValue("CurrentMinorVersionNumber");
             var buildValue = (string)regkey.GetValue("CurrentBuild", 7600);
             var canReadBuild = int.TryParse(buildValue, out var build);
 
             var version = majorValue is int major && minorValue is int minor && canReadBuild
-                ? new Version(major, minor, build) : Environment.OSVersion.Version;
+                ? new Version(major, minor, build) 
+                : Environment.OSVersion.Version;
 
-            if (version >= new Version(10, 0, 18362))
+            return version switch
             {
-                return OSVersion.W10_1903;
-            }
-            else if (version >= new Version(10, 0, 17763))
-            {
-                return OSVersion.W10_1809;
-            }
-            else if (version >= new Version(10, 0, 10240))
-            {
-                return OSVersion.W10;
-            }
-            else
-            {
-                return OSVersion.Old;
-            }
+                _ when version >= new Version(10, 0, 18362) => OSVersion.W10_1903,
+                _ when version >= new Version(10, 0, 17763) => OSVersion.W10_1809,
+                _ when version >= new Version(10, 0, 10240) => OSVersion.W10,
+                _ => OSVersion.Old,
+            };
         }
     }
 }

@@ -3,27 +3,27 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="clr-namespace:LambdaCom.LiteUI">
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="pack://application:,,,/LambdaCom.LiteUI;component/Resources/Colors.xaml"/>
-        <ResourceDictionary Source="pack://application:,,,/LambdaCom.LiteUI;component/Resources/Dimensions.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/LambdaCom.LiteUI;component/Themes/Resources/Colors.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/LambdaCom.LiteUI;component/Themes/Resources/Dimensions.xaml"/>
 
-        <ResourceDictionary Source="pack://application:,,,/LambdaCom.LiteUI;component/Styles/Border.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/LambdaCom.LiteUI;component/Themes/Styles/Border.xaml"/>
         <!--ResourceDictionary Source="pack://application:,,,/LambdaCom.LiteUI;component/Styles/Button.xaml"/ Gia' incluso in LiTEWindow -->
-        <ResourceDictionary Source="pack://application:,,,/LambdaCom.LiteUI;component/Styles/CheckBox.xaml"/>
-        <ResourceDictionary Source="pack://application:,,,/LambdaCom.LiteUI;component/Styles/ComboBox.xaml"/>
-        <ResourceDictionary Source="pack://application:,,,/LambdaCom.LiteUI;component/Styles/ComboBoxItem.xaml"/>
-        <ResourceDictionary Source="pack://application:,,,/LambdaCom.LiteUI;component/Styles/GroupBox.xaml"/>
-        <ResourceDictionary Source="pack://application:,,,/LambdaCom.LiteUI;component/Styles/Label.xaml"/>
-        <ResourceDictionary Source="pack://application:,,,/LambdaCom.LiteUI;component/Styles/ListBox.xaml"/>
-        <ResourceDictionary Source="pack://application:,,,/LambdaCom.LiteUI;component/Styles/ListBoxItem.xaml"/>
-        <ResourceDictionary Source="pack://application:,,,/LambdaCom.LiteUI;component/Styles/LiTENavigationWindow.xaml"/>
-        <ResourceDictionary Source="pack://application:,,,/LambdaCom.LiteUI;component/Styles/LiTEPopup.xaml"/>
-        <!--ResourceDictionary Source="pack://application:,,,/LambdaCom.LiteUI;component/Styles/LiTEWindow.xaml"/ Gia' incluso in LiTENavigationWindow -->
-        <ResourceDictionary Source="pack://application:,,,/LambdaCom.LiteUI;component/Styles/ProgressBar.xaml"/>
-        <ResourceDictionary Source="pack://application:,,,/LambdaCom.LiteUI;component/Styles/RadioButton.xaml"/>
-        <ResourceDictionary Source="pack://application:,,,/LambdaCom.LiteUI;component/Styles/ScrollBar.xaml"/>
-        <ResourceDictionary Source="pack://application:,,,/LambdaCom.LiteUI;component/Styles/TabControl.xaml"/>
-        <ResourceDictionary Source="pack://application:,,,/LambdaCom.LiteUI;component/Styles/TabItem.xaml"/>
-        <ResourceDictionary Source="pack://application:,,,/LambdaCom.LiteUI;component/Styles/TextBox.xaml"/>
-        <ResourceDictionary Source="pack://application:,,,/LambdaCom.LiteUI;component/Styles/ToggleButton.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/LambdaCom.LiteUI;component/Themes/Styles/CheckBox.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/LambdaCom.LiteUI;component/Themes/Styles/ComboBox.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/LambdaCom.LiteUI;component/Themes/Styles/ComboBoxItem.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/LambdaCom.LiteUI;component/Themes/Styles/GroupBox.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/LambdaCom.LiteUI;component/Themes/Styles/Label.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/LambdaCom.LiteUI;component/Themes/Styles/ListBox.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/LambdaCom.LiteUI;component/Themes/Styles/ListBoxItem.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/LambdaCom.LiteUI;component/Themes/Styles/LiTENavigationWindow.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/LambdaCom.LiteUI;component/Themes/Styles/LiTEPopup.xaml"/>
+        <!--ResourceDictionary Source="pack://application:,,,/LambdaCom.LiteUI;component/Themes/Styles/LiTEWindow.xaml"/ Gia' incluso in LiTENavigationWindow -->
+        <ResourceDictionary Source="pack://application:,,,/LambdaCom.LiteUI;component/Themes/Styles/ProgressBar.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/LambdaCom.LiteUI;component/Themes/Styles/RadioButton.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/LambdaCom.LiteUI;component/Themes/Styles/ScrollBar.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/LambdaCom.LiteUI;component/Themes/Styles/TabControl.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/LambdaCom.LiteUI;component/Themes/Styles/TabItem.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/LambdaCom.LiteUI;component/Themes/Styles/TextBox.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/LambdaCom.LiteUI;component/Themes/Styles/ToggleButton.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>
