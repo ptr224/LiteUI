@@ -32,7 +32,7 @@ namespace LambdaCom.LiteUI
     }
 
     /// <summary>
-    /// Specifica le opzioni relative alla <see cref="LiTEPage"/>.
+    /// Specifica le opzioni relative alla <see cref="LitePage"/>.
     /// </summary>
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = true)]
     public sealed class PageOptionsAttribute : Attribute
@@ -44,15 +44,15 @@ namespace LambdaCom.LiteUI
     }
 
     /// <summary>
-    /// Una pagina di contenuto visualizzabile in una <see cref="LiTENavigationWindow"/>.
+    /// Una pagina di contenuto visualizzabile in una <see cref="LiteNavigationWindow"/>.
     /// </summary>
-    public class LiTEPage : UserControl
+    public class LitePage : UserControl
     {
         public static readonly DependencyProperty TitleProperty = DependencyProperty.Register(nameof(Title),
-            typeof(string), typeof(LiTEPage), new FrameworkPropertyMetadata(nameof(LiTEPage), FrameworkPropertyMetadataOptions.AffectsRender));
+            typeof(string), typeof(LitePage), new FrameworkPropertyMetadata(nameof(LitePage), FrameworkPropertyMetadataOptions.AffectsRender));
 
         [Bindable(true)]
-        [Category(nameof(LiTEPage))]
+        [Category(nameof(LitePage))]
         public string Title
         {
             get => (string)GetValue(TitleProperty);
@@ -60,10 +60,10 @@ namespace LambdaCom.LiteUI
         }
 
         public static readonly DependencyProperty ToolbarProperty = DependencyProperty.Register(nameof(Toolbar),
-            typeof(ToolbarItemsCollection), typeof(LiTEPage), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.AffectsRender, ToolbarChanged));
+            typeof(ToolbarItemsCollection), typeof(LitePage), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.AffectsRender, ToolbarChanged));
 
         [Bindable(true)]
-        [Category(nameof(LiTEPage))]
+        [Category(nameof(LitePage))]
         public ToolbarItemsCollection Toolbar
         {
             get => (ToolbarItemsCollection)GetValue(ToolbarProperty);
@@ -72,7 +72,7 @@ namespace LambdaCom.LiteUI
 
         private static void ToolbarChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var window = ((LiTEPage)d).GetWindow();
+            var window = ((LitePage)d).GetWindow();
             if (window != null)
                 window.Toolbar = (ToolbarItemsCollection)e.NewValue;
         }
@@ -80,8 +80,8 @@ namespace LambdaCom.LiteUI
         /// <summary>
         /// Ottiene un riferimento alla finestra contenente la pagina.
         /// </summary>
-        protected LiTENavigationWindow GetWindow()
-            => (LiTENavigationWindow)Window.GetWindow(this);
+        protected LiteNavigationWindow GetWindow()
+            => (LiteNavigationWindow)Window.GetWindow(this);
 
         /// <summary>
         /// L'oggetto <see cref="NavigationService"/> che la pagina sta usando per supportare la navigazione o <see langword="null"/> se questa non è disponibile.

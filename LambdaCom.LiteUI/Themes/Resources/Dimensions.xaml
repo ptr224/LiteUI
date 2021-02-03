@@ -9,5 +9,5 @@
     <Thickness x:Key="MaximizedWindowContentPadding">8,5,8,8</Thickness>
     <s:Double x:Key="WindowTitleFontSize">12</s:Double>
     <s:Double x:Key="WindowButtonsFontSize">10</s:Double>
-    <s:Double x:Key="WindowToolbarFontSize">16</s:Double>
+    <s:Double x:Key="WindowToolbarFontSize">12</s:Double>
 </ResourceDictionary>

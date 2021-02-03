@@ -4,17 +4,19 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/LambdaCom.LiteUI;component/Themes/Styles/Button.xaml"/>
     </ResourceDictionary.MergedDictionaries>
-    <Style x:Key="LiTEWindowButton" TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
+    <Style x:Key="LiteWindowButton" TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
         <Setter Property="Width" Value="{DynamicResource WindowButtonWidth}"/>
         <Setter Property="FontSize" Value="{DynamicResource WindowButtonsFontSize}"/>
-        <Setter Property="Foreground" Value="{Binding BorderBrush, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ld:LiTEWindow}}}"/>
+        <Setter Property="Foreground" Value="{Binding BorderBrush, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ld:LiteWindow}}}"/>
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True"/>
     </Style>
-    <Style x:Key="LiTEToolbarButton" TargetType="{x:Type Button}" BasedOn="{StaticResource LiTEWindowButton}">
+    <Style TargetType="{x:Type ld:ToolbarButton}" BasedOn="{StaticResource LiteWindowButton}">
+        <Setter Property="MinWidth" Value="{DynamicResource WindowButtonWidth}"/>
+        <Setter Property="Width" Value="Auto"/>
         <Setter Property="FontSize" Value="{DynamicResource WindowToolbarFontSize}"/>
     </Style>
-    <Style TargetType="{x:Type ld:LiTEWindow}">
+    <Style TargetType="{x:Type ld:LiteWindow}">
         <Setter Property="WindowStyle" Value="None"/>
         <Setter Property="AllowsTransparency" Value="True"/>
         <Setter Property="Background" Value="{DynamicResource WindowColor}"/>
@@ -27,15 +29,22 @@
         </Setter>
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type ld:LiTEWindow}">
+                <ControlTemplate TargetType="{x:Type ld:LiteWindow}">
                     <Border x:Name="border" Padding="{DynamicResource WindowContentPadding}" BorderThickness="1.2" BorderBrush="{TemplateBinding BorderBrush}" Background="{TemplateBinding Background}" CornerRadius="{DynamicResource WindowCornerSize}">
                         <DockPanel>
                             <DockPanel x:Name="windowBar" Height="{DynamicResource WindowBarHeight}" DockPanel.Dock="Top">
-                                <Label x:Name="title" Content="{TemplateBinding Title}" Foreground="{TemplateBinding BorderBrush}" FontSize="{DynamicResource WindowTitleFontSize}" Margin="10,0,0,0" DockPanel.Dock="Left"/>
-                                <Button x:Name="close" Content="&#xE106;" Style="{StaticResource LiTEWindowButton}" FontFamily="Segoe MDL2 Assets" DockPanel.Dock="Right"/>
-                                <Button x:Name="maximize" Content="&#xE739;" Style="{StaticResource LiTEWindowButton}" FontFamily="Segoe MDL2 Assets" DockPanel.Dock="Right"/>
-                                <Button x:Name="minimize" Content="&#xE949;" Style="{StaticResource LiTEWindowButton}" FontFamily="Segoe MDL2 Assets" DockPanel.Dock="Right"/>
-                                <DockPanel x:Name="toolbar" LastChildFill="False" Margin="10,0"/>
+                                <Image x:Name="icon" Source="{Binding Icon, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}" Stretch="Uniform" Margin="10,5,0,5" DockPanel.Dock="Left"/>
+                                <Label x:Name="title" Content="{TemplateBinding Title}" Foreground="{TemplateBinding BorderBrush}" FontSize="{DynamicResource WindowTitleFontSize}" Margin="5,0,0,0" DockPanel.Dock="Left"/>
+                                <Button x:Name="close" Content="&#xE106;" Style="{StaticResource LiteWindowButton}" FontFamily="Segoe MDL2 Assets" DockPanel.Dock="Right"/>
+                                <Button x:Name="maximize" Content="&#xE739;" Style="{StaticResource LiteWindowButton}" FontFamily="Segoe MDL2 Assets" DockPanel.Dock="Right"/>
+                                <Button x:Name="minimize" Content="&#xE949;" Style="{StaticResource LiteWindowButton}" FontFamily="Segoe MDL2 Assets" DockPanel.Dock="Right"/>
+                                <ItemsControl x:Name="toolbar" Margin="10,0" ItemsSource="{TemplateBinding Toolbar}">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <DockPanel LastChildFill="False"/>
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                </ItemsControl>
                             </DockPanel>
                             <ContentPresenter/>
                         </DockPanel>
@@ -55,6 +64,9 @@
                         <Trigger Property="ResizeMode" Value="CanMinimize">
                             <Setter Property="IsEnabled" TargetName="maximize" Value="False"/>
                         </Trigger>
+                        <Trigger Property="Icon" Value="{x:Null}">
+                            <Setter Property="Visibility" TargetName="icon" Value="Collapsed"/>
+                        </Trigger>
                         <DataTrigger Binding="{Binding IsTransparent, RelativeSource={RelativeSource Self}}" Value="False">
                             <Setter Property="Background" Value="{DynamicResource WindowBaseColor}"/>
                         </DataTrigger>
@@ -69,7 +81,7 @@
                         </DataTrigger>
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding WindowState}" Value="Maximized"/>
+                                <Condition Binding="{Binding WindowState, RelativeSource={RelativeSource Self}}" Value="Maximized"/>
                                 <Condition Binding="{Binding BarStyle, RelativeSource={RelativeSource Self}}" Value="{x:Static ld:WindowBarStyle.HiddenMaximized}"/>
                             </MultiDataTrigger.Conditions>
                             <MultiDataTrigger.Setters>

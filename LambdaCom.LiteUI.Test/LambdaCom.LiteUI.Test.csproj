@@ -8,7 +8,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Logo PortoCloud.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\LambdaCom.LiteUI\LambdaCom.LiteUI.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Logo PortoCloud.png" />
   </ItemGroup>
 
 </Project>

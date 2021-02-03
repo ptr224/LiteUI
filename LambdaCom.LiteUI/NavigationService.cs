@@ -59,21 +59,21 @@ namespace LambdaCom.LiteUI
 
     public sealed class NavigationService
     {
-        private readonly LiTENavigationWindow window;
-        private readonly List<LiTEPage> history;
-        private readonly Dictionary<string, LiTEPage> singletons;
+        private readonly LiteNavigationWindow window;
+        private readonly List<LitePage> history;
+        private readonly Dictionary<string, LitePage> singletons;
 
-        private LiTEPage current;
+        private LitePage current;
         private bool saveCurrent = true;
 
-        internal NavigationService(LiTENavigationWindow window)
+        internal NavigationService(LiteNavigationWindow window)
         {
             this.window = window;
-            history = new List<LiTEPage>();
-            singletons = new Dictionary<string, LiTEPage>();
+            history = new List<LitePage>();
+            singletons = new Dictionary<string, LitePage>();
         }
 
-        private void LoadCurrent(LiTEPage page)
+        private void LoadCurrent(LitePage page)
         {
             // Imposta nuova pagina come corrente
             current = page;
@@ -93,7 +93,7 @@ namespace LambdaCom.LiteUI
 
         internal bool CancelClosing()
         {
-            // Comunica alla LiTENavigationWindow se va annullata la chiusura
+            // Comunica alla finestra se va annullata la chiusura
             return current?.CallCancelNavigation() ?? false;
         }
 
@@ -113,7 +113,7 @@ namespace LambdaCom.LiteUI
         }
 
         /// <summary>
-        /// <see langword="true"/> se è presente almeno una pagina nella cronologia di navigazione, altrimenti <see langword="false"/>.
+        /// Controlla se sia presente almeno una pagina nella cronologia di navigazione.
         /// </summary>
         public bool CanGoBack()
         {
@@ -133,7 +133,7 @@ namespace LambdaCom.LiteUI
                     return;
 
                 // Se la pagina corrente non è un singleton ed implementa IDisposable eseguilo
-                if (!singletons.ContainsValue(current) && current is IDisposable disposable)
+                if (!singletons.ContainsKey(current.GetType().FullName) && current is IDisposable disposable)
                     disposable.Dispose();
             }
 
@@ -155,10 +155,10 @@ namespace LambdaCom.LiteUI
         /// <param name="type">Il tipo della pagina da aprire.</param>
         /// <param name="extras">I parametri da passare alla pagina.</param>
         /// <exception cref="ArgumentNullException">Il tipo della pagina non può essere <see langword="null"/>.</exception>
-        /// <exception cref="ArgumentException">Il tipo della pagina deve essere sottoclasse di <see cref="LiTEPage"/>.</exception>
+        /// <exception cref="ArgumentException">Il tipo della pagina deve essere sottoclasse di <see cref="LitePage"/>.</exception>
         public void Navigate(Type type, NavigationParams extras = null)
         {
-            if (type == null)
+            if (type is null)
                 throw new ArgumentNullException(nameof(type));
 
             if (current != null)
@@ -173,7 +173,7 @@ namespace LambdaCom.LiteUI
             }
 
             // Crea pagina e caricala
-            if (type.IsSubclassOf(typeof(LiTEPage)))
+            if (type.IsSubclassOf(typeof(LitePage)))
             {
                 // Leggi da attributo, se presente, le impostazioni della pagina, altrimenti usa parametri di default
                 saveCurrent = true;
@@ -208,7 +208,7 @@ namespace LambdaCom.LiteUI
                 }
 
                 // Carica nuova istanza di pagina o se necessario riporta in cima il singleton
-                LiTEPage page;
+                LitePage page;
 
                 if (singleton)
                 {
@@ -219,7 +219,7 @@ namespace LambdaCom.LiteUI
                     }
                     else
                     {
-                        page = (LiTEPage)Activator.CreateInstance(type);
+                        page = (LitePage)Activator.CreateInstance(type);
                         page.CallCreated(extras ?? new NavigationParams());
 
                         singletons.Add(type.FullName, page);
@@ -227,7 +227,7 @@ namespace LambdaCom.LiteUI
                 }
                 else if (instantiateNew || (page = history.Where(p => p.GetType() == type).FirstOrDefault()) == null)
                 {
-                    page = (LiTEPage)Activator.CreateInstance(type);
+                    page = (LitePage)Activator.CreateInstance(type);
                     page.CallCreated(extras ?? new NavigationParams());
                 }
                 else
@@ -238,7 +238,7 @@ namespace LambdaCom.LiteUI
                 LoadCurrent(page);
             }
             else
-                throw new ArgumentException("Type must be subclass of " + nameof(LiTEPage), nameof(type));
+                throw new ArgumentException("Type must be subclass of " + nameof(LitePage), nameof(type));
         }
 
         /// <summary>
@@ -247,8 +247,8 @@ namespace LambdaCom.LiteUI
         /// <typeparam name="T">Il tipo della pagina da aprire.</typeparam>
         /// <param name="extras">I parametri da passare alla pagina.</param>
         /// <exception cref="ArgumentNullException">Il tipo della pagina non può essere <see langword="null"/>.</exception>
-        /// <exception cref="ArgumentException">Il tipo della pagina deve essere sottoclasse di <see cref="LiTEPage"/>.</exception>
-        public void Navigate<T>(NavigationParams extras) where T : LiTEPage, new()
+        /// <exception cref="ArgumentException">Il tipo della pagina deve essere sottoclasse di <see cref="LitePage"/>.</exception>
+        public void Navigate<T>(NavigationParams extras) where T : LitePage
             => Navigate(typeof(T), extras);
 
         /// <summary>
@@ -257,8 +257,8 @@ namespace LambdaCom.LiteUI
         /// <typeparam name="T">Il tipo della pagina da aprire.</typeparam>
         /// <param name="extras">I parametri da passare alla pagina.</param>
         /// <exception cref="ArgumentNullException">Il tipo della pagina non può essere <see langword="null"/>.</exception>
-        /// <exception cref="ArgumentException">Il tipo della pagina deve essere sottoclasse di <see cref="LiTEPage"/>.</exception>
-        public void Navigate<T>(params (string key, object value)[] extras) where T : LiTEPage, new()
+        /// <exception cref="ArgumentException">Il tipo della pagina deve essere sottoclasse di <see cref="LitePage"/>.</exception>
+        public void Navigate<T>(params (string key, object value)[] extras) where T : LitePage
         {
             // Ricrea l'oggetto parametro dai valori passati
             var param = new NavigationParams();
@@ -274,8 +274,8 @@ namespace LambdaCom.LiteUI
         /// </summary>
         /// <typeparam name="T">Il tipo della pagina da aprire.</typeparam>
         /// <exception cref="ArgumentNullException">Il tipo della pagina non può essere <see langword="null"/>.</exception>
-        /// <exception cref="ArgumentException">Il tipo della pagina deve essere sottoclasse di <see cref="LiTEPage"/>.</exception>
-        public void Navigate<T>() where T : LiTEPage, new()
+        /// <exception cref="ArgumentException">Il tipo della pagina deve essere sottoclasse di <see cref="LitePage"/>.</exception>
+        public void Navigate<T>() where T : LitePage
             => Navigate(typeof(T));
     }
 }

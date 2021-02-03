@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.ObjectModel;
-using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
@@ -9,26 +7,24 @@ using System.Windows.Media;
 
 namespace LambdaCom.LiteUI
 {
-    public enum LiTEWindowTheme { Light, Dark }
+    public enum LiteWindowTheme { Light, Dark }
 
     public enum WindowBarStyle { Hidden, HiddenMaximized, Normal, Big }
 
-    public class ToolbarItemsCollection : ObservableCollection<ToolbarButton> { }
-
-    public class LiTEWindow : Window
+    public class LiteWindow : Window
     {
         #region Style and properties
 
-        static LiTEWindow()
+        static LiteWindow()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(LiTEWindow), new FrameworkPropertyMetadata(typeof(LiTEWindow)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(LiteWindow), new FrameworkPropertyMetadata(typeof(LiteWindow)));
         }
 
         public static readonly DependencyProperty IsFullscreenProperty = DependencyProperty.Register(nameof(IsFullscreen),
-            typeof(bool), typeof(LiTEWindow), new FrameworkPropertyMetadata(true, FrameworkPropertyMetadataOptions.AffectsRender, FullscreenChanged));
+            typeof(bool), typeof(LiteWindow), new FrameworkPropertyMetadata(true, FrameworkPropertyMetadataOptions.AffectsRender, FullscreenChanged));
 
         [Bindable(true)]
-        [Category(nameof(LiTEWindow))]
+        [Category(nameof(LiteWindow))]
         public bool IsFullscreen
         {
             get => (bool)GetValue(IsFullscreenProperty);
@@ -37,7 +33,7 @@ namespace LambdaCom.LiteUI
 
         private static void FullscreenChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var window = (LiTEWindow)d;
+            var window = (LiteWindow)d;
             window.MaxHeight = (bool)e.NewValue ? double.PositiveInfinity : SystemParameters.WorkArea.Height + 8;
 
             if (window.WindowState == WindowState.Maximized)
@@ -48,10 +44,10 @@ namespace LambdaCom.LiteUI
         }
 
         public static readonly DependencyProperty IsTransparentProperty = DependencyProperty.Register(nameof(IsTransparent),
-            typeof(bool), typeof(LiTEWindow), new FrameworkPropertyMetadata(true, FrameworkPropertyMetadataOptions.AffectsRender));
+            typeof(bool), typeof(LiteWindow), new FrameworkPropertyMetadata(true, FrameworkPropertyMetadataOptions.AffectsRender));
 
         [Bindable(true)]
-        [Category(nameof(LiTEWindow))]
+        [Category(nameof(LiteWindow))]
         public bool IsTransparent
         {
             get => (bool)GetValue(IsTransparentProperty);
@@ -59,10 +55,10 @@ namespace LambdaCom.LiteUI
         }
 
         public static readonly DependencyProperty BarStyleProperty = DependencyProperty.Register(nameof(BarStyle),
-            typeof(WindowBarStyle), typeof(LiTEWindow), new FrameworkPropertyMetadata(WindowBarStyle.Normal, FrameworkPropertyMetadataOptions.AffectsRender));
+            typeof(WindowBarStyle), typeof(LiteWindow), new FrameworkPropertyMetadata(WindowBarStyle.Normal, FrameworkPropertyMetadataOptions.AffectsRender));
 
         [Bindable(true)]
-        [Category(nameof(LiTEWindow))]
+        [Category(nameof(LiteWindow))]
         public WindowBarStyle BarStyle
         {
             get => (WindowBarStyle)GetValue(BarStyleProperty);
@@ -70,35 +66,25 @@ namespace LambdaCom.LiteUI
         }
 
         public static readonly DependencyProperty ToolbarProperty = DependencyProperty.Register(nameof(Toolbar),
-            typeof(ToolbarItemsCollection), typeof(LiTEWindow), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.AffectsRender, ToolbarChanged));
+            typeof(ToolbarItemsCollection), typeof(LiteWindow), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.AffectsRender));
 
         [Bindable(true)]
-        [Category(nameof(LiTEWindow))]
+        [Category(nameof(LiteWindow))]
         public ToolbarItemsCollection Toolbar
         {
             get => (ToolbarItemsCollection)GetValue(ToolbarProperty);
             set => SetValue(ToolbarProperty, value);
         }
 
-        private static void ToolbarChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            var window = (LiTEWindow)d;
-
-            if (e.OldValue is ToolbarItemsCollection oldToolbar)
-                oldToolbar.CollectionChanged -= window.ToolbarItemsCollectionChanged;
-
-            window.InitializeToolbar();
-        }
-
         #endregion
 
-        #region Theme
+        #region Theme colors
 
-        private static Color[] GetThemeColors(LiTEWindowTheme theme)
+        private static Color[] GetThemeColors(LiteWindowTheme theme)
             => theme switch
             {
-                LiTEWindowTheme.Light => new[] { Color.FromRgb(0x26, 0x26, 0x26), Color.FromRgb(0x7F, 0x7F, 0x7F), Color.FromRgb(0xFF, 0xFF, 0xFF) },
-                LiTEWindowTheme.Dark => new[] { Color.FromRgb(0xFF, 0xFF, 0xFF), Color.FromRgb(0x7F, 0x7F, 0x7F), Color.FromRgb(0x00, 0x00, 0x00) },
+                LiteWindowTheme.Light => new[] { Color.FromRgb(0x26, 0x26, 0x26), Color.FromRgb(0x7F, 0x7F, 0x7F), Color.FromRgb(0xFF, 0xFF, 0xFF) },
+                LiteWindowTheme.Dark => new[] { Color.FromRgb(0xFF, 0xFF, 0xFF), Color.FromRgb(0x7F, 0x7F, 0x7F), Color.FromRgb(0x00, 0x00, 0x00) },
                 _ => throw new ArgumentException("Theme not found")
             };
 
@@ -150,7 +136,7 @@ namespace LambdaCom.LiteUI
         /// Imposta il tema globale dell'applicazione.
         /// </summary>
         /// <param name="theme">Il tema da usare.</param>
-        public static void SetGlobalColors(LiTEWindowTheme theme)
+        public static void SetGlobalColors(LiteWindowTheme theme)
         {
             var colors = GetThemeColors(theme);
             SetTheme(Application.Current.Resources, colors[0], colors[1], colors[2]);
@@ -174,7 +160,7 @@ namespace LambdaCom.LiteUI
         /// Imposta il tema della finestra corrente.
         /// </summary>
         /// <param name="theme">Il tema da usare.</param>
-        public void SetColors(LiTEWindowTheme theme)
+        public void SetColors(LiteWindowTheme theme)
         {
             var colors = GetThemeColors(theme);
 
@@ -184,15 +170,13 @@ namespace LambdaCom.LiteUI
 
         #endregion
 
-        public LiTEWindow()
+        public LiteWindow()
         {
-            DataContext = this;
-
             // Forza aggiornamento dell'altezza massima
             IsFullscreen = false;
         }
 
-        public override async void OnApplyTemplate()
+        public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
 
@@ -206,11 +190,8 @@ namespace LambdaCom.LiteUI
             ((Button)GetTemplateChild("minimize")).Click += (_, __) =>
                 WindowState = WindowState.Minimized;
 
-            // Inizializza toolbar
-            InitializeToolbar();
-
             // Attiva l'effetto blur (su thread UI per non rallentare)
-            await Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Normal, new Action(() =>
+            Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Normal, new Action(() =>
             {
                 var windowHelper = new WindowInteropHelper(this);
                 AcrylicHelper.EnableBlur(windowHelper.Handle);
@@ -226,50 +207,6 @@ namespace LambdaCom.LiteUI
                     ContentRendered -= OnContentRendered;
                 }
             }));
-        }
-
-        private void InitializeToolbar()
-        {
-            // Verifica che la finestra abbia già il tema applicato
-            if (GetTemplateChild("toolbar") is DockPanel toolbar)
-            {
-                // Ripulisci toolbar
-                toolbar.Children.Clear();
-
-                // Aggiungi elementi già presenti
-                if (Toolbar != null)
-                {
-                    foreach (var item in Toolbar)
-                        toolbar.Children.Add(item);
-
-                    Toolbar.CollectionChanged += ToolbarItemsCollectionChanged;
-                }
-            }
-        }
-
-        private void ToolbarItemsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            var toolbar = (DockPanel)GetTemplateChild("toolbar");
-
-            switch (e.Action)
-            {
-                case NotifyCollectionChangedAction.Add:
-                    toolbar.Children.Insert(e.NewStartingIndex, (ToolbarButton)e.NewItems[0]);
-                    break;
-                case NotifyCollectionChangedAction.Replace:
-                    toolbar.Children[e.OldStartingIndex] = (ToolbarButton)e.NewItems[0];
-                    break;
-                case NotifyCollectionChangedAction.Remove:
-                    toolbar.Children.RemoveAt(e.OldStartingIndex);
-                    break;
-                case NotifyCollectionChangedAction.Move:
-                    toolbar.Children.RemoveAt(e.OldStartingIndex);
-                    toolbar.Children.Insert(e.NewStartingIndex, (ToolbarButton)e.NewItems[0]);
-                    break;
-                case NotifyCollectionChangedAction.Reset:
-                    toolbar.Children.Clear();
-                    break;
-            }
         }
     }
 }

@@ -6,7 +6,7 @@ using System.Windows;
 
 namespace LambdaCom.LiteUI
 {
-    public static class LiTEMessageBox
+    public static class LiteMessageBox
     {
         /// <summary>
         /// Displays a message box that has a message, title bar caption, button, and icon; and that returns a result.
@@ -16,11 +16,11 @@ namespace LambdaCom.LiteUI
         /// <param name="icon">A MessageBoxImage value that specifies the icon to display.</param>
         /// <param name="button">A MessageBoxButton value that specifies which button or buttons to display.</param>
         /// <param name="caption">A string that specifies the title bar caption to display.</param>
-        public static MessageBoxResult Show(LiTEWindow owner, string messageBoxText, MessageBoxImage icon = MessageBoxImage.None, MessageBoxButton button = MessageBoxButton.OK, string caption = null)
+        public static MessageBoxResult Show(LiteWindow owner, string messageBoxText, MessageBoxImage icon = MessageBoxImage.None, MessageBoxButton button = MessageBoxButton.OK, string caption = null)
         {
-            var msg = new LiTEMessageBoxWindow(messageBoxText, caption, button, icon);
+            var msg = new LiteMessageBoxWindow(messageBoxText, caption, button, icon);
 
-            //Imposta l'owner e usa lo stesso tema
+            // Imposta l'owner e usa lo stesso tema
             if (owner != null)
             {
                 msg.Owner = owner;
@@ -33,7 +33,7 @@ namespace LambdaCom.LiteUI
                 msg.IsTransparent = owner.IsTransparent;
             }
 
-            //Attendi la risposta
+            // Attendi la risposta
             msg.ShowDialog();
 
             return msg.Result;
@@ -48,21 +48,18 @@ namespace LambdaCom.LiteUI
         /// <param name="caption">A string that specifies the title bar caption to display.</param>
         public static MessageBoxResult Show(string messageBoxText, MessageBoxImage icon = MessageBoxImage.None, MessageBoxButton button = MessageBoxButton.OK, string caption = null)
         {
-            var msg = new LiTEMessageBoxWindow(messageBoxText, caption, button, icon);
+            var msg = new LiteMessageBoxWindow(messageBoxText, caption, button, icon);
 
-            //Attendi la risposta
+            // Attendi la risposta
             msg.ShowDialog();
 
             return msg.Result;
         }
     }
 
-    /// <summary>
-    /// Logica di interazione per LiTEMessageBoxWindow.xaml
-    /// </summary>
-    internal partial class LiTEMessageBoxWindow : LiTEWindow
+    internal partial class LiteMessageBoxWindow : LiteWindow
     {
-        //Classe usata per ricavare il testo dei bottoni
+        // Classe usata per ricavare il testo dei bottoni
         private class Helper
         {
             [DllImport("user32.dll", CharSet = CharSet.Unicode)]
@@ -78,9 +75,7 @@ namespace LambdaCom.LiteUI
             public static string GetOk()
             {
                 var sb = new StringBuilder(256);
-
-                IntPtr user32 = LoadLibrary(Environment.SystemDirectory + "\\User32.dll");
-
+                IntPtr user32 = LoadLibrary(Environment.SystemDirectory + @"\User32.dll");
                 LoadString(user32, OK_CAPTION, sb, sb.Capacity);
                 return sb.ToString();
             }
@@ -88,9 +83,7 @@ namespace LambdaCom.LiteUI
             public static string GetCancel()
             {
                 var sb = new StringBuilder(256);
-
-                IntPtr user32 = LoadLibrary(Environment.SystemDirectory + "\\User32.dll");
-
+                IntPtr user32 = LoadLibrary(Environment.SystemDirectory + @"\User32.dll");
                 LoadString(user32, CANCEL_CAPTION, sb, sb.Capacity);
                 return sb.ToString();
             }
@@ -98,9 +91,7 @@ namespace LambdaCom.LiteUI
             public static string GetYes()
             {
                 var sb = new StringBuilder(256);
-
-                IntPtr user32 = LoadLibrary(Environment.SystemDirectory + "\\User32.dll");
-
+                IntPtr user32 = LoadLibrary(Environment.SystemDirectory + @"\User32.dll");
                 LoadString(user32, YES_CAPTION, sb, sb.Capacity);
                 return sb.ToString().Substring(1);
             }
@@ -108,9 +99,7 @@ namespace LambdaCom.LiteUI
             public static string GetNo()
             {
                 var sb = new StringBuilder(256);
-
-                IntPtr user32 = LoadLibrary(Environment.SystemDirectory + "\\User32.dll");
-
+                IntPtr user32 = LoadLibrary(Environment.SystemDirectory + @"\User32.dll");
                 LoadString(user32, NO_CAPTION, sb, sb.Capacity);
                 return sb.ToString().Substring(1);
             }
@@ -118,15 +107,15 @@ namespace LambdaCom.LiteUI
 
         internal MessageBoxResult Result { get; private set; } = MessageBoxResult.Cancel;
 
-        internal LiTEMessageBoxWindow(string message, string caption, MessageBoxButton button, MessageBoxImage icon)
+        internal LiteMessageBoxWindow(string message, string caption, MessageBoxButton button, MessageBoxImage icon)
         {
             InitializeComponent();
 
-            //Imposta testo
+            // Imposta testo
             Message.Text = message;
             Title = caption ?? Process.GetCurrentProcess().ProcessName;
 
-            //Imposta bottoni
+            // Imposta bottoni
             switch (button)
             {
                 case MessageBoxButton.OKCancel:
@@ -167,26 +156,18 @@ namespace LambdaCom.LiteUI
                     break;
             }
 
-            //Imposta icona
-            switch (icon)
+            // Imposta icona
+            Image.Content = icon switch
             {
-                case MessageBoxImage.Exclamation:       // Enumeration value 48 - also covers "Warning"
-                    Image.Content = "\uE7BA";
-                    break;
-                case MessageBoxImage.Error:             // Enumeration value 16, also covers "Hand" and "Stop"
-                    Image.Content = "\uEA39";
-                    break;
-                case MessageBoxImage.Information:       // Enumeration value 64 - also covers "Asterisk"
-                    Image.Content = "\uE946";
-                    break;
-                case MessageBoxImage.Question:
-                    Image.Content = "\uE9CE";
-                    break;
-                default:
-                    return;
-            }
+                MessageBoxImage.Exclamation => "\uE7BA",    // Enumeration value 48 - also covers "Warning"
+                MessageBoxImage.Error => "\uEA39",          // Enumeration value 16, also covers "Hand" and "Stop"
+                MessageBoxImage.Information => "\uE946",    // Enumeration value 64 - also covers "Asterisk"
+                MessageBoxImage.Question => "\uE9CE",
+                _ => null
+            };
 
-            Image.Visibility = Visibility.Visible;
+            if (Image.Content is not null)
+                Image.Visibility = Visibility.Visible;
         }
 
         private void Button_OK_Click(object sender, RoutedEventArgs e)

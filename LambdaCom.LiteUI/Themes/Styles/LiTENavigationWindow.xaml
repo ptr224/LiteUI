@@ -2,9 +2,9 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:ld="clr-namespace:LambdaCom.LiteUI">
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="/LambdaCom.LiteUI;component/Themes/Styles/LiTEWindow.xaml"/>
+        <ResourceDictionary Source="/LambdaCom.LiteUI;component/Themes/Styles/LiteWindow.xaml"/>
     </ResourceDictionary.MergedDictionaries>
-    <Style TargetType="{x:Type ld:LiTENavigationWindow}">
+    <Style TargetType="{x:Type ld:LiteNavigationWindow}">
         <Setter Property="WindowStyle" Value="None"/>
         <Setter Property="AllowsTransparency" Value="True"/>
         <Setter Property="Background" Value="{DynamicResource WindowColor}"/>
@@ -17,16 +17,23 @@
         </Setter>
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type ld:LiTENavigationWindow}">
+                <ControlTemplate TargetType="{x:Type ld:LiteNavigationWindow}">
                     <Border x:Name="border" Padding="{DynamicResource WindowContentPadding}" BorderThickness="1.2" BorderBrush="{TemplateBinding BorderBrush}" Background="{TemplateBinding Background}" CornerRadius="{DynamicResource WindowCornerSize}">
                         <DockPanel>
                             <DockPanel x:Name="windowBar" Height="{DynamicResource WindowBarHeight}" DockPanel.Dock="Top">
-                                <Button x:Name="back" Content="&#xE72B;" Style="{StaticResource LiTEWindowButton}" FontFamily="Segoe MDL2 Assets" IsEnabled="False" DockPanel.Dock="Left"/>
-                                <Label x:Name="title" Content="{TemplateBinding Title}" Foreground="{TemplateBinding BorderBrush}" FontSize="{DynamicResource WindowTitleFontSize}" Margin="10,0,0,0" DockPanel.Dock="Left"/>
-                                <Button x:Name="close" Content="&#xE106;" Style="{StaticResource LiTEWindowButton}" FontFamily="Segoe MDL2 Assets" DockPanel.Dock="Right"/>
-                                <Button x:Name="maximize" Content="&#xE739;" Style="{StaticResource LiTEWindowButton}" FontFamily="Segoe MDL2 Assets" DockPanel.Dock="Right"/>
-                                <Button x:Name="minimize" Content="&#xE949;" Style="{StaticResource LiTEWindowButton}" FontFamily="Segoe MDL2 Assets" DockPanel.Dock="Right"/>
-                                <DockPanel x:Name="toolbar" LastChildFill="False" Margin="10,0"/>
+                                <Button x:Name="back" Content="&#xE72B;" Style="{StaticResource LiteWindowButton}" FontFamily="Segoe MDL2 Assets" IsEnabled="False" DockPanel.Dock="Left"/>
+                                <Image x:Name="icon" Source="{Binding Icon, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}" Stretch="Uniform" Margin="10,5,0,5" DockPanel.Dock="Left"/>
+                                <Label x:Name="title" Content="{TemplateBinding Title}" Foreground="{TemplateBinding BorderBrush}" FontSize="{DynamicResource WindowTitleFontSize}" Margin="5,0,0,0" DockPanel.Dock="Left"/>
+                                <Button x:Name="close" Content="&#xE106;" Style="{StaticResource LiteWindowButton}" FontFamily="Segoe MDL2 Assets" DockPanel.Dock="Right"/>
+                                <Button x:Name="maximize" Content="&#xE739;" Style="{StaticResource LiteWindowButton}" FontFamily="Segoe MDL2 Assets" DockPanel.Dock="Right"/>
+                                <Button x:Name="minimize" Content="&#xE949;" Style="{StaticResource LiteWindowButton}" FontFamily="Segoe MDL2 Assets" DockPanel.Dock="Right"/>
+                                <ItemsControl x:Name="toolbar" Margin="10,0" ItemsSource="{TemplateBinding Toolbar}">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <DockPanel LastChildFill="False"/>
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                </ItemsControl>
                             </DockPanel>
                             <ContentPresenter/>
                         </DockPanel>
@@ -46,6 +53,9 @@
                         <Trigger Property="ResizeMode" Value="CanMinimize">
                             <Setter Property="IsEnabled" TargetName="maximize" Value="False"/>
                         </Trigger>
+                        <Trigger Property="Icon" Value="{x:Null}">
+                            <Setter Property="Visibility" TargetName="icon" Value="Collapsed"/>
+                        </Trigger>
                         <DataTrigger Binding="{Binding IsTransparent, RelativeSource={RelativeSource Self}}" Value="False">
                             <Setter Property="Background" Value="{DynamicResource WindowBaseColor}"/>
                         </DataTrigger>
@@ -60,7 +70,7 @@
                         </DataTrigger>
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding WindowState}" Value="Maximized"/>
+                                <Condition Binding="{Binding WindowState, RelativeSource={RelativeSource Self}}" Value="Maximized"/>
                                 <Condition Binding="{Binding BarStyle, RelativeSource={RelativeSource Self}}" Value="{x:Static ld:WindowBarStyle.HiddenMaximized}"/>
                             </MultiDataTrigger.Conditions>
                             <MultiDataTrigger.Setters>

@@ -1,4 +1,4 @@
-﻿<ld:LiTEWindow x:Class="LambdaCom.LiteUI.LiTEMessageBoxWindow"
+﻿<ld:LiteWindow x:Class="LambdaCom.LiteUI.LiteMessageBoxWindow"
                   x:ClassModifier="internal"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -21,4 +21,4 @@
             <Button Name="Button_Cancel" Content="_Cancel" Width="75" Height="22" Margin="5,0" IsCancel="True" Click="Button_Cancel_Click"/>
         </StackPanel>
     </StackPanel>
-</ld:LiTEWindow>
+</ld:LiteWindow>

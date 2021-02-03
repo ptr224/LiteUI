@@ -6,13 +6,13 @@ using System.Windows.Controls;
 namespace LambdaCom.LiteUI
 {
     /// <summary>
-    /// Una speciale <see cref="LiTEWindow"/> che contiene e naviga tra delle <see cref="LiTEPage"/>.
+    /// Una speciale <see cref="LiteWindow"/> che contiene e naviga tra delle <see cref="LitePage"/>.
     /// </summary>
-    public class LiTENavigationWindow : LiTEWindow
+    public class LiteNavigationWindow : LiteWindow
     {
-        static LiTENavigationWindow()
+        static LiteNavigationWindow()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(LiTENavigationWindow), new FrameworkPropertyMetadata(typeof(LiTENavigationWindow)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(LiteNavigationWindow), new FrameworkPropertyMetadata(typeof(LiteNavigationWindow)));
         }
 
         internal Button Back;
@@ -21,10 +21,10 @@ namespace LambdaCom.LiteUI
         public NavigationService NavigationService { get; }
 
         public static readonly DependencyProperty HideNavigationButtonProperty = DependencyProperty.Register(nameof(HideNavigationButton),
-            typeof(bool), typeof(LiTENavigationWindow), new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsRender));
+            typeof(bool), typeof(LiteNavigationWindow), new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsRender));
 
         [Bindable(true)]
-        [Category(nameof(LiTEWindow))]
+        [Category(nameof(LiteWindow))]
         public bool HideNavigationButton
         {
             get => (bool)GetValue(HideNavigationButtonProperty);
@@ -32,31 +32,31 @@ namespace LambdaCom.LiteUI
         }
 
         public static readonly DependencyProperty StartupPageProperty = DependencyProperty.Register(nameof(StartupPage),
-            typeof(Type), typeof(LiTENavigationWindow), new FrameworkPropertyMetadata(null));
+            typeof(Type), typeof(LiteNavigationWindow), new FrameworkPropertyMetadata(null));
 
         [Bindable(false)]
-        [Category(nameof(LiTEWindow))]
+        [Category(nameof(LiteWindow))]
         public Type StartupPage
         {
             get => (Type)GetValue(StartupPageProperty);
             set => SetValue(StartupPageProperty, value);
         }
 
-        public LiTENavigationWindow()
+        public LiteNavigationWindow()
         {
             NavigationService = new NavigationService(this);
 
-            Closing += LiTENavigationWindow_Closing;
-            Closed += LiTENavigationWindow_Closed;
+            Closing += LiteNavigationWindow_Closing;
+            Closed += LiteNavigationWindow_Closed;
         }
 
-        private void LiTENavigationWindow_Closing(object sender, CancelEventArgs e)
+        private void LiteNavigationWindow_Closing(object sender, CancelEventArgs e)
         {
             // Se la pagina corrente non va chiusa non chiuderti
             e.Cancel = NavigationService.CancelClosing();
         }
 
-        private void LiTENavigationWindow_Closed(object sender, EventArgs e)
+        private void LiteNavigationWindow_Closed(object sender, EventArgs e)
         {
             // Disponi le pagine ancora caricate
             NavigationService.Dispose();

@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
@@ -8,7 +9,7 @@ namespace LambdaCom.LiteUI.Test
     /// Logica di interazione per NavPage.xaml
     /// </summary>
     [PageOptions(LaunchMode = PageLaunchMode.Normal)]
-    public partial class NavPage : LiTEPage
+    public partial class NavPage : LitePage
     {
         public NavPage()
         {
@@ -34,10 +35,10 @@ namespace LambdaCom.LiteUI.Test
             switch (me.SelectedIndex)
             {
                 case 0:
-                    GetWindow()?.SetColors(LiTEWindowTheme.Light);
+                    GetWindow()?.SetColors(LiteWindowTheme.Light);
                     return;
                 case 1:
-                    GetWindow()?.SetColors(LiTEWindowTheme.Dark);
+                    GetWindow()?.SetColors(LiteWindowTheme.Dark);
                     return;
                 case 2:
                     GetWindow()?.SetColors(Color.FromRgb(0x00, 0xFF, 0x00), Color.FromRgb(0xFF, 0x00, 0x00), Color.FromRgb(0x00, 0x00, 0x00));
@@ -50,17 +51,23 @@ namespace LambdaCom.LiteUI.Test
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            LiTEMessageBox.Show(GetWindow(), "Ciao", MessageBoxImage.Information, MessageBoxButton.YesNoCancel);
+            LiteMessageBox.Show(GetWindow(), "Ciao", MessageBoxImage.Information, MessageBoxButton.YesNoCancel);
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            //NavigationService.Navigate<NavPage>(("Title", Title));
             /*Application.Current.Resources["WindowBarHeight"] = 40d;
             Application.Current.Resources["WindowButtonWidth"] = 40d;
             Application.Current.Resources["WindowContentMargin"] = new Thickness(10, 40, 10, 10);*/
 
-            popup.IsOpen = !popup.IsOpen;
+            //popup.IsOpen = !popup.IsOpen;
+
+            var Arr = Enum.GetValues<WindowBarStyle>();
+            int j = Array.IndexOf(Arr, GetWindow().BarStyle) + 1;
+
+            GetWindow().BarStyle = (Arr.Length == j) ? Arr[0] : Arr[j];
+
+            NavigationService.Navigate<NavPage>(("Title", Title));
         }
 
         private void tbb_Click(object sender, RoutedEventArgs e)
