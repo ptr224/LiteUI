@@ -3,6 +3,23 @@
   <PropertyGroup>
     <TargetFramework>net5.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <Authors>LambdaCom</Authors>
+    <Copyright>LambdaCom</Copyright>
+    <PackageLicenseExpression></PackageLicenseExpression>
+    <Description>Custom interface styles and Android-like page navigation windows for WPF</Description>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <Product>LiteUI</Product>
+    <RepositoryUrl>https://github.com/ptr224/LambdaCom.LiteUI</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/ptr224/LambdaCom.LiteUI</PackageProjectUrl>
+    <RepositoryType>git</RepositoryType>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
 
 </Project>

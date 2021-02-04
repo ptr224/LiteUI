@@ -190,7 +190,7 @@ namespace LambdaCom.LiteUI
             ((Button)GetTemplateChild("minimize")).Click += (_, __) =>
                 WindowState = WindowState.Minimized;
 
-            // Attiva l'effetto blur (su thread UI per non rallentare)
+            // Attiva l'effetto blur (su thread UI per evitare bug sfondo nero)
             Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Normal, new Action(() =>
             {
                 var windowHelper = new WindowInteropHelper(this);
