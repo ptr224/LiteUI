@@ -16,7 +16,6 @@ namespace LambdaCom.LiteUI
         }
 
         internal Button Back;
-        internal Label PageTitle;
 
         public NavigationService NavigationService { get; }
 
@@ -68,7 +67,6 @@ namespace LambdaCom.LiteUI
 
             // Salva riferimenti e gestisci pressione indietro
             Back = (Button)GetTemplateChild("back");
-            PageTitle = (Label)GetTemplateChild("title");
 
             Back.Click += BackButton_Click;
 

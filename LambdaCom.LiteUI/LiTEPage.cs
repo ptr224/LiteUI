@@ -60,7 +60,7 @@ namespace LambdaCom.LiteUI
         }
 
         public static readonly DependencyProperty ToolbarProperty = DependencyProperty.Register(nameof(Toolbar),
-            typeof(ToolbarItemsCollection), typeof(LitePage), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.AffectsRender, ToolbarChanged));
+            typeof(ToolbarItemsCollection), typeof(LitePage), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.AffectsRender));
 
         [Bindable(true)]
         [Category(nameof(LitePage))]
@@ -70,13 +70,6 @@ namespace LambdaCom.LiteUI
             set => SetValue(ToolbarProperty, value);
         }
 
-        private static void ToolbarChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            var window = ((LitePage)d).GetWindow();
-            if (window != null)
-                window.Toolbar = (ToolbarItemsCollection)e.NewValue;
-        }
-
         /// <summary>
         /// Ottiene un riferimento alla finestra contenente la pagina.
         /// </summary>
@@ -84,12 +77,12 @@ namespace LambdaCom.LiteUI
             => (LiteNavigationWindow)Window.GetWindow(this);
 
         /// <summary>
-        /// L'oggetto <see cref="NavigationService"/> che la pagina sta usando per supportare la navigazione o <see langword="null"/> se questa non è disponibile.
+        /// L'oggetto <see cref="LiteUI.NavigationService"/> che la pagina sta usando per supportare la navigazione o <see langword="null"/> se questa non è disponibile.
         /// </summary>
-        protected NavigationService NavigationService
+        public NavigationService NavigationService
             => GetWindow()?.NavigationService;
 
-        // Tieni separate le chiamate interne per semplificare la signatura di Created e Retrieved
+        // Tieni separate le chiamate interne per non dover dichiarare tutto internal protected
         internal void CallCreated(NavigationParams extras)
             => Created(extras);
 

@@ -56,16 +56,12 @@ namespace LambdaCom.LiteUI.Test
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            /*Application.Current.Resources["WindowBarHeight"] = 40d;
-            Application.Current.Resources["WindowButtonWidth"] = 40d;
-            Application.Current.Resources["WindowContentMargin"] = new Thickness(10, 40, 10, 10);*/
-
             //popup.IsOpen = !popup.IsOpen;
 
-            var Arr = Enum.GetValues<WindowBarStyle>();
+            /*var Arr = Enum.GetValues<WindowBarStyle>();
             int j = Array.IndexOf(Arr, GetWindow().BarStyle) + 1;
 
-            GetWindow().BarStyle = (Arr.Length == j) ? Arr[0] : Arr[j];
+            GetWindow().BarStyle = (Arr.Length == j) ? Arr[0] : Arr[j];*/
 
             NavigationService.Navigate<NavPage>(("Title", Title));
         }

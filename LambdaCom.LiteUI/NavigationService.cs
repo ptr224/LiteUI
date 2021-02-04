@@ -75,20 +75,10 @@ namespace LambdaCom.LiteUI
 
         private void LoadCurrent(LitePage page)
         {
-            // Imposta nuova pagina come corrente
+            // Imposta nuova pagina come corrente e carica in finestra
             current = page;
-
-            // Carica pagina in finestra e binda a titolo pagina in modo da reagire ai cambiamenti 
-            window.PageTitle.SetBinding(ContentControl.ContentProperty, new Binding(nameof(page.Title))
-            {
-                Source = page
-            });
-
-            window.Back.IsEnabled = CanGoBack();
-            window.Content = page;
-
-            // Imposta la toolbar della pagina sulla finestra
-            window.Toolbar = page.Toolbar;
+            window.DataContext = page;
+            window.Back.IsEnabled = CanGoBack;
         }
 
         internal bool CancelClosing()
@@ -115,10 +105,7 @@ namespace LambdaCom.LiteUI
         /// <summary>
         /// Controlla se sia presente almeno una pagina nella cronologia di navigazione.
         /// </summary>
-        public bool CanGoBack()
-        {
-            return history.Count > 0;
-        }
+        public bool CanGoBack => history.Count > 0;
 
         /// <summary>
         /// Ritorna alla pagina precedente nella cronologia di navigazione.<para/>Se la pagina implementa <see cref="IDisposable"/> verrà disposta automaticamente.
