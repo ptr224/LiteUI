@@ -21,12 +21,12 @@
                     <Border x:Name="border" Padding="{DynamicResource WindowContentPadding}" BorderThickness="1.2" BorderBrush="{TemplateBinding BorderBrush}" Background="{TemplateBinding Background}" CornerRadius="{DynamicResource WindowCornerSize}">
                         <DockPanel>
                             <DockPanel x:Name="windowBar" Height="{DynamicResource WindowBarHeight}" DockPanel.Dock="Top">
-                                <Button x:Name="back" Content="&#xE72B;" Style="{StaticResource LiteWindowButton}" FontFamily="Segoe MDL2 Assets" IsEnabled="False" DockPanel.Dock="Left"/>
+                                <Button x:Name="back" Command="{Binding BackCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ld:LiteNavigationWindow}}}" Content="&#xE72B;" Style="{StaticResource LiteWindowButton}" FontFamily="Segoe MDL2 Assets" DockPanel.Dock="Left"/>
                                 <Image x:Name="icon" Source="{Binding Icon, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}" Stretch="Uniform" Margin="10,5,0,5" DockPanel.Dock="Left"/>
                                 <Label x:Name="title" Content="{Binding Title}" Foreground="{TemplateBinding BorderBrush}" FontSize="{DynamicResource WindowTitleFontSize}" Margin="5,0,0,0" DockPanel.Dock="Left"/>
-                                <Button x:Name="close" Content="&#xE106;" Style="{StaticResource LiteWindowButton}" FontFamily="Segoe MDL2 Assets" DockPanel.Dock="Right"/>
-                                <Button x:Name="maximize" Content="&#xE739;" Style="{StaticResource LiteWindowButton}" FontFamily="Segoe MDL2 Assets" DockPanel.Dock="Right"/>
-                                <Button x:Name="minimize" Content="&#xE949;" Style="{StaticResource LiteWindowButton}" FontFamily="Segoe MDL2 Assets" DockPanel.Dock="Right"/>
+                                <Button x:Name="close" Command="{x:Static SystemCommands.CloseWindowCommand}" Content="&#xE106;" Style="{StaticResource LiteWindowButton}" FontFamily="Segoe MDL2 Assets" DockPanel.Dock="Right"/>
+                                <Button x:Name="maximize" Command="{x:Static SystemCommands.MaximizeWindowCommand}" Content="&#xE739;" Style="{StaticResource LiteWindowButton}" FontFamily="Segoe MDL2 Assets" DockPanel.Dock="Right"/>
+                                <Button x:Name="minimize" Command="{x:Static SystemCommands.MinimizeWindowCommand}" Content="&#xE949;" Style="{StaticResource LiteWindowButton}" FontFamily="Segoe MDL2 Assets" DockPanel.Dock="Right"/>
                                 <ItemsControl x:Name="toolbar" Margin="10,0" ItemsSource="{Binding Toolbar}">
                                     <ItemsControl.ItemsPanel>
                                         <ItemsPanelTemplate>
@@ -44,6 +44,7 @@
                         </Trigger>
                         <Trigger Property="WindowState" Value="Maximized">
                             <Setter Property="Content" TargetName="maximize" Value="&#xE923;"/>
+                            <Setter Property="Command" TargetName="maximize" Value="{x:Static SystemCommands.RestoreWindowCommand}"/>
                             <Setter Property="Padding" TargetName="border" Value="{DynamicResource MaximizedWindowContentPadding}"/>
                         </Trigger>
                         <Trigger Property="ResizeMode" Value="NoResize">

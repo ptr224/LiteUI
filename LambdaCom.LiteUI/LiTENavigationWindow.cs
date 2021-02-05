@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace LambdaCom.LiteUI
 {
@@ -10,14 +11,36 @@ namespace LambdaCom.LiteUI
     /// </summary>
     public class LiteNavigationWindow : LiteWindow
     {
+        public class BackRelayCommand : ICommand
+        {
+            private readonly NavigationService _navigationService;
+
+            public BackRelayCommand(NavigationService navigationService)
+            {
+                _navigationService = navigationService;
+            }
+
+            public event EventHandler CanExecuteChanged
+            {
+                add => CommandManager.RequerySuggested += value;
+                remove => CommandManager.RequerySuggested -= value;
+            }
+
+            public bool CanExecute(object parameter)
+            {
+                return _navigationService.CanGoBack;
+            }
+
+            public void Execute(object parameter)
+            {
+                _navigationService.GoBack();
+            }
+        }
+
         static LiteNavigationWindow()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(LiteNavigationWindow), new FrameworkPropertyMetadata(typeof(LiteNavigationWindow)));
         }
-
-        internal Button Back;
-
-        public NavigationService NavigationService { get; }
 
         public static readonly DependencyProperty HideNavigationButtonProperty = DependencyProperty.Register(nameof(HideNavigationButton),
             typeof(bool), typeof(LiteNavigationWindow), new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsRender));
@@ -41,17 +64,23 @@ namespace LambdaCom.LiteUI
             set => SetValue(StartupPageProperty, value);
         }
 
+        public NavigationService NavigationService { get; }
+        public BackRelayCommand BackCommand { get; }
+
         public LiteNavigationWindow()
         {
-            NavigationService = new NavigationService(this);
+            // Inizializza NavigationService e comando Back
+            NavigationService = new NavigationService(page => DataContext = page);
+            BackCommand = new BackRelayCommand(NavigationService);
 
+            // Ascolta eventi di chiusura
             Closing += LiteNavigationWindow_Closing;
             Closed += LiteNavigationWindow_Closed;
         }
 
         private void LiteNavigationWindow_Closing(object sender, CancelEventArgs e)
         {
-            // Se la pagina corrente non va chiusa non chiuderti
+            // Se la pagina corrente non va chiusa non chiudere nemmeno la finestra
             e.Cancel = NavigationService.CancelClosing();
         }
 
@@ -65,18 +94,9 @@ namespace LambdaCom.LiteUI
         {
             base.OnApplyTemplate();
 
-            // Salva riferimenti e gestisci pressione indietro
-            Back = (Button)GetTemplateChild("back");
-
-            Back.Click += BackButton_Click;
-
+            // Naviga a startup page se dichiarata
             if (StartupPage != null)
                 NavigationService.Navigate(StartupPage);
-        }
-
-        private void BackButton_Click(object sender, RoutedEventArgs e)
-        {
-            NavigationService.GoBack();
         }
     }
 }

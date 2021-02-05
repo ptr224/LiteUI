@@ -59,16 +59,16 @@ namespace LambdaCom.LiteUI
 
     public sealed class NavigationService
     {
-        private readonly LiteNavigationWindow window;
+        private readonly Action<LitePage> _onLoadPageCallBack;
         private readonly List<LitePage> history;
         private readonly Dictionary<string, LitePage> singletons;
 
         private LitePage current;
         private bool saveCurrent = true;
 
-        internal NavigationService(LiteNavigationWindow window)
+        internal NavigationService(Action<LitePage> onLoadPageCallBack)
         {
-            this.window = window;
+            _onLoadPageCallBack = onLoadPageCallBack;
             history = new List<LitePage>();
             singletons = new Dictionary<string, LitePage>();
         }
@@ -77,8 +77,7 @@ namespace LambdaCom.LiteUI
         {
             // Imposta nuova pagina come corrente e carica in finestra
             current = page;
-            window.DataContext = page;
-            window.Back.IsEnabled = CanGoBack;
+            _onLoadPageCallBack(page);
         }
 
         internal bool CancelClosing()

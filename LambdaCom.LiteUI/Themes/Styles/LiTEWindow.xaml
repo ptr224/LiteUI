@@ -35,9 +35,9 @@
                             <DockPanel x:Name="windowBar" Height="{DynamicResource WindowBarHeight}" DockPanel.Dock="Top">
                                 <Image x:Name="icon" Source="{Binding Icon, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}" Stretch="Uniform" Margin="10,5,0,5" DockPanel.Dock="Left"/>
                                 <Label x:Name="title" Content="{TemplateBinding Title}" Foreground="{TemplateBinding BorderBrush}" FontSize="{DynamicResource WindowTitleFontSize}" Margin="5,0,0,0" DockPanel.Dock="Left"/>
-                                <Button x:Name="close" Content="&#xE106;" Style="{StaticResource LiteWindowButton}" FontFamily="Segoe MDL2 Assets" DockPanel.Dock="Right"/>
-                                <Button x:Name="maximize" Content="&#xE739;" Style="{StaticResource LiteWindowButton}" FontFamily="Segoe MDL2 Assets" DockPanel.Dock="Right"/>
-                                <Button x:Name="minimize" Content="&#xE949;" Style="{StaticResource LiteWindowButton}" FontFamily="Segoe MDL2 Assets" DockPanel.Dock="Right"/>
+                                <Button x:Name="close" Command="{x:Static SystemCommands.CloseWindowCommand}" Content="&#xE106;" Style="{StaticResource LiteWindowButton}" FontFamily="Segoe MDL2 Assets" DockPanel.Dock="Right"/>
+                                <Button x:Name="maximize" Command="{x:Static SystemCommands.MaximizeWindowCommand}" Content="&#xE739;" Style="{StaticResource LiteWindowButton}" FontFamily="Segoe MDL2 Assets" DockPanel.Dock="Right"/>
+                                <Button x:Name="minimize" Command="{x:Static SystemCommands.MinimizeWindowCommand}" Content="&#xE949;" Style="{StaticResource LiteWindowButton}" FontFamily="Segoe MDL2 Assets" DockPanel.Dock="Right"/>
                                 <ItemsControl x:Name="toolbar" Margin="10,0" ItemsSource="{TemplateBinding Toolbar}">
                                     <ItemsControl.ItemsPanel>
                                         <ItemsPanelTemplate>
@@ -55,6 +55,7 @@
                         </Trigger>
                         <Trigger Property="WindowState" Value="Maximized">
                             <Setter Property="Content" TargetName="maximize" Value="&#xE923;"/>
+                            <Setter Property="Command" TargetName="maximize" Value="{x:Static SystemCommands.RestoreWindowCommand}"/>
                             <Setter Property="Padding" TargetName="border" Value="{DynamicResource MaximizedWindowContentPadding}"/>
                         </Trigger>
                         <Trigger Property="ResizeMode" Value="NoResize">

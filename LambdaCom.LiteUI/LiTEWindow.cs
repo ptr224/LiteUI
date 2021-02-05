@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Windows;
-using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
 
@@ -174,21 +174,17 @@ namespace LambdaCom.LiteUI
         {
             // Forza aggiornamento dell'altezza massima
             IsFullscreen = false;
+
+            // Inizializza comandi bottoni
+            CommandBindings.Add(new CommandBinding(SystemCommands.CloseWindowCommand, (_, __) => SystemCommands.CloseWindow(this)));
+            CommandBindings.Add(new CommandBinding(SystemCommands.MinimizeWindowCommand, (_, __) => SystemCommands.MinimizeWindow(this)));
+            CommandBindings.Add(new CommandBinding(SystemCommands.MaximizeWindowCommand, (_, __) => SystemCommands.MaximizeWindow(this)));
+            CommandBindings.Add(new CommandBinding(SystemCommands.RestoreWindowCommand, (_, __) => SystemCommands.RestoreWindow(this)));
         }
 
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
-
-            // Gestisci pressione bottoni barra
-            ((Button)GetTemplateChild("maximize")).Click += (_, __) =>
-                WindowState = WindowState == WindowState.Normal ? WindowState.Maximized : WindowState.Normal;
-
-            ((Button)GetTemplateChild("close")).Click += (_, __) =>
-                Close();
-
-            ((Button)GetTemplateChild("minimize")).Click += (_, __) =>
-                WindowState = WindowState.Minimized;
 
             // Attiva l'effetto blur (su thread UI per evitare bug sfondo nero)
             Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Normal, new Action(() =>
