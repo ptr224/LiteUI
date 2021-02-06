@@ -16,7 +16,7 @@
         </ld:ToolbarItemsCollection>
     </ld:LitePage.Toolbar>
     <Grid>
-        <ListBox x:Name="listBox" HorizontalAlignment="Left" Margin="10,41,0,10" Width="180" SelectedIndex="0" SelectionChanged="ListBox_SelectionChanged">
+        <ListBox x:Name="listBox" IsEnabled="{Binding IsChecked, ElementName=checkBox}" HorizontalAlignment="Left" Margin="10,41,0,10" Width="180" SelectedIndex="0" SelectionChanged="ListBox_SelectionChanged" HorizontalContentAlignment="Left">
             <ListBoxItem Content="Chiaro"/>
             <ListBoxItem Content="Scuro"/>
             <ListBoxItem Content="Termac"/>
@@ -52,5 +52,9 @@
                 <Label FontFamily="Segoe UI" Content="wellawella"/>
             </ld:LitePopup>
         </Popup>
+        <Expander IsEnabled="{Binding IsChecked, ElementName=checkBox}" Header="Expander" HorizontalAlignment="Left" Height="100" Margin="573,121,0,0" VerticalAlignment="Top" Width="100" ExpandDirection="Down">
+            <Grid Background="Red"/>
+        </Expander>
+        <Slider IsEnabled="{Binding IsChecked, ElementName=checkBox}" HorizontalAlignment="Left" Margin="548,257,0,0" VerticalAlignment="Top" Width="125"/>
     </Grid>
 </ld:LitePage>

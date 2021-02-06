@@ -22,7 +22,7 @@
                         <DockPanel>
                             <DockPanel x:Name="windowBar" Height="{DynamicResource WindowBarHeight}" DockPanel.Dock="Top">
                                 <Button x:Name="back" Command="{Binding BackCommand, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ld:LiteNavigationWindow}}}" Content="&#xE72B;" Style="{StaticResource LiteWindowButton}" FontFamily="Segoe MDL2 Assets" DockPanel.Dock="Left"/>
-                                <Image x:Name="icon" Source="{Binding Icon, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}" Stretch="Uniform" Margin="10,5,0,5" DockPanel.Dock="Left"/>
+                                <Image x:Name="icon" Source="{TemplateBinding Icon}" Stretch="Uniform" Margin="10,5,0,5" DockPanel.Dock="Left"/>
                                 <Label x:Name="title" Content="{Binding Title}" Foreground="{TemplateBinding BorderBrush}" FontSize="{DynamicResource WindowTitleFontSize}" Margin="5,0,0,0" DockPanel.Dock="Left"/>
                                 <Button x:Name="close" Command="{x:Static SystemCommands.CloseWindowCommand}" Content="&#xE106;" Style="{StaticResource LiteWindowButton}" FontFamily="Segoe MDL2 Assets" DockPanel.Dock="Right"/>
                                 <Button x:Name="maximize" Command="{x:Static SystemCommands.MaximizeWindowCommand}" Content="&#xE739;" Style="{StaticResource LiteWindowButton}" FontFamily="Segoe MDL2 Assets" DockPanel.Dock="Right"/>
