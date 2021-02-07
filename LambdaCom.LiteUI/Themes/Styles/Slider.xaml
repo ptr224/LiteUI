@@ -16,52 +16,52 @@
     </Style>
     <ControlTemplate x:Key="SliderThumbHorizontalDefault" TargetType="{x:Type Thumb}">
         <Grid HorizontalAlignment="Center" UseLayoutRounding="True" VerticalAlignment="Center">
-            <Path x:Name="grip" Cursor="Hand" Data="M 0,0 C0,0 11,0 11,0 11,0 11,18 11,18 11,18 0,18 0,18 0,18 0,0 0,0 z" Fill="{DynamicResource HighlightedColor}" SnapsToDevicePixels="True" StrokeThickness="1" Stretch="Fill" Stroke="{DynamicResource ActiveColor}" UseLayoutRounding="True" VerticalAlignment="Center"/>
+            <Path x:Name="grip" Cursor="Hand" Data="M 0,0 C0,0 11,0 11,0 11,0 11,18 11,18 11,18 0,18 0,18 0,18 0,0 0,0 z" Fill="{DynamicResource ActiveColor}" SnapsToDevicePixels="True" StrokeThickness="1" Stretch="Fill" Stroke="Transparent" RenderOptions.EdgeMode="Aliased" UseLayoutRounding="True" VerticalAlignment="Center"/>
         </Grid>
         <ControlTemplate.Triggers>
-            <Trigger Property="IsMouseOver" Value="true">
-                <Setter Property="Fill" TargetName="grip" Value="{DynamicResource BackgroundColor}"/>
-            </Trigger>
-            <Trigger Property="IsDragging" Value="true">
-                <Setter Property="StrokeThickness" TargetName="grip" Value="1"/>
-            </Trigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsMouseOver" Value="true"/>
+                    <Condition Property="IsDragging" Value="false"/>
+                </MultiTrigger.Conditions>
+                <Setter Property="StrokeThickness" TargetName="grip" Value="0"/>
+            </MultiTrigger>
             <Trigger Property="IsEnabled" Value="false">
                 <Setter Property="Fill" TargetName="grip" Value="Transparent"/>
-                <Setter Property="Stroke" TargetName="grip" Value="{DynamicResource InactiveColor}"/>
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
     <ControlTemplate x:Key="SliderThumbHorizontalTop" TargetType="{x:Type Thumb}">
         <Grid HorizontalAlignment="Center" UseLayoutRounding="True" VerticalAlignment="Center">
-            <Path x:Name="grip" Cursor="Hand" Data="M 0,6 C0,6 5.5,0 5.5,0 5.5,0 11,6 11,6 11,6 11,18 11,18 11,18 0,18 0,18 0,18 0,6 0,6 z" Fill="{DynamicResource HighlightedColor}" SnapsToDevicePixels="True" StrokeThickness="1" Stretch="Fill" Stroke="{DynamicResource ActiveColor}" UseLayoutRounding="True" VerticalAlignment="Center"/>
+            <Path x:Name="grip" Cursor="Hand" Data="M 0,6 C0,6 5.5,0 5.5,0 5.5,0 11,6 11,6 11,6 11,18 11,18 11,18 0,18 0,18 0,18 0,6 0,6 z" Fill="{DynamicResource ActiveColor}" SnapsToDevicePixels="True" StrokeThickness="1" Stretch="Fill" Stroke="Transparent" RenderOptions.EdgeMode="Aliased" UseLayoutRounding="True" VerticalAlignment="Center"/>
         </Grid>
         <ControlTemplate.Triggers>
-            <Trigger Property="IsMouseOver" Value="true">
-                <Setter Property="Fill" TargetName="grip" Value="{DynamicResource BackgroundColor}"/>
-            </Trigger>
-            <Trigger Property="IsDragging" Value="true">
-                <Setter Property="StrokeThickness" TargetName="grip" Value="1"/>
-            </Trigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsMouseOver" Value="true"/>
+                    <Condition Property="IsDragging" Value="false"/>
+                </MultiTrigger.Conditions>
+                <Setter Property="StrokeThickness" TargetName="grip" Value="0"/>
+            </MultiTrigger>
             <Trigger Property="IsEnabled" Value="false">
                 <Setter Property="Fill" TargetName="grip" Value="Transparent"/>
-                <Setter Property="Stroke" TargetName="grip" Value="{DynamicResource InactiveColor}"/>
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
     <ControlTemplate x:Key="SliderThumbHorizontalBottom" TargetType="{x:Type Thumb}">
         <Grid HorizontalAlignment="Center" UseLayoutRounding="True" VerticalAlignment="Center">
-            <Path x:Name="grip" Cursor="Hand" Data="M 0,12 C0,12 5.5,18 5.5,18 5.5,18 11,12 11,12 11,12 11,0 11,0 11,0 0,0 0,0 0,0 0,12 0,12 z" Fill="{DynamicResource HighlightedColor}" SnapsToDevicePixels="True" StrokeThickness="1" Stretch="Fill" Stroke="{DynamicResource ActiveColor}" UseLayoutRounding="True" VerticalAlignment="Center"/>
+            <Path x:Name="grip" Cursor="Hand" Data="M 0,12 C0,12 5.5,18 5.5,18 5.5,18 11,12 11,12 11,12 11,0 11,0 11,0 0,0 0,0 0,0 0,12 0,12 z" Fill="{DynamicResource ActiveColor}" SnapsToDevicePixels="True" StrokeThickness="1" Stretch="Fill" Stroke="Transparent" RenderOptions.EdgeMode="Aliased" UseLayoutRounding="True" VerticalAlignment="Center"/>
         </Grid>
         <ControlTemplate.Triggers>
-            <Trigger Property="IsMouseOver" Value="true">
-                <Setter Property="Fill" TargetName="grip" Value="{DynamicResource BackgroundColor}"/>
-            </Trigger>
-            <Trigger Property="IsDragging" Value="true">
-                <Setter Property="StrokeThickness" TargetName="grip" Value="1"/>
-            </Trigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsMouseOver" Value="true"/>
+                    <Condition Property="IsDragging" Value="false"/>
+                </MultiTrigger.Conditions>
+                <Setter Property="StrokeThickness" TargetName="grip" Value="0"/>
+            </MultiTrigger>
             <Trigger Property="IsEnabled" Value="false">
                 <Setter Property="Fill" TargetName="grip" Value="Transparent"/>
-                <Setter Property="Stroke" TargetName="grip" Value="{DynamicResource InactiveColor}"/>
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
@@ -75,7 +75,7 @@
                 </Grid.RowDefinitions>
                 <TickBar x:Name="TopTick" Fill="{TemplateBinding Foreground}" Height="4" Margin="0,0,0,2" Placement="Top" Grid.Row="0" Visibility="Collapsed"/>
                 <TickBar x:Name="BottomTick" Fill="{TemplateBinding Foreground}" Height="4" Margin="0,2,0,0" Placement="Bottom" Grid.Row="2" Visibility="Collapsed"/>
-                <Border x:Name="TrackBackground" Background="{DynamicResource ActiveColor}" BorderThickness="0" BorderBrush="{DynamicResource ActiveColor}" Height="4.0" Margin="5,0" Grid.Row="1" VerticalAlignment="center">
+                <Border x:Name="TrackBackground" Background="{DynamicResource BackgroundColor}" BorderThickness="0" BorderBrush="{DynamicResource ActiveColor}" Height="4.0" Margin="5,0" Grid.Row="1" VerticalAlignment="center">
                     <Canvas Margin="-6,-1">
                         <Rectangle x:Name="PART_SelectionRange" Fill="{DynamicResource ActiveColor}" Height="4.0" Visibility="Hidden"/>
                     </Canvas>
@@ -110,61 +110,72 @@
             </Trigger>
             <Trigger Property="IsSelectionRangeEnabled" Value="true">
                 <Setter Property="Visibility" TargetName="PART_SelectionRange" Value="Visible"/>
-                <Setter Property="Background" TargetName="TrackBackground" Value="{DynamicResource HighlightedColor}"/>
             </Trigger>
-            <Trigger Property="IsEnabled" Value="False">
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding IsSelectionRangeEnabled, RelativeSource={RelativeSource Self}}" Value="false"/>
+                    <Condition Binding="{Binding IsEnabled, RelativeSource={RelativeSource Self}}" Value="false"/>
+                </MultiDataTrigger.Conditions>
                 <Setter Property="Background" TargetName="TrackBackground" Value="{DynamicResource InactiveColor}"/>
-            </Trigger>
+            </MultiDataTrigger>
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding IsSelectionRangeEnabled, RelativeSource={RelativeSource Self}}" Value="true"/>
+                    <Condition Binding="{Binding IsEnabled, RelativeSource={RelativeSource Self}}" Value="false"/>
+                </MultiDataTrigger.Conditions>
+                <Setter Property="Fill" TargetName="PART_SelectionRange" Value="{DynamicResource InactiveColor}"/>
+                <Setter Property="Background" TargetName="TrackBackground" Value="Transparent"/>
+            </MultiDataTrigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
     <ControlTemplate x:Key="SliderThumbVerticalDefault" TargetType="{x:Type Thumb}">
         <Grid HorizontalAlignment="Center" UseLayoutRounding="True" VerticalAlignment="Center">
-            <Path x:Name="grip" Cursor="Hand" Data="M0.5,0.5 L18.5,0.5 18.5,11.5 0.5,11.5z" Fill="{DynamicResource HighlightedColor}" Stretch="Fill" Stroke="{DynamicResource ActiveColor}"/>
+            <Path x:Name="grip" Cursor="Hand" Data="M0.5,0.5 L18.5,0.5 18.5,11.5 0.5,11.5z" Fill="{DynamicResource ActiveColor}" Stretch="Fill" StrokeThickness="1" Stroke="Transparent" RenderOptions.EdgeMode="Aliased"/>
         </Grid>
         <ControlTemplate.Triggers>
-            <Trigger Property="IsMouseOver" Value="true">
-                <Setter Property="Fill" TargetName="grip" Value="{DynamicResource BackgroundColor}"/>
-            </Trigger>
-            <Trigger Property="IsDragging" Value="true">
-                <Setter Property="StrokeThickness" TargetName="grip" Value="1"/>
-            </Trigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsMouseOver" Value="true"/>
+                    <Condition Property="IsDragging" Value="false"/>
+                </MultiTrigger.Conditions>
+                <Setter Property="StrokeThickness" TargetName="grip" Value="0"/>
+            </MultiTrigger>
             <Trigger Property="IsEnabled" Value="false">
                 <Setter Property="Fill" TargetName="grip" Value="Transparent"/>
-                <Setter Property="Stroke" TargetName="grip" Value="{DynamicResource InactiveColor}"/>
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
     <ControlTemplate x:Key="SliderThumbVerticalLeft" TargetType="{x:Type Thumb}">
         <Grid HorizontalAlignment="Center" UseLayoutRounding="True" VerticalAlignment="Center">
-            <Path x:Name="grip" Cursor="Hand" Data="M 6,11 C6,11 0,5.5 0,5.5 0,5.5 6,0 6,0 6,0 18,0 18,0 18,0 18,11 18,11 18,11 6,11 6,11 z" Fill="{DynamicResource HighlightedColor}" Stretch="Fill" Stroke="{DynamicResource ActiveColor}"/>
+            <Path x:Name="grip" Cursor="Hand" Data="M 6,11 C6,11 0,5.5 0,5.5 0,5.5 6,0 6,0 6,0 18,0 18,0 18,0 18,11 18,11 18,11 6,11 6,11 z" Fill="{DynamicResource ActiveColor}" Stretch="Fill" StrokeThickness="1" Stroke="Transparent" RenderOptions.EdgeMode="Aliased"/>
         </Grid>
         <ControlTemplate.Triggers>
-            <Trigger Property="IsMouseOver" Value="true">
-                <Setter Property="Fill" TargetName="grip" Value="{DynamicResource BackgroundColor}"/>
-            </Trigger>
-            <Trigger Property="IsDragging" Value="true">
-                <Setter Property="StrokeThickness" TargetName="grip" Value="1"/>
-            </Trigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsMouseOver" Value="true"/>
+                    <Condition Property="IsDragging" Value="false"/>
+                </MultiTrigger.Conditions>
+                <Setter Property="StrokeThickness" TargetName="grip" Value="0"/>
+            </MultiTrigger>
             <Trigger Property="IsEnabled" Value="false">
                 <Setter Property="Fill" TargetName="grip" Value="Transparent"/>
-                <Setter Property="Stroke" TargetName="grip" Value="{DynamicResource InactiveColor}"/>
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
     <ControlTemplate x:Key="SliderThumbVerticalRight" TargetType="{x:Type Thumb}">
         <Grid HorizontalAlignment="Center" UseLayoutRounding="True" VerticalAlignment="Center">
-            <Path x:Name="grip" Cursor="Hand" Data="M 12,11 C12,11 18,5.5 18,5.5 18,5.5 12,0 12,0 12,0 0,0 0,0 0,0 0,11 0,11 0,11 12,11 12,11 z" Fill="{DynamicResource HighlightedColor}" Stretch="Fill" Stroke="{DynamicResource ActiveColor}"/>
+            <Path x:Name="grip" Cursor="Hand" Data="M 12,11 C12,11 18,5.5 18,5.5 18,5.5 12,0 12,0 12,0 0,0 0,0 0,0 0,11 0,11 0,11 12,11 12,11 z" Fill="{DynamicResource ActiveColor}" Stretch="Fill" StrokeThickness="1" Stroke="Transparent" RenderOptions.EdgeMode="Aliased"/>
         </Grid>
         <ControlTemplate.Triggers>
-            <Trigger Property="IsMouseOver" Value="true">
-                <Setter Property="Fill" TargetName="grip" Value="{DynamicResource BackgroundColor}"/>
-            </Trigger>
-            <Trigger Property="IsDragging" Value="true">
-                <Setter Property="StrokeThickness" TargetName="grip" Value="1"/>
-            </Trigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsMouseOver" Value="true"/>
+                    <Condition Property="IsDragging" Value="false"/>
+                </MultiTrigger.Conditions>
+                <Setter Property="StrokeThickness" TargetName="grip" Value="0"/>
+            </MultiTrigger>
             <Trigger Property="IsEnabled" Value="false">
                 <Setter Property="Fill" TargetName="grip" Value="Transparent"/>
-                <Setter Property="Stroke" TargetName="grip" Value="{DynamicResource InactiveColor}"/>
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
@@ -178,7 +189,7 @@
                 </Grid.ColumnDefinitions>
                 <TickBar x:Name="TopTick" Grid.Column="0" Fill="{TemplateBinding Foreground}" Margin="0,0,2,0" Placement="Left" Visibility="Collapsed" Width="4"/>
                 <TickBar x:Name="BottomTick" Grid.Column="2" Fill="{TemplateBinding Foreground}" Margin="2,0,0,0" Placement="Right" Visibility="Collapsed" Width="4"/>
-                <Border x:Name="TrackBackground" Background="{DynamicResource ActiveColor}" BorderThickness="0" BorderBrush="{DynamicResource ActiveColor}" Grid.Column="1" HorizontalAlignment="center" Margin="0,5" Width="4.0">
+                <Border x:Name="TrackBackground" Background="{DynamicResource BackgroundColor}" BorderThickness="0" BorderBrush="{DynamicResource ActiveColor}" Grid.Column="1" HorizontalAlignment="center" Margin="0,5" Width="4.0">
                     <Canvas Margin="-1,-6">
                         <Rectangle x:Name="PART_SelectionRange" Fill="{DynamicResource ActiveColor}" Visibility="Hidden" Width="4.0"/>
                     </Canvas>
@@ -213,11 +224,22 @@
             </Trigger>
             <Trigger Property="IsSelectionRangeEnabled" Value="true">
                 <Setter Property="Visibility" TargetName="PART_SelectionRange" Value="Visible"/>
-                <Setter Property="Background" TargetName="TrackBackground" Value="{DynamicResource HighlightedColor}"/>
             </Trigger>
-            <Trigger Property="IsEnabled" Value="False">
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding IsSelectionRangeEnabled, RelativeSource={RelativeSource Self}}" Value="false"/>
+                    <Condition Binding="{Binding IsEnabled, RelativeSource={RelativeSource Self}}" Value="false"/>
+                </MultiDataTrigger.Conditions>
                 <Setter Property="Background" TargetName="TrackBackground" Value="{DynamicResource InactiveColor}"/>
-            </Trigger>
+            </MultiDataTrigger>
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding IsSelectionRangeEnabled, RelativeSource={RelativeSource Self}}" Value="true"/>
+                    <Condition Binding="{Binding IsEnabled, RelativeSource={RelativeSource Self}}" Value="false"/>
+                </MultiDataTrigger.Conditions>
+                <Setter Property="Fill" TargetName="PART_SelectionRange" Value="{DynamicResource InactiveColor}"/>
+                <Setter Property="Background" TargetName="TrackBackground" Value="Transparent"/>
+            </MultiDataTrigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
     <Style TargetType="{x:Type Slider}">
@@ -229,6 +251,9 @@
         <Style.Triggers>
             <Trigger Property="Orientation" Value="Vertical">
                 <Setter Property="Template" Value="{StaticResource SliderVertical}"/>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Foreground" Value="{DynamicResource InactiveColor}"/>
             </Trigger>
         </Style.Triggers>
     </Style>

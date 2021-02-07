@@ -35,7 +35,7 @@
                     </ComboBox>
                     <RadioButton Content="RadioButton" HorizontalAlignment="Left" Margin="42,132,0,0" VerticalAlignment="Top" IsChecked="True"/>
                     <RadioButton Content="RadioButton" HorizontalAlignment="Left" Margin="42,152,0,0" VerticalAlignment="Top" IsChecked="True"/>
-                    <TextBox HorizontalAlignment="Left" Margin="29,10,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+                    <TextBox x:Name="color" HorizontalAlignment="Left" Margin="29,10,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
                 </Grid>
             </ScrollViewer>
         </GroupBox>
@@ -55,6 +55,8 @@
         <Expander IsEnabled="{Binding IsChecked, ElementName=checkBox}" Header="Expander" HorizontalAlignment="Left" Height="100" Margin="573,121,0,0" VerticalAlignment="Top" Width="100" ExpandDirection="Down">
             <Grid Background="Red"/>
         </Expander>
-        <Slider IsEnabled="{Binding IsChecked, ElementName=checkBox}" HorizontalAlignment="Left" Margin="548,257,0,0" VerticalAlignment="Top" Width="125"/>
+        <Slider IsEnabled="{Binding IsChecked, ElementName=checkBox}" HorizontalAlignment="Left" Margin="548,265,0,0" VerticalAlignment="Top" Width="120"/>
+        <Slider IsEnabled="{Binding IsChecked, ElementName=checkBox}" HorizontalAlignment="Left" Margin="548,288,0,0" VerticalAlignment="Top" Width="120" TickPlacement="TopLeft" IsSelectionRangeEnabled="True" SelectionEnd="5"/>
+        <Slider IsEnabled="{Binding IsChecked, ElementName=checkBox}" HorizontalAlignment="Left" Margin="548,317,0,0" VerticalAlignment="Top" Width="120" TickPlacement="BottomRight"/>
     </Grid>
 </ld:LitePage>

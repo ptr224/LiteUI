@@ -107,15 +107,15 @@ namespace LambdaCom.LiteUI
 
             if (ac.GetBrightness() > bc.GetBrightness())
             {
-                resources["BackgroundColor"] = new SolidColorBrush(Color.FromArgb(0xFF, special.R, special.G, special.B));
-                resources["HighlightedColor"] = new SolidColorBrush(Color.FromArgb(0x90, special.R, special.G, special.B));
+                resources["HighlightedColor"] = new SolidColorBrush(Color.FromArgb(0xFF, special.R, special.G, special.B));
+                resources["BackgroundColor"] = new SolidColorBrush(Color.FromArgb(0x90, special.R, special.G, special.B));
                 resources["WindowBaseColor"] = new SolidColorBrush(Color.FromArgb(0xFF, background.R, background.G, background.B));
                 resources["WindowColor"] = new SolidColorBrush(Color.FromArgb(0xC7, background.R, background.G, background.B));
             }
             else
             {
-                resources["BackgroundColor"] = new SolidColorBrush(Color.FromArgb(0xFF, background.R, background.G, background.B));
-                resources["HighlightedColor"] = new SolidColorBrush(Color.FromArgb(0x90, background.R, background.G, background.B));
+                resources["HighlightedColor"] = new SolidColorBrush(Color.FromArgb(0xFF, background.R, background.G, background.B));
+                resources["BackgroundColor"] = new SolidColorBrush(Color.FromArgb(0x90, background.R, background.G, background.B));
                 resources["WindowBaseColor"] = new SolidColorBrush(Color.FromArgb(0xFF, special.R, special.G, special.B));
                 resources["WindowColor"] = new SolidColorBrush(Color.FromArgb(0xC7, special.R, special.G, special.B));
             }

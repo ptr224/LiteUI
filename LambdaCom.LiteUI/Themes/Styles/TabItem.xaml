@@ -45,7 +45,7 @@
                                 <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}" Value="true"/>
                                 <Condition Binding="{Binding IsSelected, RelativeSource={RelativeSource Self}}" Value="false"/>
                             </MultiDataTrigger.Conditions>
-                            <Setter Property="Background" TargetName="mainBorder" Value="{DynamicResource HighlightedColor}"/>
+                            <Setter Property="Background" TargetName="mainBorder" Value="{DynamicResource BackgroundColor}"/>
                         </MultiDataTrigger>
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
@@ -54,7 +54,7 @@
                             </MultiDataTrigger.Conditions>
                             <Setter Property="Panel.ZIndex" Value="1"/>
                             <Setter Property="Opacity" TargetName="innerBorder" Value="1"/>
-                            <Setter Property="Background" TargetName="mainBorder" Value="{DynamicResource HighlightedColor}"/>
+                            <Setter Property="Background" TargetName="mainBorder" Value="{DynamicResource BackgroundColor}"/>
                             <Setter Property="BorderThickness" TargetName="mainBorder" Value="1,1,0,1"/>
                         </MultiDataTrigger>
                         <MultiDataTrigger>
@@ -64,7 +64,7 @@
                             </MultiDataTrigger.Conditions>
                             <Setter Property="Panel.ZIndex" Value="1"/>
                             <Setter Property="Opacity" TargetName="innerBorder" Value="1"/>
-                            <Setter Property="Background" TargetName="mainBorder" Value="{DynamicResource HighlightedColor}"/>
+                            <Setter Property="Background" TargetName="mainBorder" Value="{DynamicResource BackgroundColor}"/>
                             <Setter Property="BorderThickness" TargetName="mainBorder" Value="1,0,1,1"/>
                         </MultiDataTrigger>
                         <MultiDataTrigger>
@@ -74,7 +74,7 @@
                             </MultiDataTrigger.Conditions>
                             <Setter Property="Panel.ZIndex" Value="1"/>
                             <Setter Property="Opacity" TargetName="innerBorder" Value="1"/>
-                            <Setter Property="Background" TargetName="mainBorder" Value="{DynamicResource HighlightedColor}"/>
+                            <Setter Property="Background" TargetName="mainBorder" Value="{DynamicResource BackgroundColor}"/>
                             <Setter Property="BorderThickness" TargetName="mainBorder" Value="0,1,1,1"/>
                         </MultiDataTrigger>
                         <MultiDataTrigger>
@@ -84,7 +84,7 @@
                             </MultiDataTrigger.Conditions>
                             <Setter Property="Panel.ZIndex" Value="1"/>
                             <Setter Property="Opacity" TargetName="innerBorder" Value="1"/>
-                            <Setter Property="Background" TargetName="mainBorder" Value="{DynamicResource HighlightedColor}"/>
+                            <Setter Property="Background" TargetName="mainBorder" Value="{DynamicResource BackgroundColor}"/>
                             <Setter Property="BorderThickness" TargetName="mainBorder" Value="1,1,1,0"/>
                         </MultiDataTrigger>
                     </ControlTemplate.Triggers>
