@@ -13,6 +13,16 @@
             <ld:ToolbarButton ToolTip="n2" Position="Right">
                 <Image Source="file:///D:/ptr22/OneDrive/Immagini/Programmi/LiTE/LiTE.png" Stretch="Uniform"/>
             </ld:ToolbarButton>
+            <ld:ToolbarButton ToolTip="n3" Position="Left">
+                <ComboBox BorderThickness="0" Width="120" SelectedIndex="0">
+                    <ComboBoxItem Content="1"/>
+                    <ComboBoxItem Content="2"/>
+                    <ComboBoxItem Content="3"/>
+                </ComboBox>
+            </ld:ToolbarButton>
+            <ld:ToolbarButton ToolTip="n4" Position="Left">
+                <TextBox Width="120"/>
+            </ld:ToolbarButton>
         </ld:ToolbarItemsCollection>
     </ld:LitePage.Toolbar>
     <Grid>

@@ -14,7 +14,7 @@
     <Style TargetType="{x:Type ld:ToolbarButton}" BasedOn="{StaticResource LiteWindowButton}">
         <Setter Property="MinWidth" Value="{DynamicResource WindowButtonWidth}"/>
         <Setter Property="Width" Value="Auto"/>
-        <Setter Property="FontSize" Value="{DynamicResource WindowToolbarFontSize}"/>
+        <Setter Property="FontSize" Value="{DynamicResource WindowBarFontSize}"/>
     </Style>
     <Style TargetType="{x:Type ld:LiteWindow}">
         <Setter Property="WindowStyle" Value="None"/>
@@ -34,7 +34,7 @@
                         <DockPanel>
                             <DockPanel x:Name="windowBar" Height="{DynamicResource WindowBarHeight}" DockPanel.Dock="Top">
                                 <Image x:Name="icon" Source="{TemplateBinding Icon}" Stretch="Uniform" Margin="10,5,0,5" DockPanel.Dock="Left"/>
-                                <Label x:Name="title" Content="{TemplateBinding Title}" Foreground="{TemplateBinding BorderBrush}" FontSize="{DynamicResource WindowTitleFontSize}" Margin="5,0,0,0" DockPanel.Dock="Left"/>
+                                <Label x:Name="title" Content="{TemplateBinding Title}" Foreground="{TemplateBinding BorderBrush}" FontSize="{DynamicResource WindowBarFontSize}" Margin="5,0,0,0" DockPanel.Dock="Left"/>
                                 <Button x:Name="close" Command="{x:Static SystemCommands.CloseWindowCommand}" Content="&#xE106;" Style="{StaticResource LiteWindowButton}" FontFamily="Segoe MDL2 Assets" DockPanel.Dock="Right"/>
                                 <Button x:Name="maximize" Command="{x:Static SystemCommands.MaximizeWindowCommand}" Content="&#xE739;" Style="{StaticResource LiteWindowButton}" FontFamily="Segoe MDL2 Assets" DockPanel.Dock="Right"/>
                                 <Button x:Name="minimize" Command="{x:Static SystemCommands.MinimizeWindowCommand}" Content="&#xE949;" Style="{StaticResource LiteWindowButton}" FontFamily="Segoe MDL2 Assets" DockPanel.Dock="Right"/>
