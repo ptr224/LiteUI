@@ -21,12 +21,7 @@ namespace LambdaCom.LiteUI
         Normal,
 
         /// <summary>
-        /// Se la pagina è già aperta e nella cronologia riporta la stessa istanza.
-        /// </summary>
-        SingleInstance,
-
-        /// <summary>
-        /// Riporta sempre la stessa istanza, indipendentemente dal fatto che si trovi nella cronologia o meno.
+        /// Se la pagina è già aperta nella cronologia riporta la stessa istanza.
         /// </summary>
         Singleton
     }

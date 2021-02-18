@@ -13,7 +13,15 @@
     <RepositoryUrl>https://github.com/ptr224/LambdaCom.LiteUI</RepositoryUrl>
     <PackageProjectUrl>https://github.com/ptr224/LambdaCom.LiteUI</PackageProjectUrl>
     <RepositoryType>git</RepositoryType>
-    <Version>1.1.0</Version>
+    <Version>1.2.0</Version>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>D:\ptr22\Source\VisualStudio\LambdaCom.LiteUI\LambdaCom.LiteUI\LambdaCom.LiteUI.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>D:\ptr22\Source\VisualStudio\LambdaCom.LiteUI\LambdaCom.LiteUI\LambdaCom.LiteUI.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

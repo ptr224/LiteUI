@@ -1,67 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Windows.Controls;
-using System.Windows.Data;
 
 namespace LambdaCom.LiteUI
 {
-    /// <summary>
-    /// Collezione di parametri passati dal <see cref="NavigationService"/>.
-    /// </summary>
-    public sealed class NavigationParams
-    {
-        private readonly Dictionary<string, object> extras = new Dictionary<string, object>();
-
-        /// <summary>
-        /// Aggiunge un parametro.
-        /// </summary>
-        /// <param name="key">La chiave del parametro.</param>
-        /// <param name="value">Il valore del parametro.</param>
-        public NavigationParams Add(string key, object value)
-        {
-            extras.Add(key, value);
-            return this;
-        }
-
-        /// <summary>
-        /// Preleva un parametro o un valore di default.
-        /// </summary>
-        /// <param name="key">La chiave del parametro.</param>
-        /// <param name="defaultValue">Il valore di default nel caso in cui il parametro sia assente.</param>
-        /// <returns></returns>
-        public object Get(string key, object defaultValue)
-        {
-            if (extras.TryGetValue(key, out var value))
-                return value;
-            else
-                return defaultValue;
-        }
-
-        /// <summary>
-        /// Preleva un parametro o un valore di default.
-        /// </summary>
-        /// <typeparam name="T">Il tipo del parametro.</typeparam>
-        /// <param name="key">La chiave del parametro.</param>
-        /// <param name="defaultValue">Il valore di default nel caso in cui il parametro sia assente.</param>
-        public T Get<T>(string key, object defaultValue)
-            => (T)Get(key, defaultValue);
-
-        /// <summary>
-        /// Preleva un parametro o il valore di default di quel tipo.
-        /// </summary>
-        /// <typeparam name="T">Il tipo del parametro.</typeparam>
-        /// <param name="key">La chiave del parametro.</param>
-        /// <param name="defaultValue">Il valore di default nel caso in cui il parametro sia assente.</param>
-        public T Get<T>(string key)
-            => (T)Get(key, default(T));
-    }
-
     public sealed class NavigationService
     {
         private readonly Action<LitePage> _onLoadPageCallBack;
         private readonly List<LitePage> history;
-        private readonly Dictionary<string, LitePage> singletons;
 
         private LitePage current;
         private bool saveCurrent = true;
@@ -70,7 +16,6 @@ namespace LambdaCom.LiteUI
         {
             _onLoadPageCallBack = onLoadPageCallBack;
             history = new List<LitePage>();
-            singletons = new Dictionary<string, LitePage>();
         }
 
         private void LoadCurrent(LitePage page)
@@ -89,16 +34,12 @@ namespace LambdaCom.LiteUI
         internal void Dispose()
         {
             // Disponi la pagina corrente, quelle nella cronologia ed i singleton
-            if (current is IDisposable disposable)
-                disposable.Dispose();
+            if (current is IDisposable disposableCurrent)
+                disposableCurrent.Dispose();
 
             foreach (var page in history)
-                if (page is IDisposable disposableSingleton)
-                    disposableSingleton.Dispose();
-
-            foreach (var page in singletons.Values)
-                if (page is IDisposable disposableSingleton)
-                    disposableSingleton.Dispose();
+                if (page is IDisposable disposablePage)
+                    disposablePage.Dispose();
         }
 
         /// <summary>
@@ -118,8 +59,11 @@ namespace LambdaCom.LiteUI
                 if (current.CallCancelNavigation())
                     return;
 
-                // Se la pagina corrente non è un singleton ed implementa IDisposable eseguilo
-                if (!singletons.ContainsKey(current.GetType().FullName) && current is IDisposable disposable)
+                // Se la pagina corrente non è un singleton ancora aperto ed implementa IDisposable eseguilo
+                if (!(Attribute.GetCustomAttribute(current.GetType(), typeof(PageOptionsAttribute)) is PageOptionsAttribute attributes
+                        && attributes.LaunchMode == PageLaunchMode.Singleton
+                        && history.Any(p => p == current))
+                    && current is IDisposable disposable)
                     disposable.Dispose();
             }
 
@@ -161,57 +105,23 @@ namespace LambdaCom.LiteUI
             // Crea pagina e caricala
             if (type.IsSubclassOf(typeof(LitePage)))
             {
-                // Leggi da attributo, se presente, le impostazioni della pagina, altrimenti usa parametri di default
+                // Leggi da attributo, se presente, le impostazioni della pagina, altrimenti tratta come Normal
                 saveCurrent = true;
-                bool singleton = false;
                 bool instantiateNew = true;
 
                 if (Attribute.GetCustomAttribute(type, typeof(PageOptionsAttribute)) is PageOptionsAttribute attributes)
-                {
-                    switch (attributes.LaunchMode)
+                    (saveCurrent, instantiateNew) = attributes.LaunchMode switch
                     {
-                        case PageLaunchMode.Ignore:
-                            saveCurrent = false;
-                            singleton = false;
-                            instantiateNew = true;
-                            break;
-                        case PageLaunchMode.Normal:
-                            saveCurrent = true;
-                            singleton = false;
-                            instantiateNew = true;
-                            break;
-                        case PageLaunchMode.SingleInstance:
-                            saveCurrent = true;
-                            singleton = false;
-                            instantiateNew = false;
-                            break;
-                        case PageLaunchMode.Singleton:
-                            saveCurrent = true;
-                            singleton = true;
-                            instantiateNew = false;
-                            break;
-                    }
-                }
+                        PageLaunchMode.Ignore => (false, true),
+                        PageLaunchMode.Normal => (true, true),
+                        PageLaunchMode.Singleton => (true, false),
+                        _ => (false, false)
+                    };
 
-                // Carica nuova istanza di pagina o se necessario riporta in cima il singleton
+                // Carica nuova istanza di pagina o se singleton riporta in cima
                 LitePage page;
 
-                if (singleton)
-                {
-                    // Se già aperto riporta singleton, altrimenti crea
-                    if (singletons.TryGetValue(type.FullName, out page))
-                    {
-                        page.CallRetrieved(extras ?? new NavigationParams());
-                    }
-                    else
-                    {
-                        page = (LitePage)Activator.CreateInstance(type);
-                        page.CallCreated(extras ?? new NavigationParams());
-
-                        singletons.Add(type.FullName, page);
-                    }
-                }
-                else if (instantiateNew || (page = history.Where(p => p.GetType() == type).FirstOrDefault()) == null)
+                if (instantiateNew || (page = history.Where(p => p.GetType() == type).FirstOrDefault()) == null)
                 {
                     page = (LitePage)Activator.CreateInstance(type);
                     page.CallCreated(extras ?? new NavigationParams());

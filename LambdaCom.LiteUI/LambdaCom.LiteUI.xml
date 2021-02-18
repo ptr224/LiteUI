@@ -1,0 +1,240 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>LambdaCom.LiteUI</name>
+    </assembly>
+    <members>
+        <member name="M:LambdaCom.LiteUI.LiteMessageBox.Show(LambdaCom.LiteUI.LiteWindow,System.String,System.Windows.MessageBoxImage,System.Windows.MessageBoxButton,System.String)">
+            <summary>
+            Displays a message box that has a message, title bar caption, button, and icon; and that returns a result.
+            </summary>
+            <param name="owner">A Window that represents the owner window of the message box.</param>
+            <param name="messageBoxText">A string that specifies the text to display.</param>
+            <param name="icon">A MessageBoxImage value that specifies the icon to display.</param>
+            <param name="button">A MessageBoxButton value that specifies which button or buttons to display.</param>
+            <param name="caption">A string that specifies the title bar caption to display.</param>
+        </member>
+        <member name="M:LambdaCom.LiteUI.LiteMessageBox.Show(System.String,System.Windows.MessageBoxImage,System.Windows.MessageBoxButton,System.String)">
+            <summary>
+            Displays a message box that has a message, title bar caption, button, and icon; and that returns a result.
+            </summary>
+            <param name="messageBoxText">A string that specifies the text to display.</param>
+            <param name="icon">A MessageBoxImage value that specifies the icon to display.</param>
+            <param name="button">A MessageBoxButton value that specifies which button or buttons to display.</param>
+            <param name="caption">A string that specifies the title bar caption to display.</param>
+        </member>
+        <member name="M:LambdaCom.LiteUI.LiteMessageBoxWindow.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:LambdaCom.LiteUI.LiteNavigationWindow">
+            <summary>
+            Una speciale <see cref="T:LambdaCom.LiteUI.LiteWindow"/> che contiene e naviga tra delle <see cref="T:LambdaCom.LiteUI.LitePage"/>.
+            </summary>
+        </member>
+        <member name="T:LambdaCom.LiteUI.PageLaunchMode">
+            <summary>
+            Descrive le modalità di lancio di una pagina.
+            </summary>
+        </member>
+        <member name="F:LambdaCom.LiteUI.PageLaunchMode.Ignore">
+            <summary>
+            Viene creata una nuova pagina che non compare nella cronologia.
+            </summary>
+        </member>
+        <member name="F:LambdaCom.LiteUI.PageLaunchMode.Normal">
+            <summary>
+            Viene creata una nuova pagina e salvata nella cronologia.
+            </summary>
+        </member>
+        <member name="F:LambdaCom.LiteUI.PageLaunchMode.Singleton">
+            <summary>
+            Se la pagina è già aperta nella cronologia riporta la stessa istanza.
+            </summary>
+        </member>
+        <member name="T:LambdaCom.LiteUI.PageOptionsAttribute">
+            <summary>
+            Specifica le opzioni relative alla <see cref="T:LambdaCom.LiteUI.LitePage"/>.
+            </summary>
+        </member>
+        <member name="P:LambdaCom.LiteUI.PageOptionsAttribute.LaunchMode">
+            <summary>
+            Specifica le modalità di lancio della pagina.
+            </summary>
+        </member>
+        <member name="T:LambdaCom.LiteUI.LitePage">
+            <summary>
+            Una pagina di contenuto visualizzabile in una <see cref="T:LambdaCom.LiteUI.LiteNavigationWindow"/>.
+            </summary>
+        </member>
+        <member name="M:LambdaCom.LiteUI.LitePage.GetWindow">
+            <summary>
+            Ottiene un riferimento alla finestra contenente la pagina.
+            </summary>
+        </member>
+        <member name="P:LambdaCom.LiteUI.LitePage.NavigationService">
+            <summary>
+            L'oggetto <see cref="T:LambdaCom.LiteUI.NavigationService"/> che la pagina sta usando per supportare la navigazione o <see langword="null"/> se questa non è disponibile.
+            </summary>
+        </member>
+        <member name="M:LambdaCom.LiteUI.LitePage.Created(LambdaCom.LiteUI.NavigationParams)">
+            <summary>
+            Metodo chiamato alla creazione della pagina.
+            </summary>
+            <param name="extras">I parametri passati dalla chiamata.</param>
+        </member>
+        <member name="M:LambdaCom.LiteUI.LitePage.Retrieved(LambdaCom.LiteUI.NavigationParams)">
+            <summary>
+            Metodo eseguito quando la pagina viene richiamata.
+            </summary>
+            <param name="extras">I parametri passati dalla chiamata.</param>
+        </member>
+        <member name="M:LambdaCom.LiteUI.LitePage.CancelNavigation">
+            <summary>
+            Metodo eseguito quando la pagina sta per essere lasciata.<para/>
+            Ritornare <see langword="true"/> se non si vuole che la pagina venga abbandonata.
+            </summary>
+        </member>
+        <member name="M:LambdaCom.LiteUI.LiteWindow.SetGlobalColors(System.Windows.Media.Color,System.Windows.Media.Color,System.Windows.Media.Color)">
+            <summary>
+            Imposta il tema globale dell'applicazione.
+            </summary>
+            <param name="active">Il colore degli elementi attivi.</param>
+            <param name="inactive">Il colore degli elementi inattivi.</param>
+            <param name="background">Il colore di base dello sfondo.</param>
+        </member>
+        <member name="M:LambdaCom.LiteUI.LiteWindow.SetGlobalColors(LambdaCom.LiteUI.LiteWindowTheme)">
+            <summary>
+            Imposta il tema globale dell'applicazione.
+            </summary>
+            <param name="theme">Il tema da usare.</param>
+        </member>
+        <member name="M:LambdaCom.LiteUI.LiteWindow.SetColors(System.Windows.Media.Color,System.Windows.Media.Color,System.Windows.Media.Color)">
+            <summary>
+            Imposta il tema della finestra corrente.
+            </summary>
+            <param name="active">Il colore degli elementi attivi.</param>
+            <param name="inactive">Il colore degli elementi inattivi.</param>
+            <param name="background">Il colore di base dello sfondo.</param>
+        </member>
+        <member name="M:LambdaCom.LiteUI.LiteWindow.SetColors(LambdaCom.LiteUI.LiteWindowTheme)">
+            <summary>
+            Imposta il tema della finestra corrente.
+            </summary>
+            <param name="theme">Il tema da usare.</param>
+        </member>
+        <member name="T:LambdaCom.LiteUI.NavigationParams">
+            <summary>
+            Collezione di parametri passati dal <see cref="T:LambdaCom.LiteUI.NavigationService"/>.
+            </summary>
+        </member>
+        <member name="M:LambdaCom.LiteUI.NavigationParams.Add(System.String,System.Object)">
+            <summary>
+            Aggiunge un parametro.
+            </summary>
+            <param name="key">La chiave del parametro.</param>
+            <param name="value">Il valore del parametro.</param>
+        </member>
+        <member name="M:LambdaCom.LiteUI.NavigationParams.Get(System.String,System.Object)">
+            <summary>
+            Preleva un parametro o un valore di default.
+            </summary>
+            <param name="key">La chiave del parametro.</param>
+            <param name="defaultValue">Il valore di default nel caso in cui il parametro sia assente.</param>
+            <returns></returns>
+        </member>
+        <member name="M:LambdaCom.LiteUI.NavigationParams.Get``1(System.String,System.Object)">
+            <summary>
+            Preleva un parametro o un valore di default.
+            </summary>
+            <typeparam name="T">Il tipo del parametro.</typeparam>
+            <param name="key">La chiave del parametro.</param>
+            <param name="defaultValue">Il valore di default nel caso in cui il parametro sia assente.</param>
+        </member>
+        <member name="M:LambdaCom.LiteUI.NavigationParams.Get``1(System.String)">
+            <summary>
+            Preleva un parametro o il valore di default di quel tipo.
+            </summary>
+            <typeparam name="T">Il tipo del parametro.</typeparam>
+            <param name="key">La chiave del parametro.</param>
+            <param name="defaultValue">Il valore di default nel caso in cui il parametro sia assente.</param>
+        </member>
+        <member name="P:LambdaCom.LiteUI.NavigationService.CanGoBack">
+            <summary>
+            Controlla se sia presente almeno una pagina nella cronologia di navigazione.
+            </summary>
+        </member>
+        <member name="M:LambdaCom.LiteUI.NavigationService.GoBack">
+            <summary>
+            Ritorna alla pagina precedente nella cronologia di navigazione.<para/>Se la pagina implementa <see cref="T:System.IDisposable"/> verrà disposta automaticamente.
+            </summary>
+            <exception cref="T:System.ArgumentOutOfRangeException">La cronologia di navigazione è vuota.</exception>
+        </member>
+        <member name="M:LambdaCom.LiteUI.NavigationService.Navigate(System.Type,LambdaCom.LiteUI.NavigationParams)">
+            <summary>
+            Naviga ad una pagina del tipo dato con i parametri dati.
+            </summary>
+            <param name="type">Il tipo della pagina da aprire.</param>
+            <param name="extras">I parametri da passare alla pagina.</param>
+            <exception cref="T:System.ArgumentNullException">Il tipo della pagina non può essere <see langword="null"/>.</exception>
+            <exception cref="T:System.ArgumentException">Il tipo della pagina deve essere sottoclasse di <see cref="T:LambdaCom.LiteUI.LitePage"/>.</exception>
+        </member>
+        <member name="M:LambdaCom.LiteUI.NavigationService.Navigate``1(LambdaCom.LiteUI.NavigationParams)">
+            <summary>
+            Naviga ad una pagina del tipo dato con i parametri dati.
+            </summary>
+            <typeparam name="T">Il tipo della pagina da aprire.</typeparam>
+            <param name="extras">I parametri da passare alla pagina.</param>
+            <exception cref="T:System.ArgumentNullException">Il tipo della pagina non può essere <see langword="null"/>.</exception>
+            <exception cref="T:System.ArgumentException">Il tipo della pagina deve essere sottoclasse di <see cref="T:LambdaCom.LiteUI.LitePage"/>.</exception>
+        </member>
+        <member name="M:LambdaCom.LiteUI.NavigationService.Navigate``1(System.ValueTuple{System.String,System.Object}[])">
+            <summary>
+            Naviga ad una pagina del tipo dato con i parametri dati.
+            </summary>
+            <typeparam name="T">Il tipo della pagina da aprire.</typeparam>
+            <param name="extras">I parametri da passare alla pagina.</param>
+            <exception cref="T:System.ArgumentNullException">Il tipo della pagina non può essere <see langword="null"/>.</exception>
+            <exception cref="T:System.ArgumentException">Il tipo della pagina deve essere sottoclasse di <see cref="T:LambdaCom.LiteUI.LitePage"/>.</exception>
+        </member>
+        <member name="M:LambdaCom.LiteUI.NavigationService.Navigate``1">
+            <summary>
+            Naviga ad una pagina del tipo dato senza passare alcun parametro.
+            </summary>
+            <typeparam name="T">Il tipo della pagina da aprire.</typeparam>
+            <exception cref="T:System.ArgumentNullException">Il tipo della pagina non può essere <see langword="null"/>.</exception>
+            <exception cref="T:System.ArgumentException">Il tipo della pagina deve essere sottoclasse di <see cref="T:LambdaCom.LiteUI.LitePage"/>.</exception>
+        </member>
+        <member name="T:XamlGeneratedNamespace.GeneratedInternalTypeHelper">
+            <summary>
+            GeneratedInternalTypeHelper
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateInstance(System.Type,System.Globalization.CultureInfo)">
+            <summary>
+            CreateInstance
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.GetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            GetPropertyValue
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.SetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            SetPropertyValue
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateDelegate(System.Type,System.Object,System.String)">
+            <summary>
+            CreateDelegate
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.AddEventHandler(System.Reflection.EventInfo,System.Object,System.Delegate)">
+            <summary>
+            AddEventHandler
+            </summary>
+        </member>
+    </members>
+</doc>
