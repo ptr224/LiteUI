@@ -7,7 +7,7 @@ namespace LambdaCom.LiteUI
     public sealed class NavigationService
     {
         private readonly Action<LitePage> _onLoadPageCallBack;
-        private readonly List<LitePage> history;
+        private readonly Stack<LitePage> history;
 
         private LitePage current;
         private bool saveCurrent = true;
@@ -15,7 +15,7 @@ namespace LambdaCom.LiteUI
         internal NavigationService(Action<LitePage> onLoadPageCallBack)
         {
             _onLoadPageCallBack = onLoadPageCallBack;
-            history = new List<LitePage>();
+            history = new Stack<LitePage>();
         }
 
         private void LoadCurrent(LitePage page)
@@ -28,16 +28,16 @@ namespace LambdaCom.LiteUI
         internal bool CancelClosing()
         {
             // Comunica alla finestra se va annullata la chiusura
-            return current?.CallCancelNavigation() ?? false;
+            return current?.CallClosing() ?? false;
         }
 
         internal void Dispose()
         {
-            // Disponi la pagina corrente, quelle nella cronologia ed i singleton
+            // Disponi la pagina corrente e quelle nella cronologia
             if (current is IDisposable disposableCurrent)
                 disposableCurrent.Dispose();
 
-            foreach (var page in history)
+            while (history.TryPop(out var page))
                 if (page is IDisposable disposablePage)
                     disposablePage.Dispose();
         }
@@ -53,30 +53,22 @@ namespace LambdaCom.LiteUI
         /// <exception cref="ArgumentOutOfRangeException">La cronologia di navigazione è vuota.</exception>
         public void GoBack()
         {
-            if (current != null)
-            {
-                // Se la pagina non va abbandonata termina
-                if (current.CallCancelNavigation())
-                    return;
+            if (!CanGoBack)
+                throw new InvalidOperationException("La cronologia di navigazione è vuota.");
 
-                // Se la pagina corrente non è un singleton ancora aperto ed implementa IDisposable eseguilo
-                if (!(Attribute.GetCustomAttribute(current.GetType(), typeof(PageOptionsAttribute)) is PageOptionsAttribute attributes
-                        && attributes.LaunchMode == PageLaunchMode.Singleton
-                        && history.Any(p => p == current))
-                    && current is IDisposable disposable)
-                    disposable.Dispose();
-            }
+            // Se la pagina non va abbandonata termina
+            if (current.CallClosing())
+                return;
+
+            // Se la pagina implementa IDisposable eseguilo
+            if (current is IDisposable disposable)
+                disposable.Dispose();
 
             // Se è nella cronologia è certamente una pagina da salvare
             saveCurrent = true;
 
             // Preleva l'ultima pagina dalla cronologia e caricala
-            int lastIndex = history.Count - 1;
-
-            var page = history[lastIndex];
-            history.RemoveAt(lastIndex);
-
-            LoadCurrent(page);
+            LoadCurrent(history.Pop());
         }
 
         /// <summary>
@@ -88,53 +80,99 @@ namespace LambdaCom.LiteUI
         /// <exception cref="ArgumentException">Il tipo della pagina deve essere sottoclasse di <see cref="LitePage"/>.</exception>
         public void Navigate(Type type, NavigationParams extras = null)
         {
-            if (type is null)
-                throw new ArgumentNullException(nameof(type));
+            // Leggi LaunchMode del tipo, se assente imposta su Normal
+            var launchMode = Attribute.GetCustomAttribute(type, typeof(PageOptionsAttribute)) is PageOptionsAttribute attributes
+                ? attributes.LaunchMode
+                : PageLaunchMode.Normal;
 
-            if (current != null)
+            // Se non sono stati passati parametri crea vuoto
+            if (extras is null)
+                extras = new NavigationParams();
+
+            switch (launchMode)
             {
-                // Se la pagina non va abbandonata termina
-                if (current.CallCancelNavigation())
-                    return;
+                case PageLaunchMode.Ignore:
+                    if (SaveCurrent())
+                        return;
 
-                // Se la pagina non è da ignorare aggiungila alla cronologia
-                if (saveCurrent)
-                    history.Add(current);
+                    CreatePage();
+                    saveCurrent = false;
+                    break;
+                case PageLaunchMode.Normal:
+                    if (SaveCurrent())
+                        return;
+
+                    CreatePage();
+                    saveCurrent = true;
+                    break;
+                case PageLaunchMode.SingleTop:
+                    // Se current ha il tipo richiesto chiama direttamente
+                    // altrimenti controlla che la pagina corrente si possa terminare e creala
+                    if (current?.GetType() == type)
+                        current.CallRetrieved(extras);
+                    else if (SaveCurrent())
+                        return;
+                    else
+                        CreatePage();
+
+                    saveCurrent = true;
+                    break;
+                case PageLaunchMode.SingleInstance:
+                    // Se current ha il tipo richiesto chiama direttamente
+                    // altrimenti controlla se è presente nella cronologia e inizia a disporre le pagine
+                    // altrimenti controlla che la pagina corrente si possa terminare e creala
+                    if (current?.GetType() == type)
+                        current.CallRetrieved(extras);
+                    else if(history.Any(p => p.GetType() == type))
+                    {
+                        var page = current;
+
+                        do
+                        {
+                            // Se la pagina non va abbandonata termina
+                            if (page.CallClosing())
+                                return;
+
+                            // Se la pagina implementa IDisposable eseguilo
+                            if (page is IDisposable disposable)
+                                disposable.Dispose();
+                        }
+                        while ((page = history.Pop()).GetType() != type);
+
+                        page.CallRetrieved(extras);
+                        LoadCurrent(page);
+                    }
+                    else if(SaveCurrent())
+                        return;
+                    else
+                        CreatePage();
+
+                    saveCurrent = true;
+                    break;
             }
 
-            // Crea pagina e caricala
-            if (type.IsSubclassOf(typeof(LitePage)))
+            bool SaveCurrent()
             {
-                // Leggi da attributo, se presente, le impostazioni della pagina, altrimenti tratta come Normal
-                saveCurrent = true;
-                bool instantiateNew = true;
-
-                if (Attribute.GetCustomAttribute(type, typeof(PageOptionsAttribute)) is PageOptionsAttribute attributes)
-                    (saveCurrent, instantiateNew) = attributes.LaunchMode switch
-                    {
-                        PageLaunchMode.Ignore => (false, true),
-                        PageLaunchMode.Normal => (true, true),
-                        PageLaunchMode.Singleton => (true, false),
-                        _ => (false, false)
-                    };
-
-                // Carica nuova istanza di pagina o se singleton riporta in cima
-                LitePage page;
-
-                if (instantiateNew || (page = history.Where(p => p.GetType() == type).FirstOrDefault()) == null)
+                if (current != null)
                 {
-                    page = (LitePage)Activator.CreateInstance(type);
-                    page.CallCreated(extras ?? new NavigationParams());
-                }
-                else
-                {
-                    page.CallRetrieved(extras ?? new NavigationParams());
+                    // Se la pagina non va abbandonata termina
+                    if (current.CallClosing())
+                        return true;
+
+                    // Se la pagina non è da ignorare aggiungila alla cronologia
+                    if (saveCurrent)
+                        history.Push(current);
                 }
 
+                return false;
+            }
+
+            void CreatePage()
+            {
+                var page = (LitePage)Activator.CreateInstance(type);
+                page.CallCreated(extras);
                 LoadCurrent(page);
             }
-            else
-                throw new ArgumentException("Type must be subclass of " + nameof(LitePage), nameof(type));
         }
 
         /// <summary>
@@ -142,8 +180,6 @@ namespace LambdaCom.LiteUI
         /// </summary>
         /// <typeparam name="T">Il tipo della pagina da aprire.</typeparam>
         /// <param name="extras">I parametri da passare alla pagina.</param>
-        /// <exception cref="ArgumentNullException">Il tipo della pagina non può essere <see langword="null"/>.</exception>
-        /// <exception cref="ArgumentException">Il tipo della pagina deve essere sottoclasse di <see cref="LitePage"/>.</exception>
         public void Navigate<T>(NavigationParams extras) where T : LitePage
             => Navigate(typeof(T), extras);
 
@@ -152,8 +188,6 @@ namespace LambdaCom.LiteUI
         /// </summary>
         /// <typeparam name="T">Il tipo della pagina da aprire.</typeparam>
         /// <param name="extras">I parametri da passare alla pagina.</param>
-        /// <exception cref="ArgumentNullException">Il tipo della pagina non può essere <see langword="null"/>.</exception>
-        /// <exception cref="ArgumentException">Il tipo della pagina deve essere sottoclasse di <see cref="LitePage"/>.</exception>
         public void Navigate<T>(params (string key, object value)[] extras) where T : LitePage
         {
             // Ricrea l'oggetto parametro dai valori passati
@@ -169,8 +203,6 @@ namespace LambdaCom.LiteUI
         /// Naviga ad una pagina del tipo dato senza passare alcun parametro.
         /// </summary>
         /// <typeparam name="T">Il tipo della pagina da aprire.</typeparam>
-        /// <exception cref="ArgumentNullException">Il tipo della pagina non può essere <see langword="null"/>.</exception>
-        /// <exception cref="ArgumentException">Il tipo della pagina deve essere sottoclasse di <see cref="LitePage"/>.</exception>
         public void Navigate<T>() where T : LitePage
             => Navigate(typeof(T));
     }

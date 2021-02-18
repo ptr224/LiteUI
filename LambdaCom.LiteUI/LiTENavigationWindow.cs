@@ -94,7 +94,7 @@ namespace LambdaCom.LiteUI
         {
             base.OnApplyTemplate();
 
-            // Naviga a startup page se dichiarata
+            // Naviga a StartupPage se dichiarata
             if (StartupPage != null)
                 NavigationService.Navigate(StartupPage);
         }

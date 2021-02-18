@@ -48,7 +48,6 @@ namespace LambdaCom.LiteUI
         /// </summary>
         /// <typeparam name="T">Il tipo del parametro.</typeparam>
         /// <param name="key">La chiave del parametro.</param>
-        /// <param name="defaultValue">Il valore di default nel caso in cui il parametro sia assente.</param>
         public T Get<T>(string key)
             => (T)Get(key, default(T));
     }

@@ -40,17 +40,22 @@
         </member>
         <member name="F:LambdaCom.LiteUI.PageLaunchMode.Ignore">
             <summary>
-            Viene creata una nuova pagina che non compare nella cronologia.
+            Crea una nuova pagina che non viene salvata nella cronologia.
             </summary>
         </member>
         <member name="F:LambdaCom.LiteUI.PageLaunchMode.Normal">
             <summary>
-            Viene creata una nuova pagina e salvata nella cronologia.
+            Crea ogni volta una nuova pagina.
             </summary>
         </member>
-        <member name="F:LambdaCom.LiteUI.PageLaunchMode.Singleton">
+        <member name="F:LambdaCom.LiteUI.PageLaunchMode.SingleTop">
             <summary>
-            Se la pagina è già aperta nella cronologia riporta la stessa istanza.
+            Se la pagina è attualmente in primo piano viene richiamata la stessa istanza.
+            </summary>
+        </member>
+        <member name="F:LambdaCom.LiteUI.PageLaunchMode.SingleInstance">
+            <summary>
+            Se la pagina è presente nella cronologia richiama la stessa istanza ed elimina tutte le pagine accodate successivamente.
             </summary>
         </member>
         <member name="T:LambdaCom.LiteUI.PageOptionsAttribute">
@@ -90,7 +95,7 @@
             </summary>
             <param name="extras">I parametri passati dalla chiamata.</param>
         </member>
-        <member name="M:LambdaCom.LiteUI.LitePage.CancelNavigation">
+        <member name="M:LambdaCom.LiteUI.LitePage.Closing">
             <summary>
             Metodo eseguito quando la pagina sta per essere lasciata.<para/>
             Ritornare <see langword="true"/> se non si vuole che la pagina venga abbandonata.
@@ -158,7 +163,6 @@
             </summary>
             <typeparam name="T">Il tipo del parametro.</typeparam>
             <param name="key">La chiave del parametro.</param>
-            <param name="defaultValue">Il valore di default nel caso in cui il parametro sia assente.</param>
         </member>
         <member name="P:LambdaCom.LiteUI.NavigationService.CanGoBack">
             <summary>
@@ -186,8 +190,6 @@
             </summary>
             <typeparam name="T">Il tipo della pagina da aprire.</typeparam>
             <param name="extras">I parametri da passare alla pagina.</param>
-            <exception cref="T:System.ArgumentNullException">Il tipo della pagina non può essere <see langword="null"/>.</exception>
-            <exception cref="T:System.ArgumentException">Il tipo della pagina deve essere sottoclasse di <see cref="T:LambdaCom.LiteUI.LitePage"/>.</exception>
         </member>
         <member name="M:LambdaCom.LiteUI.NavigationService.Navigate``1(System.ValueTuple{System.String,System.Object}[])">
             <summary>
@@ -195,16 +197,12 @@
             </summary>
             <typeparam name="T">Il tipo della pagina da aprire.</typeparam>
             <param name="extras">I parametri da passare alla pagina.</param>
-            <exception cref="T:System.ArgumentNullException">Il tipo della pagina non può essere <see langword="null"/>.</exception>
-            <exception cref="T:System.ArgumentException">Il tipo della pagina deve essere sottoclasse di <see cref="T:LambdaCom.LiteUI.LitePage"/>.</exception>
         </member>
         <member name="M:LambdaCom.LiteUI.NavigationService.Navigate``1">
             <summary>
             Naviga ad una pagina del tipo dato senza passare alcun parametro.
             </summary>
             <typeparam name="T">Il tipo della pagina da aprire.</typeparam>
-            <exception cref="T:System.ArgumentNullException">Il tipo della pagina non può essere <see langword="null"/>.</exception>
-            <exception cref="T:System.ArgumentException">Il tipo della pagina deve essere sottoclasse di <see cref="T:LambdaCom.LiteUI.LitePage"/>.</exception>
         </member>
         <member name="T:XamlGeneratedNamespace.GeneratedInternalTypeHelper">
             <summary>

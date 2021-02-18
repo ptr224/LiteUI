@@ -11,19 +11,24 @@ namespace LambdaCom.LiteUI
     public enum PageLaunchMode
     {
         /// <summary>
-        /// Viene creata una nuova pagina che non compare nella cronologia.
+        /// Crea una nuova pagina che non viene salvata nella cronologia.
         /// </summary>
         Ignore,
 
         /// <summary>
-        /// Viene creata una nuova pagina e salvata nella cronologia.
+        /// Crea ogni volta una nuova pagina.
         /// </summary>
         Normal,
 
         /// <summary>
-        /// Se la pagina è già aperta nella cronologia riporta la stessa istanza.
+        /// Se la pagina è attualmente in primo piano viene richiamata la stessa istanza.
         /// </summary>
-        Singleton
+        SingleTop,
+
+        /// <summary>
+        /// Se la pagina è presente nella cronologia richiama la stessa istanza ed elimina tutte le pagine accodate successivamente.
+        /// </summary>
+        SingleInstance
     }
 
     /// <summary>
@@ -84,8 +89,8 @@ namespace LambdaCom.LiteUI
         internal void CallRetrieved(NavigationParams extras)
             => Retrieved(extras);
 
-        internal bool CallCancelNavigation()
-            => CancelNavigation();
+        internal bool CallClosing()
+            => Closing();
 
         /// <summary>
         /// Metodo chiamato alla creazione della pagina.
@@ -109,7 +114,7 @@ namespace LambdaCom.LiteUI
         /// Metodo eseguito quando la pagina sta per essere lasciata.<para/>
         /// Ritornare <see langword="true"/> se non si vuole che la pagina venga abbandonata.
         /// </summary>
-        protected virtual bool CancelNavigation()
+        protected virtual bool Closing()
         {
             // Di default non cancellare la navigazione
             return false;
