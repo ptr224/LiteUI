@@ -69,20 +69,6 @@
                             <Setter Property="Visibility" TargetName="windowBar" Value="Collapsed"/>
                             <Setter Property="Padding" TargetName="border" Value="{DynamicResource MaximizedWindowContentPadding}"/>
                         </DataTrigger>
-                        <MultiDataTrigger>
-                            <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding WindowState, RelativeSource={RelativeSource Self}}" Value="Maximized"/>
-                                <Condition Binding="{Binding BarStyle, RelativeSource={RelativeSource Self}}" Value="{x:Static ld:WindowBarStyle.HiddenMaximized}"/>
-                            </MultiDataTrigger.Conditions>
-                            <MultiDataTrigger.Setters>
-                                <Setter Property="WindowChrome.WindowChrome">
-                                    <Setter.Value>
-                                        <WindowChrome CaptionHeight="0"/>
-                                    </Setter.Value>
-                                </Setter>
-                                <Setter Property="Visibility" TargetName="windowBar" Value="Collapsed"/>
-                            </MultiDataTrigger.Setters>
-                        </MultiDataTrigger>
                         <DataTrigger Binding="{Binding BarStyle, RelativeSource={RelativeSource Self}}" Value="{x:Static ld:WindowBarStyle.Big}">
                             <Setter Property="WindowChrome.WindowChrome">
                                 <Setter.Value>
@@ -91,6 +77,22 @@
                             </Setter>
                             <Setter Property="Height" TargetName="windowBar" Value="{DynamicResource WindowButtonWidth}"/>
                         </DataTrigger>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding WindowState, RelativeSource={RelativeSource Self}}" Value="Maximized"/>
+                                <Condition Binding="{Binding IsFullscreen, RelativeSource={RelativeSource Self}}" Value="True"/>
+                            </MultiDataTrigger.Conditions>
+                            <MultiDataTrigger.Setters>
+                                <Setter Property="WindowChrome.WindowChrome">
+                                    <Setter.Value>
+                                        <WindowChrome CaptionHeight="0"/>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter Property="Visibility" TargetName="close" Value="Collapsed"/>
+                                <Setter Property="Visibility" TargetName="maximize" Value="Collapsed"/>
+                                <Setter Property="Visibility" TargetName="minimize" Value="Collapsed"/>
+                            </MultiDataTrigger.Setters>
+                        </MultiDataTrigger>
                         <DataTrigger Binding="{Binding HideNavigationButton, RelativeSource={RelativeSource Self}}" Value="True">
                             <Setter Property="Visibility" TargetName="back" Value="Collapsed"/>
                         </DataTrigger>

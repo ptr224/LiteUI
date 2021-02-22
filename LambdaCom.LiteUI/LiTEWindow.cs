@@ -9,7 +9,7 @@ namespace LambdaCom.LiteUI
 {
     public enum LiteWindowTheme { Light, Dark }
 
-    public enum WindowBarStyle { Hidden, HiddenMaximized, Normal, Big }
+    public enum WindowBarStyle { Hidden, Normal, Big }
 
     public class LiteWindow : Window
     {

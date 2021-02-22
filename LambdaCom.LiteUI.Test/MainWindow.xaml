@@ -6,5 +6,5 @@
         xmlns:local="clr-namespace:LambdaCom.LiteUI.Test"
         xmlns:ld="clr-namespace:LambdaCom.LiteUI;assembly=LambdaCom.LiteUI"
         mc:Ignorable="d"
-        Title="LiTEUI" Height="386" Width="468" StartupPage="{x:Type local:NavPage}" Icon="/Logo PortoCloud.png">
+        Title="LiTEUI" Height="386" Width="468" BarStyle="Big" StartupPage="{x:Type local:NavPage}" Icon="/Logo PortoCloud.png">
 </ld:LiteNavigationWindow>
