@@ -13,7 +13,7 @@
     <RepositoryUrl>https://github.com/ptr224/LambdaCom.LiteUI</RepositoryUrl>
     <PackageProjectUrl>https://github.com/ptr224/LambdaCom.LiteUI</PackageProjectUrl>
     <RepositoryType>git</RepositoryType>
-    <Version>1.2.2</Version>
+    <Version>1.2.4</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">

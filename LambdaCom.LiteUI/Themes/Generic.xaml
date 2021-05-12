@@ -18,8 +18,8 @@
         <ResourceDictionary Source="/LambdaCom.LiteUI;component/Themes/Styles/Label.xaml"/>
         <ResourceDictionary Source="/LambdaCom.LiteUI;component/Themes/Styles/ListBox.xaml"/>
         <ResourceDictionary Source="/LambdaCom.LiteUI;component/Themes/Styles/ListBoxItem.xaml"/>
-        <ResourceDictionary Source="/LambdaCom.LiteUI;component/Themes/Styles/ListView.xaml"/>
-        <ResourceDictionary Source="/LambdaCom.LiteUI;component/Themes/Styles/ListViewItem.xaml"/>
+        <!--ResourceDictionary Source="/LambdaCom.LiteUI;component/Themes/Styles/ListView.xaml"/>
+        <ResourceDictionary Source="/LambdaCom.LiteUI;component/Themes/Styles/ListViewItem.xaml"/ -->
         <ResourceDictionary Source="/LambdaCom.LiteUI;component/Themes/Styles/LiteNavigationWindow.xaml"/>
         <ResourceDictionary Source="/LambdaCom.LiteUI;component/Themes/Styles/LitePopup.xaml"/>
         <!--ResourceDictionary Source="/LambdaCom.LiteUI;component/Themes/Styles/LiteWindow.xaml"/ Incluso in LiteNavigationWindow -->
