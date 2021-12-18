@@ -32,7 +32,6 @@
             <ListBoxItem Content="Termac"/>
             <ListBoxItem Content="Blu"/>
         </ListBox>
-        <CheckBox Content="Trasparente" IsChecked="{Binding IsTransparent, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ld:LiteWindow}}}" HorizontalAlignment="Left" Margin="109,16,0,0" VerticalAlignment="Top"/>
         <Label Content="Tema:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
         <GroupBox Header="Cose che non fanno nulla" HorizontalAlignment="Left" Height="195" Margin="215,41,0,0" VerticalAlignment="Top" Width="198" IsEnabled="{Binding IsChecked, ElementName=checkBox}">
             <ScrollViewer>

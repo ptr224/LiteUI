@@ -68,9 +68,6 @@
                         <Trigger Property="Icon" Value="{x:Null}">
                             <Setter Property="Visibility" TargetName="icon" Value="Collapsed"/>
                         </Trigger>
-                        <DataTrigger Binding="{Binding IsTransparent, RelativeSource={RelativeSource Self}}" Value="False">
-                            <Setter Property="Background" Value="{DynamicResource WindowBaseColor}"/>
-                        </DataTrigger>
                         <DataTrigger Binding="{Binding BarStyle, RelativeSource={RelativeSource Self}}" Value="{x:Static ld:WindowBarStyle.Hidden}">
                             <Setter Property="WindowChrome.WindowChrome">
                                 <Setter.Value>

@@ -2,7 +2,6 @@
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Interop;
 using System.Windows.Media;
 
 namespace LiteUI
@@ -41,17 +40,6 @@ namespace LiteUI
                 window.WindowState = WindowState.Minimized;
                 window.WindowState = WindowState.Maximized;
             }
-        }
-
-        public static readonly DependencyProperty IsTransparentProperty = DependencyProperty.Register(nameof(IsTransparent),
-            typeof(bool), typeof(LiteWindow), new FrameworkPropertyMetadata(true, FrameworkPropertyMetadataOptions.AffectsRender));
-
-        [Bindable(true)]
-        [Category(nameof(LiteWindow))]
-        public bool IsTransparent
-        {
-            get => (bool)GetValue(IsTransparentProperty);
-            set => SetValue(IsTransparentProperty, value);
         }
 
         public static readonly DependencyProperty BarStyleProperty = DependencyProperty.Register(nameof(BarStyle),
@@ -107,17 +95,15 @@ namespace LiteUI
 
             if (ac.GetBrightness() > bc.GetBrightness())
             {
-                resources["HighlightedColor"] = new SolidColorBrush(Color.FromArgb(0xFF, special.R, special.G, special.B));
+                resources["HighlightedColor"] = new SolidColorBrush(Color.FromRgb(special.R, special.G, special.B));
                 resources["BackgroundColor"] = new SolidColorBrush(Color.FromArgb(0x90, special.R, special.G, special.B));
-                resources["WindowBaseColor"] = new SolidColorBrush(Color.FromArgb(0xFF, background.R, background.G, background.B));
-                resources["WindowColor"] = new SolidColorBrush(Color.FromArgb(0xC7, background.R, background.G, background.B));
+                resources["WindowColor"] = new SolidColorBrush(Color.FromRgb(background.R, background.G, background.B));
             }
             else
             {
-                resources["HighlightedColor"] = new SolidColorBrush(Color.FromArgb(0xFF, background.R, background.G, background.B));
+                resources["HighlightedColor"] = new SolidColorBrush(Color.FromRgb(background.R, background.G, background.B));
                 resources["BackgroundColor"] = new SolidColorBrush(Color.FromArgb(0x90, background.R, background.G, background.B));
-                resources["WindowBaseColor"] = new SolidColorBrush(Color.FromArgb(0xFF, special.R, special.G, special.B));
-                resources["WindowColor"] = new SolidColorBrush(Color.FromArgb(0xC7, special.R, special.G, special.B));
+                resources["WindowColor"] = new SolidColorBrush(Color.FromRgb(special.R, special.G, special.B));
             }
         }
 
@@ -180,29 +166,6 @@ namespace LiteUI
             CommandBindings.Add(new CommandBinding(SystemCommands.MinimizeWindowCommand, (_, __) => SystemCommands.MinimizeWindow(this)));
             CommandBindings.Add(new CommandBinding(SystemCommands.MaximizeWindowCommand, (_, __) => SystemCommands.MaximizeWindow(this)));
             CommandBindings.Add(new CommandBinding(SystemCommands.RestoreWindowCommand, (_, __) => SystemCommands.RestoreWindow(this)));
-        }
-
-        public override void OnApplyTemplate()
-        {
-            base.OnApplyTemplate();
-
-            // Attiva l'effetto blur (su thread UI per evitare bug sfondo nero)
-            Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Normal, new Action(() =>
-            {
-                var windowHelper = new WindowInteropHelper(this);
-                AcrylicHelper.EnableBlur(windowHelper.Handle);
-                ContentRendered += OnContentRendered;
-
-                void OnContentRendered(object sender, EventArgs e)
-                {
-                    if (SizeToContent != SizeToContent.Manual)
-                    {
-                        InvalidateMeasure();
-                    }
-
-                    ContentRendered -= OnContentRendered;
-                }
-            }));
         }
     }
 }

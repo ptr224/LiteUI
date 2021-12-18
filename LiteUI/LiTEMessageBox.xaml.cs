@@ -29,8 +29,6 @@ namespace LiteUI
                 var colors = owner.Colors;
                 if (colors != null)
                     msg.SetColors(colors[0], colors[1], colors[2]);
-
-                msg.IsTransparent = owner.IsTransparent;
             }
 
             // Attendi la risposta
