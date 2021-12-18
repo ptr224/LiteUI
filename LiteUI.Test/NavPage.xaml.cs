@@ -2,7 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace LambdaCom.LiteUI.Test
+namespace LiteUI.Test
 {
     /// <summary>
     /// Logica di interazione per NavPage.xaml

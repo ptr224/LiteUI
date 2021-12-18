@@ -5,7 +5,7 @@ using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
 
-namespace LambdaCom.LiteUI
+namespace LiteUI
 {
     public enum LiteWindowTheme { Light, Dark }
 

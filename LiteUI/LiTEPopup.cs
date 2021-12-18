@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 
-namespace LambdaCom.LiteUI
+namespace LiteUI
 {
     public enum PopupShadow { All, NoLeft, NoTop, NoRight, NoBottom }
 

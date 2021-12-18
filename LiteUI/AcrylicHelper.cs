@@ -29,7 +29,7 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace LambdaCom.LiteUI
+namespace LiteUI
 {
     internal enum AccentFlagsType
     {

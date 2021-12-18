@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LambdaCom.LiteUI", "LambdaCom.LiteUI\LambdaCom.LiteUI.csproj", "{B9509F9C-52F6-470D-A827-FCDE298F43E1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiteUI", "LiteUI\LiteUI.csproj", "{B9509F9C-52F6-470D-A827-FCDE298F43E1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LambdaCom.LiteUI.Test", "LambdaCom.LiteUI.Test\LambdaCom.LiteUI.Test.csproj", "{FD7B84AB-E04C-44DB-8D42-B8C38422306E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiteUI.Test", "LiteUI.Test\LiteUI.Test.csproj", "{FD7B84AB-E04C-44DB-8D42-B8C38422306E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

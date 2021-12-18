@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace LambdaCom.LiteUI
+namespace LiteUI
 {
     /// <summary>
     /// Collezione di parametri passati dal <see cref="NavigationService"/>.

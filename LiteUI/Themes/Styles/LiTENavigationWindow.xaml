@@ -1,8 +1,8 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:ld="clr-namespace:LambdaCom.LiteUI">
+                    xmlns:ld="clr-namespace:LiteUI">
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="/LambdaCom.LiteUI;component/Themes/Styles/LiteWindow.xaml"/>
+        <ResourceDictionary Source="/LiteUI;component/Themes/Styles/LiteWindow.xaml"/>
     </ResourceDictionary.MergedDictionaries>
     <Style TargetType="{x:Type ld:LiteNavigationWindow}">
         <Setter Property="WindowStyle" Value="None"/>

@@ -1,6 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:ld="clr-namespace:LambdaCom.LiteUI">
+                    xmlns:ld="clr-namespace:LiteUI">
     <Style TargetType="{x:Type ld:LitePopup}">
         <Setter Property="Background" Value="{DynamicResource WindowBaseColor}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource ActiveColor}"/>

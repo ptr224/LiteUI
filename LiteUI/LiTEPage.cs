@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace LambdaCom.LiteUI
+namespace LiteUI
 {
     /// <summary>
     /// Descrive le modalità di lancio di una pagina.

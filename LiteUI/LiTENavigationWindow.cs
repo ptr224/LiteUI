@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
 
-namespace LambdaCom.LiteUI
+namespace LiteUI
 {
     /// <summary>
     /// Una speciale <see cref="LiteWindow"/> che contiene e naviga tra delle <see cref="LitePage"/>.

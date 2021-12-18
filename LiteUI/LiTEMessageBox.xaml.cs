@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows;
 
-namespace LambdaCom.LiteUI
+namespace LiteUI
 {
     public static class LiteMessageBox
     {

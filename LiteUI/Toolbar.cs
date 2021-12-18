@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace LambdaCom.LiteUI
+namespace LiteUI
 {
     public class ToolbarItemsCollection : ObservableCollection<ToolbarButton> { }
 

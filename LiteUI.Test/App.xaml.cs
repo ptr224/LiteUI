@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace LambdaCom.LiteUI.Test
+namespace LiteUI.Test
 {
     /// <summary>
     /// Interaction logic for App.xaml

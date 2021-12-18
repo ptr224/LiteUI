@@ -4,7 +4,8 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net5.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
-    <StartupObject>LambdaCom.LiteUI.Test.App</StartupObject>
+    <StartupObject>LiteUI.Test.App</StartupObject>
+    <ApplicationIcon />
   </PropertyGroup>
 
   <ItemGroup>
@@ -12,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\LambdaCom.LiteUI\LambdaCom.LiteUI.csproj" />
+    <ProjectReference Include="..\LiteUI\LiteUI.csproj" />
   </ItemGroup>
 
   <ItemGroup>

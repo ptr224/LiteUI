@@ -1,4 +1,4 @@
-﻿namespace LambdaCom.LiteUI.Test
+﻿namespace LiteUI.Test
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

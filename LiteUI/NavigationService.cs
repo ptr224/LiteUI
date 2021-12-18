@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace LambdaCom.LiteUI
+namespace LiteUI
 {
     public sealed class NavigationService
     {
