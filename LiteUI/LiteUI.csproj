@@ -24,4 +24,12 @@
     <DocumentationFile>D:\ptr22\Source\VisualStudio\LiteUI\LiteUI\LiteUI.xml</DocumentationFile>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="LiteUI.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\.editorconfig" Link=".editorconfig" />
+  </ItemGroup>
+
 </Project>
