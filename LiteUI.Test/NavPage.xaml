@@ -50,7 +50,7 @@
         </GroupBox>
         <CheckBox x:Name="checkBox" Content="Abilita cose" HorizontalAlignment="Left" Margin="270,257,0,0" VerticalAlignment="Top" IsChecked="True"/>
         <CheckBox IsChecked="{Binding IsFullscreen, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ld:LiteWindow}}}" Content="Fullscreen" HorizontalAlignment="Left" Margin="215,16,0,0" VerticalAlignment="Top" Cursor="Hand"/>
-        <Button Content="Apri pagina" Click="Button_Click_1" HorizontalAlignment="Left" Margin="251,295,0,0" Height="22" VerticalAlignment="Top"/>
+        <Button Content="Apri pagina" Click="Button_Click_1" HorizontalAlignment="Left" Margin="251,295,0,0" VerticalAlignment="Top"/>
         <Popup x:Name="popup" Placement="Center" AllowsTransparency="True" StaysOpen="True" IsOpen="False">
             <ld:LitePopup Shadow="NoTop">
                 <Label Content="dwerew"/>
