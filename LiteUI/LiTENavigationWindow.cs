@@ -41,8 +41,12 @@ namespace LiteUI
             DefaultStyleKeyProperty.OverrideMetadata(typeof(LiteNavigationWindow), new FrameworkPropertyMetadata(typeof(LiteNavigationWindow)));
         }
 
-        public static readonly DependencyProperty HideNavigationButtonProperty = DependencyProperty.Register(nameof(HideNavigationButton),
-            typeof(bool), typeof(LiteNavigationWindow), new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsRender));
+        public static readonly DependencyProperty HideNavigationButtonProperty = DependencyProperty.Register(
+            nameof(HideNavigationButton),
+            typeof(bool),
+            typeof(LiteNavigationWindow),
+            new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsRender)
+        );
 
         [Bindable(true)]
         [Category(nameof(LiteWindow))]
@@ -52,8 +56,12 @@ namespace LiteUI
             set => SetValue(HideNavigationButtonProperty, value);
         }
 
-        public static readonly DependencyProperty StartupPageProperty = DependencyProperty.Register(nameof(StartupPage),
-            typeof(Type), typeof(LiteNavigationWindow), new FrameworkPropertyMetadata(null));
+        public static readonly DependencyProperty StartupPageProperty = DependencyProperty.Register(
+            nameof(StartupPage),
+            typeof(Type),
+            typeof(LiteNavigationWindow),
+            new FrameworkPropertyMetadata(null)
+        );
 
         [Bindable(false)]
         [Category(nameof(LiteWindow))]
@@ -94,7 +102,7 @@ namespace LiteUI
             base.OnApplyTemplate();
 
             // Naviga a StartupPage se dichiarata
-            if (StartupPage != null)
+            if (StartupPage is not null)
                 NavigationService.Navigate(StartupPage);
         }
     }

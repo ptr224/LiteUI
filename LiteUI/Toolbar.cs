@@ -16,8 +16,11 @@ namespace LiteUI
             DefaultStyleKeyProperty.OverrideMetadata(typeof(ToolbarButton), new FrameworkPropertyMetadata(typeof(ToolbarButton)));
         }
 
-        public static readonly DependencyProperty PositionProperty = DependencyProperty.Register(nameof(Position),
-            typeof(ToolbarPosition), typeof(ToolbarButton), new FrameworkPropertyMetadata(ToolbarPosition.Right, FrameworkPropertyMetadataOptions.AffectsRender, PositionChanged));
+        public static readonly DependencyProperty PositionProperty = DependencyProperty.Register(
+            nameof(Position),
+            typeof(ToolbarPosition),
+            typeof(ToolbarButton),
+            new FrameworkPropertyMetadata(ToolbarPosition.Right, FrameworkPropertyMetadataOptions.AffectsRender, PositionChanged));
 
         [Bindable(true)]
         [Category(nameof(ToolbarButton))]

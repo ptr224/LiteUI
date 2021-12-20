@@ -21,8 +21,8 @@
                             <Setter Property="Background" Value="{DynamicResource HighlightedColor}"/>
                         </Trigger>
                         <Trigger Property="IsSelected" Value="true">
-                            <Setter Property="Background" Value="{DynamicResource HighlightedColor}"/>
-                            <Setter Property="BorderBrush" Value="{DynamicResource ActiveColor}"/>
+                            <Setter Property="Foreground" Value="{DynamicResource AccentForeground}"/>
+                            <Setter Property="Background" Value="{DynamicResource AccentBackground}"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Background" Value="Transparent"/>

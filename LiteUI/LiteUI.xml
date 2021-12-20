@@ -101,29 +101,13 @@
             Ritornare <see langword="true"/> se non si vuole che la pagina venga abbandonata.
             </summary>
         </member>
-        <member name="M:LiteUI.LiteWindow.SetGlobalColors(System.Windows.Media.Color,System.Windows.Media.Color,System.Windows.Media.Color)">
-            <summary>
-            Imposta il tema globale dell'applicazione.
-            </summary>
-            <param name="active">Il colore degli elementi attivi.</param>
-            <param name="inactive">Il colore degli elementi inattivi.</param>
-            <param name="background">Il colore di base dello sfondo.</param>
-        </member>
-        <member name="M:LiteUI.LiteWindow.SetGlobalColors(LiteUI.LiteWindowTheme)">
+        <member name="M:LiteUI.LiteWindow.SetGlobalTheme(LiteUI.LiteWindowTheme)">
             <summary>
             Imposta il tema globale dell'applicazione.
             </summary>
             <param name="theme">Il tema da usare.</param>
         </member>
-        <member name="M:LiteUI.LiteWindow.SetColors(System.Windows.Media.Color,System.Windows.Media.Color,System.Windows.Media.Color)">
-            <summary>
-            Imposta il tema della finestra corrente.
-            </summary>
-            <param name="active">Il colore degli elementi attivi.</param>
-            <param name="inactive">Il colore degli elementi inattivi.</param>
-            <param name="background">Il colore di base dello sfondo.</param>
-        </member>
-        <member name="M:LiteUI.LiteWindow.SetColors(LiteUI.LiteWindowTheme)">
+        <member name="M:LiteUI.LiteWindow.SetTheme(LiteUI.LiteWindowTheme)">
             <summary>
             Imposta il tema della finestra corrente.
             </summary>

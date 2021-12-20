@@ -5,4 +5,6 @@
     <SolidColorBrush x:Key="HighlightedColor" Color="#FFFFFF"/>
     <SolidColorBrush x:Key="BackgroundColor" Color="#E8E8E8"/>
     <SolidColorBrush x:Key="WindowColor" Color="#B9B9B9"/>
+    <SolidColorBrush x:Key="AccentForeground" Color="#FFFFFF"/>
+    <SolidColorBrush x:Key="AccentBackground" Color="#007ACC"/>
 </ResourceDictionary>

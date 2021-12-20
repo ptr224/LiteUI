@@ -26,9 +26,9 @@ namespace LiteUI
                 msg.Owner = owner;
                 msg.WindowStartupLocation = WindowStartupLocation.CenterOwner;
 
-                var colors = owner.Colors;
-                if (colors != null)
-                    msg.SetColors(colors[0], colors[1], colors[2]);
+                var theme = owner.Theme;
+                if (theme is not null)
+                    msg.SetTheme(theme);
             }
 
             // Attendi la risposta

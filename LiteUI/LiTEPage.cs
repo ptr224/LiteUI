@@ -48,8 +48,12 @@ namespace LiteUI
     /// </summary>
     public class LitePage : UserControl
     {
-        public static readonly DependencyProperty TitleProperty = DependencyProperty.Register(nameof(Title),
-            typeof(string), typeof(LitePage), new FrameworkPropertyMetadata(nameof(LitePage), FrameworkPropertyMetadataOptions.AffectsRender));
+        public static readonly DependencyProperty TitleProperty = DependencyProperty.Register(
+            nameof(Title),
+            typeof(string),
+            typeof(LitePage),
+            new FrameworkPropertyMetadata(nameof(LitePage), FrameworkPropertyMetadataOptions.AffectsRender)
+        );
 
         [Bindable(true)]
         [Category(nameof(LitePage))]
@@ -59,8 +63,12 @@ namespace LiteUI
             set => SetValue(TitleProperty, value);
         }
 
-        public static readonly DependencyProperty ToolbarProperty = DependencyProperty.Register(nameof(Toolbar),
-            typeof(ToolbarItemsCollection), typeof(LitePage), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.AffectsRender));
+        public static readonly DependencyProperty ToolbarProperty = DependencyProperty.Register(
+            nameof(Toolbar),
+            typeof(ToolbarItemsCollection),
+            typeof(LitePage),
+            new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.AffectsRender)
+        );
 
         [Bindable(true)]
         [Category(nameof(LitePage))]

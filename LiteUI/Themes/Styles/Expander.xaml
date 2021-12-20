@@ -24,7 +24,8 @@
                             <Setter Property="Fill" TargetName="circle" Value="{DynamicResource HighlightedColor}"/>
                         </Trigger>
                         <Trigger Property="IsPressed" Value="true">
-                            <Setter Property="StrokeThickness" TargetName="circle" Value="1"/>
+                            <Setter Property="Stroke" TargetName="circle" Value="{DynamicResource AccentBackground}"/>
+                            <Setter Property="Stroke" TargetName="arrow" Value="{DynamicResource AccentBackground}"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
                             <Setter Property="Stroke" TargetName="circle" Value="{DynamicResource InactiveColor}"/>
@@ -70,7 +71,8 @@
                             <Setter Property="Fill" TargetName="circle" Value="{DynamicResource HighlightedColor}"/>
                         </Trigger>
                         <Trigger Property="IsPressed" Value="true">
-                            <Setter Property="StrokeThickness" TargetName="circle" Value="1"/>
+                            <Setter Property="Stroke" TargetName="circle" Value="{DynamicResource AccentBackground}"/>
+                            <Setter Property="Stroke" TargetName="arrow" Value="{DynamicResource AccentBackground}"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
                             <Setter Property="Stroke" TargetName="circle" Value="{DynamicResource InactiveColor}"/>
@@ -116,7 +118,8 @@
                             <Setter Property="Fill" TargetName="circle" Value="{DynamicResource HighlightedColor}"/>
                         </Trigger>
                         <Trigger Property="IsPressed" Value="true">
-                            <Setter Property="StrokeThickness" TargetName="circle" Value="1"/>
+                            <Setter Property="Stroke" TargetName="circle" Value="{DynamicResource AccentBackground}"/>
+                            <Setter Property="Stroke" TargetName="arrow" Value="{DynamicResource AccentBackground}"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
                             <Setter Property="Stroke" TargetName="circle" Value="{DynamicResource InactiveColor}"/>
@@ -162,7 +165,8 @@
                             <Setter Property="Fill" TargetName="circle" Value="{DynamicResource HighlightedColor}"/>
                         </Trigger>
                         <Trigger Property="IsPressed" Value="true">
-                            <Setter Property="StrokeThickness" TargetName="circle" Value="1"/>
+                            <Setter Property="Stroke" TargetName="circle" Value="{DynamicResource AccentBackground}"/>
+                            <Setter Property="Stroke" TargetName="arrow" Value="{DynamicResource AccentBackground}"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
                             <Setter Property="Stroke" TargetName="circle" Value="{DynamicResource InactiveColor}"/>

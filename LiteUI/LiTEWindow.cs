@@ -1,12 +1,28 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 
 namespace LiteUI
 {
-    public enum LiteWindowTheme { Light, Dark }
+    public record LiteWindowTheme(Color Active, Color Inactive, Color Background, Color AccentForeground, Color AccentBackground)
+    {
+        public static readonly LiteWindowTheme Light = new(
+            Color.FromRgb(0x26, 0x26, 0x26),
+            Color.FromRgb(0x7F, 0x7F, 0x7F),
+            Color.FromRgb(0xFF, 0xFF, 0xFF),
+            Color.FromRgb(0xFF, 0xFF, 0xFF),
+            Color.FromRgb(0x00, 0x7A, 0xCC)
+        );
+
+        public static readonly LiteWindowTheme Dark = new(
+            Color.FromRgb(0xFF, 0xFF, 0xFF),
+            Color.FromRgb(0x7F, 0x7F, 0x7F),
+            Color.FromRgb(0x00, 0x00, 0x00),
+            Color.FromRgb(0xFF, 0xFF, 0xFF),
+            Color.FromRgb(0x00, 0x96, 0xF3)
+        );
+    }
 
     public enum WindowBarStyle { Hidden, Normal, Big }
 
@@ -19,8 +35,12 @@ namespace LiteUI
             DefaultStyleKeyProperty.OverrideMetadata(typeof(LiteWindow), new FrameworkPropertyMetadata(typeof(LiteWindow)));
         }
 
-        public static readonly DependencyProperty IsFullscreenProperty = DependencyProperty.Register(nameof(IsFullscreen),
-            typeof(bool), typeof(LiteWindow), new FrameworkPropertyMetadata(true, FrameworkPropertyMetadataOptions.AffectsRender, FullscreenChanged));
+        public static readonly DependencyProperty IsFullscreenProperty = DependencyProperty.Register(
+            nameof(IsFullscreen),
+            typeof(bool),
+            typeof(LiteWindow),
+            new FrameworkPropertyMetadata(true, FrameworkPropertyMetadataOptions.AffectsRender, FullscreenChanged)
+        );
 
         [Bindable(true)]
         [Category(nameof(LiteWindow))]
@@ -42,8 +62,12 @@ namespace LiteUI
             }
         }
 
-        public static readonly DependencyProperty BarStyleProperty = DependencyProperty.Register(nameof(BarStyle),
-            typeof(WindowBarStyle), typeof(LiteWindow), new FrameworkPropertyMetadata(WindowBarStyle.Normal, FrameworkPropertyMetadataOptions.AffectsRender));
+        public static readonly DependencyProperty BarStyleProperty = DependencyProperty.Register(
+            nameof(BarStyle),
+            typeof(WindowBarStyle),
+            typeof(LiteWindow),
+            new FrameworkPropertyMetadata(WindowBarStyle.Normal, FrameworkPropertyMetadataOptions.AffectsRender)
+        );
 
         [Bindable(true)]
         [Category(nameof(LiteWindow))]
@@ -53,8 +77,12 @@ namespace LiteUI
             set => SetValue(BarStyleProperty, value);
         }
 
-        public static readonly DependencyProperty ToolbarProperty = DependencyProperty.Register(nameof(Toolbar),
-            typeof(ToolbarItemsCollection), typeof(LiteWindow), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.AffectsRender));
+        public static readonly DependencyProperty ToolbarProperty = DependencyProperty.Register(
+            nameof(Toolbar),
+            typeof(ToolbarItemsCollection),
+            typeof(LiteWindow),
+            new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.AffectsRender)
+        );
 
         [Bindable(true)]
         [Category(nameof(LiteWindow))]
@@ -66,28 +94,20 @@ namespace LiteUI
 
         #endregion
 
-        #region Theme colors
-
-        private static Color[] GetThemeColors(LiteWindowTheme theme)
-            => theme switch
-            {
-                LiteWindowTheme.Light => new[] { Color.FromRgb(0x26, 0x26, 0x26), Color.FromRgb(0x7F, 0x7F, 0x7F), Color.FromRgb(0xFF, 0xFF, 0xFF) },
-                LiteWindowTheme.Dark => new[] { Color.FromRgb(0xFF, 0xFF, 0xFF), Color.FromRgb(0x7F, 0x7F, 0x7F), Color.FromRgb(0x00, 0x00, 0x00) },
-                _ => throw new ArgumentException("Theme not found")
-            };
+        #region Theme
 
         // Calcola valori per tutte le chiavi dei colori
-        private static void SetTheme(ResourceDictionary resources, Color active, Color inactive, Color background)
+        private static void SetTheme(ResourceDictionary resources, LiteWindowTheme theme)
         {
             // Genera il colore di accento del tema
-            var special = active * 0.2f + background * 0.8f;
+            var special = theme.Active * 0.2f + theme.Background * 0.8f;
 
             // Regola la palette per temi chiari e temi scuri
-            var ac = System.Drawing.Color.FromArgb(0xFF, active.R, active.G, active.B);
-            var bc = System.Drawing.Color.FromArgb(0xFF, background.R, background.G, background.B);
+            var ac = System.Drawing.Color.FromArgb(0xFF, theme.Active.R, theme.Active.G, theme.Active.B);
+            var bc = System.Drawing.Color.FromArgb(0xFF, theme.Background.R, theme.Background.G, theme.Background.B);
             var (accent1, accent2, window) = ac.GetBrightness() > bc.GetBrightness()
-                ? (special, special * 0.2f, background) // Temi scuri
-                : (background, special, special * 0.6f); // Temi chiari
+                ? (special, special * 0.2f, theme.Background) // Temi scuri
+                : (theme.Background, special, special * 0.6f); // Temi chiari
 
             // Rimuovi eventuali trasparenze
             accent1.A = byte.MaxValue;
@@ -95,58 +115,34 @@ namespace LiteUI
             window.A = byte.MaxValue;
 
             // Setta colori
-            resources["ActiveColor"] = new SolidColorBrush(active);
-            resources["InactiveColor"] = new SolidColorBrush(inactive);
+            resources["ActiveColor"] = new SolidColorBrush(theme.Active);
+            resources["InactiveColor"] = new SolidColorBrush(theme.Inactive);
             resources["HighlightedColor"] = new SolidColorBrush(accent1);
             resources["BackgroundColor"] = new SolidColorBrush(accent2);
             resources["WindowColor"] = new SolidColorBrush(window);
-        }
-
-        /// <summary>
-        /// Imposta il tema globale dell'applicazione.
-        /// </summary>
-        /// <param name="active">Il colore degli elementi attivi.</param>
-        /// <param name="inactive">Il colore degli elementi inattivi.</param>
-        /// <param name="background">Il colore di base dello sfondo.</param>
-        public static void SetGlobalColors(Color active, Color inactive, Color background)
-        {
-            SetTheme(Application.Current.Resources, active, inactive, background);
+            resources["AccentForeground"] = new SolidColorBrush(theme.AccentForeground);
+            resources["AccentBackground"] = new SolidColorBrush(theme.AccentBackground);
         }
 
         /// <summary>
         /// Imposta il tema globale dell'applicazione.
         /// </summary>
         /// <param name="theme">Il tema da usare.</param>
-        public static void SetGlobalColors(LiteWindowTheme theme)
+        public static void SetGlobalTheme(LiteWindowTheme theme)
         {
-            var colors = GetThemeColors(theme);
-            SetTheme(Application.Current.Resources, colors[0], colors[1], colors[2]);
+            SetTheme(Application.Current.Resources, theme);
         }
 
-        internal Color[] Colors { get; private set; }
-
-        /// <summary>
-        /// Imposta il tema della finestra corrente.
-        /// </summary>
-        /// <param name="active">Il colore degli elementi attivi.</param>
-        /// <param name="inactive">Il colore degli elementi inattivi.</param>
-        /// <param name="background">Il colore di base dello sfondo.</param>
-        public void SetColors(Color active, Color inactive, Color background)
-        {
-            Colors = new[] { active, inactive, background };
-            SetTheme(Resources, active, inactive, background);
-        }
+        internal LiteWindowTheme Theme { get; private set; }
 
         /// <summary>
         /// Imposta il tema della finestra corrente.
         /// </summary>
         /// <param name="theme">Il tema da usare.</param>
-        public void SetColors(LiteWindowTheme theme)
+        public void SetTheme(LiteWindowTheme theme)
         {
-            var colors = GetThemeColors(theme);
-
-            Colors = colors;
-            SetTheme(Resources, colors[0], colors[1], colors[2]);
+            Theme = theme;
+            SetTheme(Resources, theme);
         }
 
         #endregion

@@ -20,6 +20,7 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsKeyboardFocused" Value="True">
+                            <Setter Property="BorderBrush" Value="{DynamicResource AccentBackground}"/>
                             <Setter Property="Background" Value="{DynamicResource HighlightedColor}"/>
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">

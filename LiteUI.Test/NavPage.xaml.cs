@@ -34,16 +34,28 @@ namespace LiteUI.Test
             switch (me.SelectedIndex)
             {
                 case 0:
-                    GetWindow()?.SetColors(LiteWindowTheme.Light);
+                    GetWindow()?.SetTheme(LiteWindowTheme.Light);
                     return;
                 case 1:
-                    GetWindow()?.SetColors(LiteWindowTheme.Dark);
+                    GetWindow()?.SetTheme(LiteWindowTheme.Dark);
                     return;
                 case 2:
-                    GetWindow()?.SetColors(Color.FromRgb(0x00, 0xFF, 0x00), Color.FromRgb(0xFF, 0x00, 0x00), Color.FromRgb(0x00, 0x00, 0x00));
+                    GetWindow()?.SetTheme(new(
+                        Color.FromRgb(0x00, 0xFF, 0x00),
+                        Color.FromRgb(0xFF, 0x00, 0x00),
+                        Color.FromRgb(0x00, 0x00, 0x00),
+                        Color.FromRgb(0x00, 0x00, 0x00),
+                        Color.FromRgb(0xFF, 0xFF, 0x00)
+                    ));
                     break;
                 case 3:
-                    GetWindow()?.SetColors(Color.FromRgb(0x00, 0xFF, 0xFF), Color.FromRgb(0x00, 0x7F, 0x7F), Color.FromRgb(0x00, 0x00, 0x00));
+                    GetWindow()?.SetTheme(new(
+                        Color.FromRgb(0x00, 0xFF, 0xFF),
+                        Color.FromRgb(0x00, 0x7F, 0x7F),
+                        Color.FromRgb(0x00, 0x00, 0x00),
+                        Color.FromRgb(0x00, 0x00, 0x00),
+                        Color.FromRgb(0x00, 0xFF, 0xFF)
+                    ));
                     break;
             }
         }
