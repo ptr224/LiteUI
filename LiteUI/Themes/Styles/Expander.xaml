@@ -11,7 +11,7 @@
                                 <ColumnDefinition Width="19"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-                            <Ellipse x:Name="circle" Fill="{DynamicResource BackgroundColor}" HorizontalAlignment="Center" Height="19" Stroke="{DynamicResource ActiveColor}" StrokeThickness="0" VerticalAlignment="Center" Width="19"/>
+                            <Ellipse x:Name="circle" Fill="{DynamicResource BackgroundColor}" HorizontalAlignment="Center" Height="19" Stroke="{DynamicResource ActiveColor}" StrokeThickness="1" VerticalAlignment="Center" Width="19"/>
                             <Path x:Name="arrow" Data="M 1,1.5 L 4.5,5 L 8,1.5" HorizontalAlignment="Center" SnapsToDevicePixels="false" StrokeThickness="2" Stroke="{DynamicResource ActiveColor}" VerticalAlignment="Center"/>
                             <ContentPresenter Grid.Column="1" HorizontalAlignment="Left" Margin="4,0,0,0" RecognizesAccessKey="True" SnapsToDevicePixels="True" VerticalAlignment="Center"/>
                         </Grid>
@@ -28,7 +28,6 @@
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
                             <Setter Property="Stroke" TargetName="circle" Value="{DynamicResource InactiveColor}"/>
-                            <Setter Property="Fill" TargetName="circle" Value="Transparent"/>
                             <Setter Property="Stroke" TargetName="arrow" Value="{DynamicResource InactiveColor}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
@@ -57,7 +56,7 @@
                                         </TransformGroup.Children>
                                     </TransformGroup>
                                 </Grid.LayoutTransform>
-                                <Ellipse x:Name="circle" Fill="{DynamicResource BackgroundColor}" HorizontalAlignment="Center" Height="19" Stroke="{DynamicResource ActiveColor}" StrokeThickness="0" VerticalAlignment="Center" Width="19"/>
+                                <Ellipse x:Name="circle" Fill="{DynamicResource BackgroundColor}" HorizontalAlignment="Center" Height="19" Stroke="{DynamicResource ActiveColor}" StrokeThickness="1" VerticalAlignment="Center" Width="19"/>
                                 <Path x:Name="arrow" Data="M 1,1.5 L 4.5,5 L 8,1.5" HorizontalAlignment="Center" SnapsToDevicePixels="false" StrokeThickness="2" Stroke="{DynamicResource ActiveColor}" VerticalAlignment="Center"/>
                             </Grid>
                             <ContentPresenter Grid.Column="1" HorizontalAlignment="Left" Margin="4,0,0,0" RecognizesAccessKey="True" SnapsToDevicePixels="True" VerticalAlignment="Center"/>
@@ -75,7 +74,6 @@
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
                             <Setter Property="Stroke" TargetName="circle" Value="{DynamicResource InactiveColor}"/>
-                            <Setter Property="Fill" TargetName="circle" Value="Transparent"/>
                             <Setter Property="Stroke" TargetName="arrow" Value="{DynamicResource InactiveColor}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
@@ -104,7 +102,7 @@
                                         </TransformGroup.Children>
                                     </TransformGroup>
                                 </Grid.LayoutTransform>
-                                <Ellipse x:Name="circle" Fill="{DynamicResource BackgroundColor}" HorizontalAlignment="Center" Height="19" Stroke="{DynamicResource ActiveColor}" StrokeThickness="0" VerticalAlignment="Center" Width="19"/>
+                                <Ellipse x:Name="circle" Fill="{DynamicResource BackgroundColor}" HorizontalAlignment="Center" Height="19" Stroke="{DynamicResource ActiveColor}" StrokeThickness="1" VerticalAlignment="Center" Width="19"/>
                                 <Path x:Name="arrow" Data="M 1,1.5 L 4.5,5 L 8,1.5" HorizontalAlignment="Center" SnapsToDevicePixels="false" StrokeThickness="2" Stroke="{DynamicResource ActiveColor}" VerticalAlignment="Center"/>
                             </Grid>
                             <ContentPresenter HorizontalAlignment="Center" Margin="0,4,0,0" RecognizesAccessKey="True" Grid.Row="1" SnapsToDevicePixels="True" VerticalAlignment="Top"/>
@@ -122,7 +120,6 @@
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
                             <Setter Property="Stroke" TargetName="circle" Value="{DynamicResource InactiveColor}"/>
-                            <Setter Property="Fill" TargetName="circle" Value="Transparent"/>
                             <Setter Property="Stroke" TargetName="arrow" Value="{DynamicResource InactiveColor}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
@@ -151,7 +148,7 @@
                                         </TransformGroup.Children>
                                     </TransformGroup>
                                 </Grid.LayoutTransform>
-                                <Ellipse x:Name="circle" Fill="{DynamicResource BackgroundColor}" HorizontalAlignment="Center" Height="19" Stroke="{DynamicResource ActiveColor}" StrokeThickness="0" VerticalAlignment="Center" Width="19"/>
+                                <Ellipse x:Name="circle" Fill="{DynamicResource BackgroundColor}" HorizontalAlignment="Center" Height="19" Stroke="{DynamicResource ActiveColor}" StrokeThickness="1" VerticalAlignment="Center" Width="19"/>
                                 <Path x:Name="arrow" Data="M 1,1.5 L 4.5,5 L 8,1.5" HorizontalAlignment="Center" SnapsToDevicePixels="false" StrokeThickness="2" Stroke="{DynamicResource ActiveColor}" VerticalAlignment="Center"/>
                             </Grid>
                             <ContentPresenter HorizontalAlignment="Center" Margin="0,4,0,0" RecognizesAccessKey="True" Grid.Row="1" SnapsToDevicePixels="True" VerticalAlignment="Top"/>
@@ -169,7 +166,6 @@
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
                             <Setter Property="Stroke" TargetName="circle" Value="{DynamicResource InactiveColor}"/>
-                            <Setter Property="Fill" TargetName="circle" Value="Transparent"/>
                             <Setter Property="Stroke" TargetName="arrow" Value="{DynamicResource InactiveColor}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
@@ -182,8 +178,8 @@
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
         <Setter Property="VerticalContentAlignment" Value="Stretch"/>
-        <Setter Property="BorderBrush" Value="Transparent"/>
-        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource ActiveColor}"/>
+        <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Expander}">

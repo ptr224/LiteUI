@@ -14,7 +14,7 @@
                 <Image Source="file:///D:/ptr22/OneDrive/Immagini/Programmi/LiTE/LiTE.png" Stretch="Uniform"/>
             </ld:ToolbarButton>
             <ld:ToolbarButton ToolTip="n3" Position="Left">
-                <ComboBox BorderThickness="0" Width="120" SelectedIndex="0">
+                <ComboBox Width="120" SelectedIndex="0">
                     <ComboBoxItem Content="1"/>
                     <ComboBoxItem Content="2"/>
                     <ComboBoxItem Content="3"/>
@@ -61,11 +61,20 @@
                 <Label FontFamily="Segoe UI" Content="wellawella"/>
             </ld:LitePopup>
         </Popup>
-        <Expander IsEnabled="{Binding IsChecked, ElementName=checkBox}" Header="Expander" HorizontalAlignment="Left" Height="100" Margin="573,121,0,0" VerticalAlignment="Top" Width="100" ExpandDirection="Down">
-            <Grid Background="Red"/>
+        <Expander IsEnabled="{Binding IsChecked, ElementName=checkBox}" Header="Expander" HorizontalAlignment="Left" Height="100" Margin="459,140,0,0" VerticalAlignment="Top" Width="100" ExpandDirection="Down">
+            <Grid Background="#FFE5E5E5"/>
         </Expander>
         <Slider IsEnabled="{Binding IsChecked, ElementName=checkBox}" HorizontalAlignment="Left" Margin="548,265,0,0" VerticalAlignment="Top" Width="120"/>
         <Slider IsEnabled="{Binding IsChecked, ElementName=checkBox}" HorizontalAlignment="Left" Margin="548,288,0,0" VerticalAlignment="Top" Width="120" TickPlacement="TopLeft" IsSelectionRangeEnabled="True" SelectionEnd="5"/>
         <Slider IsEnabled="{Binding IsChecked, ElementName=checkBox}" HorizontalAlignment="Left" Margin="548,317,0,0" VerticalAlignment="Top" Width="120" TickPlacement="BottomRight"/>
+        <ProgressBar IsEnabled="{Binding IsChecked, ElementName=checkBox}" HorizontalAlignment="Left" Height="31" Margin="495,380,0,0" VerticalAlignment="Top" Width="128" Value="40"/>
+        <TabControl HorizontalAlignment="Left" VerticalAlignment="Top" Height="194" Width="195" Margin="578,41,0,0">
+            <TabItem Header="TabItem">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+            <TabItem Header="TabItem">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+        </TabControl>
     </Grid>
 </ld:LitePage>

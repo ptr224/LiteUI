@@ -86,7 +86,7 @@ namespace LiteUI
             var ac = System.Drawing.Color.FromArgb(0xFF, active.R, active.G, active.B);
             var bc = System.Drawing.Color.FromArgb(0xFF, background.R, background.G, background.B);
             var (accent1, accent2, window) = ac.GetBrightness() > bc.GetBrightness()
-                ? (special, special * 0.4f, background) // Temi scuri
+                ? (special, special * 0.2f, background) // Temi scuri
                 : (background, special, special * 0.6f); // Temi chiari
 
             // Rimuovi eventuali trasparenze

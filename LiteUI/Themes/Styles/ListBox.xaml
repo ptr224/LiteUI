@@ -4,7 +4,7 @@
         <Setter Property="Background" Value="{DynamicResource BackgroundColor}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource ActiveColor}"/>
         <Setter Property="Foreground" Value="{DynamicResource ActiveColor}"/>
-        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
         <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>

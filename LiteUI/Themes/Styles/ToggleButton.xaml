@@ -28,11 +28,6 @@
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="BorderBrush" Value="{DynamicResource InactiveColor}"/>
-                            <Setter Property="Effect" TargetName="border">
-                                <Setter.Value>
-                                    <BlurEffect Radius="4"/>
-                                </Setter.Value>
-                            </Setter>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
