@@ -15,16 +15,19 @@ namespace LiteUI.Test
             InitializeComponent();
         }
 
-        protected override void Created(NavigationParams extras)
+        private void LitePage_Created(object sender, NavigationParams e)
         {
-            base.Created(extras);
-            Title = extras.Get<string>("Title", "Default") + "C";
+            Title = e.Get<string>("Title", "Default") + "C";
         }
 
-        protected override void Retrieved(NavigationParams extras)
+        private void LitePage_Retrieved(object sender, NavigationParams e)
         {
-            base.Retrieved(extras);
-            Title = extras.Get<string>("Title", "Default") + "R";
+            Title = e.Get<string>("Title", "Default") + "R";
+        }
+
+        private void LitePage_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = listBox.IsEnabled;
         }
 
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)

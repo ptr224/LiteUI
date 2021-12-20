@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:LiteUI.Test"
              xmlns:ld="clr-namespace:LiteUI;assembly=LiteUI"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800" Title="NavPage">
+             d:DesignHeight="450" d:DesignWidth="800" Title="NavPage" Created="LitePage_Created" Retrieved="LitePage_Retrieved" Closing="LitePage_Closing">
     <ld:LitePage.Toolbar>
         <ld:ToolbarItemsCollection>
             <ld:ToolbarButton x:Name="tbb" Content="&#xE71A;&#xE71A;&#xE71A;&#xE71A;" FontFamily="Segoe MDL2 Assets" ToolTip="n1" Click="tbb_Click"/>

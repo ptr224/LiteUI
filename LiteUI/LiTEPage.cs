@@ -79,53 +79,43 @@ namespace LiteUI
         }
 
         /// <summary>
-        /// Ottiene un riferimento alla finestra contenente la pagina.
-        /// </summary>
-        protected LiteNavigationWindow GetWindow()
-            => (LiteNavigationWindow)Window.GetWindow(this);
-
-        /// <summary>
-        /// L'oggetto <see cref="LiteUI.NavigationService"/> che la pagina sta usando per supportare la navigazione o <see langword="null"/> se questa non è disponibile.
+        /// L'oggetto <see cref="LiteUI.NavigationService"/> che la pagina sta usando per supportare la navigazione o <see langword="null"/> se questa non è visualizzata.
         /// </summary>
         public NavigationService NavigationService
             => GetWindow()?.NavigationService;
 
-        // Tieni separate le chiamate interne per non dover dichiarare tutto internal protected
+        /// <summary>
+        /// Evento chiamato alla creazione della pagina.
+        /// </summary>
+        public event EventHandler<NavigationParams> Created;
+
+        /// <summary>
+        /// Evento chiamato quando la pagina viene richiamata.
+        /// </summary>
+        public event EventHandler<NavigationParams> Retrieved;
+
+        /// <summary>
+        /// Evento chiamato quando la pagina sta per essere lasciata.
+        /// </summary>
+        public event CancelEventHandler Closing;
+
         internal void CallCreated(NavigationParams extras)
-            => Created(extras);
+            => Created?.Invoke(this, extras);
 
         internal void CallRetrieved(NavigationParams extras)
-            => Retrieved(extras);
+            => Retrieved?.Invoke(this, extras);
 
         internal bool CallClosing()
-            => Closing();
-
-        /// <summary>
-        /// Metodo chiamato alla creazione della pagina.
-        /// </summary>
-        /// <param name="extras">I parametri passati dalla chiamata.</param>
-        protected virtual void Created(NavigationParams extras)
         {
-            // Non fare nulla di default
+            var e = new CancelEventArgs();
+            Closing?.Invoke(this, e);
+            return e.Cancel;
         }
 
         /// <summary>
-        /// Metodo eseguito quando la pagina viene richiamata.
+        /// Ottiene un riferimento alla finestra contenente la pagina.
         /// </summary>
-        /// <param name="extras">I parametri passati dalla chiamata.</param>
-        protected virtual void Retrieved(NavigationParams extras)
-        {
-            // Non fare nulla di default
-        }
-
-        /// <summary>
-        /// Metodo eseguito quando la pagina sta per essere lasciata.<para/>
-        /// Ritornare <see langword="true"/> se non si vuole che la pagina venga abbandonata.
-        /// </summary>
-        protected virtual bool Closing()
-        {
-            // Di default non cancellare la navigazione
-            return false;
-        }
+        protected LiteNavigationWindow GetWindow()
+            => Window.GetWindow(this) as LiteNavigationWindow;
     }
 }
