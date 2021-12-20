@@ -79,32 +79,27 @@ namespace LiteUI
         // Calcola valori per tutte le chiavi dei colori
         private static void SetTheme(ResourceDictionary resources, Color active, Color inactive, Color background)
         {
-            resources["ActiveColor"] = new SolidColorBrush(active);
-            resources["InactiveColor"] = new SolidColorBrush(inactive);
+            // Genera il colore di accento del tema
+            var special = active * 0.2f + background * 0.8f;
 
-            // Sottrai da background il 20% di active
-            byte sr = (byte)(active.R * 0.2 + background.R * 0.8);
-            byte sg = (byte)(active.G * 0.2 + background.G * 0.8);
-            byte sb = (byte)(active.B * 0.2 + background.B * 0.8);
-
-            var special = Color.FromRgb(sr, sg, sb);
-
-            // Usa il colore più brillante per evidenziare e il meno per lo sfondo
+            // Regola la palette per temi chiari e temi scuri
             var ac = System.Drawing.Color.FromArgb(0xFF, active.R, active.G, active.B);
             var bc = System.Drawing.Color.FromArgb(0xFF, background.R, background.G, background.B);
+            var (accent1, accent2, window) = ac.GetBrightness() > bc.GetBrightness()
+                ? (special, special * 0.4f, background) // Temi scuri
+                : (background, special, special * 0.6f); // Temi chiari
 
-            if (ac.GetBrightness() > bc.GetBrightness())
-            {
-                resources["HighlightedColor"] = new SolidColorBrush(Color.FromRgb(special.R, special.G, special.B));
-                resources["BackgroundColor"] = new SolidColorBrush(Color.FromArgb(0x90, special.R, special.G, special.B));
-                resources["WindowColor"] = new SolidColorBrush(Color.FromRgb(background.R, background.G, background.B));
-            }
-            else
-            {
-                resources["HighlightedColor"] = new SolidColorBrush(Color.FromRgb(background.R, background.G, background.B));
-                resources["BackgroundColor"] = new SolidColorBrush(Color.FromArgb(0x90, background.R, background.G, background.B));
-                resources["WindowColor"] = new SolidColorBrush(Color.FromRgb(special.R, special.G, special.B));
-            }
+            // Rimuovi eventuali trasparenze
+            accent1.A = byte.MaxValue;
+            accent2.A = byte.MaxValue;
+            window.A = byte.MaxValue;
+
+            // Setta colori
+            resources["ActiveColor"] = new SolidColorBrush(active);
+            resources["InactiveColor"] = new SolidColorBrush(inactive);
+            resources["HighlightedColor"] = new SolidColorBrush(accent1);
+            resources["BackgroundColor"] = new SolidColorBrush(accent2);
+            resources["WindowColor"] = new SolidColorBrush(window);
         }
 
         /// <summary>

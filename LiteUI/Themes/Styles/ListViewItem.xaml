@@ -18,10 +18,11 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="true">
-                            <Setter Property="Background" Value="{DynamicResource BackgroundColor}"/>
+                            <Setter Property="Background" Value="{DynamicResource HighlightedColor}"/>
                         </Trigger>
                         <Trigger Property="IsSelected" Value="true">
                             <Setter Property="Background" Value="{DynamicResource HighlightedColor}"/>
+                            <Setter Property="BorderBrush" Value="{DynamicResource ActiveColor}"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Background" Value="Transparent"/>
