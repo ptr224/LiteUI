@@ -25,6 +25,7 @@
                             <Setter Property="Background" Value="{DynamicResource AccentBackground}"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Foreground" Value="{DynamicResource InactiveColor}"/>
                             <Setter Property="Background" Value="Transparent"/>
                             <Setter Property="BorderBrush" Value="Transparent"/>
                         </Trigger>

@@ -33,6 +33,13 @@
                             <Setter Property="Foreground" Value="{DynamicResource InactiveColor}"/>
                             <Setter Property="BorderBrush" Value="{DynamicResource InactiveColor}"/>
                         </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsEnabled" Value="False"/>
+                                <Condition Property="ld:AttachedProperties.Accented" Value="True"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Background" Value="{DynamicResource BackgroundColor}"/>
+                        </MultiTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
