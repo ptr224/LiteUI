@@ -67,7 +67,7 @@ namespace LiteUI
             nameof(Toolbar),
             typeof(ToolbarItemsCollection),
             typeof(LitePage),
-            new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.AffectsRender)
+            new FrameworkPropertyMetadata(new ToolbarItemsCollection(), FrameworkPropertyMetadataOptions.AffectsRender)
         );
 
         [Bindable(true)]

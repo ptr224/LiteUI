@@ -8,22 +8,22 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800" Title="NavPage" Created="LitePage_Created" Retrieved="LitePage_Retrieved">
     <ld:LitePage.Toolbar>
-        <ld:ToolbarItemsCollection>
-            <ld:ToolbarButton x:Name="tbb" Content="&#xE71A;&#xE71A;&#xE71A;&#xE71A;" FontFamily="Segoe MDL2 Assets" ToolTip="n1" Click="tbb_Click"/>
-            <ld:ToolbarButton ToolTip="n2" Position="Right">
-                <Image Source="file:///D:/ptr22/OneDrive/Immagini/Programmi/LiTE/LiTE.png" Stretch="Uniform"/>
-            </ld:ToolbarButton>
-            <ld:ToolbarButton ToolTip="n3" Position="Left">
-                <ComboBox Width="120" SelectedIndex="0">
-                    <ComboBoxItem Content="1"/>
-                    <ComboBoxItem Content="2"/>
-                    <ComboBoxItem Content="3"/>
-                </ComboBox>
-            </ld:ToolbarButton>
-            <ld:ToolbarButton ToolTip="n4" Position="Left">
-                <TextBox Width="120"/>
-            </ld:ToolbarButton>
-        </ld:ToolbarItemsCollection>
+        <ld:ToolbarItem Position="Right">
+            <Button x:Name="tbb" Content="&#xE71B;" FontFamily="Segoe MDL2 Assets" ToolTip="n1" Click="tbb_Click"/>
+        </ld:ToolbarItem>
+        <ld:ToolbarItem ToolTip="n2" Position="Right">
+            <Image Source="file:///D:/ptr22/OneDrive/Immagini/Programmi/LiTE/LiTE.png" Stretch="Uniform"/>
+        </ld:ToolbarItem>
+        <ld:ToolbarItem ToolTip="n3">
+            <ComboBox Width="120" SelectedIndex="0">
+                <ComboBoxItem Content="1"/>
+                <ComboBoxItem Content="2"/>
+                <ComboBoxItem Content="3"/>
+            </ComboBox>
+        </ld:ToolbarItem>
+        <ld:ToolbarItem ToolTip="n4" Position="Left">
+            <TextBox/>
+        </ld:ToolbarItem>
     </ld:LitePage.Toolbar>
     <Grid>
         <ListBox x:Name="listBox" IsEnabled="{Binding IsChecked, ElementName=checkBox}" HorizontalAlignment="Left" Margin="10,41,0,10" Width="180" SelectedIndex="0" SelectionChanged="ListBox_SelectionChanged" HorizontalContentAlignment="Left">

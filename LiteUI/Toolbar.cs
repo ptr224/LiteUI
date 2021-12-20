@@ -5,25 +5,25 @@ using System.Windows.Controls;
 
 namespace LiteUI
 {
-    public class ToolbarItemsCollection : ObservableCollection<ToolbarButton> { }
+    public class ToolbarItemsCollection : ObservableCollection<ToolbarItem> { }
 
     public enum ToolbarPosition { Left, Right }
 
-    public class ToolbarButton : Button
+    public class ToolbarItem : Decorator
     {
-        static ToolbarButton()
+        static ToolbarItem()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(ToolbarButton), new FrameworkPropertyMetadata(typeof(ToolbarButton)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(ToolbarItem), new FrameworkPropertyMetadata(typeof(ToolbarItem)));
         }
 
         public static readonly DependencyProperty PositionProperty = DependencyProperty.Register(
             nameof(Position),
             typeof(ToolbarPosition),
-            typeof(ToolbarButton),
-            new FrameworkPropertyMetadata(ToolbarPosition.Right, FrameworkPropertyMetadataOptions.AffectsRender, PositionChanged));
+            typeof(ToolbarItem),
+            new FrameworkPropertyMetadata(ToolbarPosition.Left, FrameworkPropertyMetadataOptions.AffectsRender, PositionChanged));
 
         [Bindable(true)]
-        [Category(nameof(ToolbarButton))]
+        [Category(nameof(ToolbarItem))]
         public ToolbarPosition Position
         {
             get => (ToolbarPosition)GetValue(PositionProperty);
@@ -35,17 +35,12 @@ namespace LiteUI
             switch ((ToolbarPosition)e.NewValue)
             {
                 case ToolbarPosition.Left:
-                    DockPanel.SetDock((ToolbarButton)d, Dock.Left);
+                    DockPanel.SetDock((ToolbarItem)d, Dock.Left);
                     break;
                 case ToolbarPosition.Right:
-                    DockPanel.SetDock((ToolbarButton)d, Dock.Right);
+                    DockPanel.SetDock((ToolbarItem)d, Dock.Right);
                     break;
             }
-        }
-
-        public ToolbarButton()
-        {
-            DockPanel.SetDock(this, Dock.Right);
         }
     }
 }

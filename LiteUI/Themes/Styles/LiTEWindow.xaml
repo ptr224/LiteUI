@@ -12,10 +12,11 @@
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True"/>
     </Style>
-    <Style TargetType="{x:Type ld:ToolbarButton}" BasedOn="{StaticResource LiteWindowButton}">
+    <Style TargetType="{x:Type ld:ToolbarItem}">
         <Setter Property="MinWidth" Value="{DynamicResource WindowButtonWidth}"/>
         <Setter Property="Width" Value="Auto"/>
-        <Setter Property="FontSize" Value="{DynamicResource WindowBarFontSize}"/>
+        <Setter Property="TextBlock.FontSize" Value="{DynamicResource WindowBarFontSize}"/>
+        <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True"/>
     </Style>
     <Style TargetType="{x:Type ld:LiteWindow}">
         <Setter Property="WindowStyle" Value="None"/>
