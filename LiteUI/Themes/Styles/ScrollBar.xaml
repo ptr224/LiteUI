@@ -29,6 +29,9 @@
                             </MultiTrigger.Conditions>
                             <Setter Property="BorderThickness" Value="0"/>
                         </MultiTrigger>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="Background" Value="{DynamicResource AccentBackground}"/>
+                        </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
                             <Setter Property="Background" Value="{DynamicResource InactiveColor}"/>
                         </Trigger>
