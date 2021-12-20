@@ -25,11 +25,6 @@ namespace LiteUI.Test
             Title = e.Get<string>("Title", "Default") + "R";
         }
 
-        private void LitePage_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            e.Cancel = listBox.IsEnabled;
-        }
-
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var me = (ListBox)sender;
