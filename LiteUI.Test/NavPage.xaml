@@ -9,7 +9,7 @@
              d:DesignHeight="450" d:DesignWidth="800" Title="NavPage" Created="LitePage_Created" Retrieved="LitePage_Retrieved">
     <ld:LitePage.Toolbar>
         <ld:ToolbarItem Position="Right">
-            <Button x:Name="tbb" Content="&#xE71B;" FontFamily="Segoe MDL2 Assets" ToolTip="n1" Click="tbb_Click"/>
+            <Button x:Name="tbb" Content="&#xE71B;" FontFamily="Segoe MDL2 Assets" ToolTip="n1" Click="tbb_Click" ld:LiteTheming.Accented="True"/>
         </ld:ToolbarItem>
         <ld:ToolbarItem ToolTip="n2" Position="Right">
             <Image Source="file:///D:/ptr22/OneDrive/Immagini/Programmi/LiTE/LiTE.png" Stretch="Uniform"/>
@@ -36,7 +36,7 @@
         <GroupBox Header="Cose che non fanno nulla" HorizontalAlignment="Left" Height="195" Margin="215,41,0,0" VerticalAlignment="Top" Width="198" IsEnabled="{Binding IsChecked, ElementName=checkBox}">
             <ScrollViewer>
                 <Grid VerticalAlignment="Top" Height="200">
-                    <Button Content="Button" HorizontalAlignment="Left" Margin="52,93,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click" ld:AttachedProperties.Accented="True"/>
+                    <Button Content="Button" HorizontalAlignment="Left" Margin="52,93,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click" ld:LiteTheming.Accented="True"/>
                     <ComboBox HorizontalAlignment="Left" Margin="29,50,0,0" VerticalAlignment="Top" Width="120" SelectedIndex="0" Cursor="Hand">
                         <ComboBoxItem Content="1"/>
                         <ComboBoxItem Content="2"/>
@@ -58,7 +58,7 @@
         </Popup>
         <Popup x:Name="pop" AllowsTransparency="True" IsOpen="False" StaysOpen="False" Placement="Bottom" PlacementTarget="{Binding ElementName=tbb}">
             <ld:LitePopup Shadow="NoTop">
-                <Label FontFamily="Segoe UI" Content="wellawella"/>
+                <Label Content="wellawella"/>
             </ld:LitePopup>
         </Popup>
         <Expander IsEnabled="{Binding IsChecked, ElementName=checkBox}" Header="Expander" HorizontalAlignment="Left" Height="100" Margin="459,140,0,0" VerticalAlignment="Top" Width="100" ExpandDirection="Down">

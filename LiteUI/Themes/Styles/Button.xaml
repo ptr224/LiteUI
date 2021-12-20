@@ -18,7 +18,7 @@
                         <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                     </Border>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="ld:AttachedProperties.Accented" Value="True">
+                        <Trigger Property="ld:LiteTheming.Accented" Value="True">
                             <Setter Property="Foreground" Value="{DynamicResource AccentForeground}"/>
                             <Setter Property="Background" Value="{DynamicResource AccentBackground}"/>
                         </Trigger>
@@ -36,7 +36,7 @@
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsEnabled" Value="False"/>
-                                <Condition Property="ld:AttachedProperties.Accented" Value="True"/>
+                                <Condition Property="ld:LiteTheming.Accented" Value="True"/>
                             </MultiTrigger.Conditions>
                             <Setter Property="Background" Value="{DynamicResource BackgroundColor}"/>
                         </MultiTrigger>
