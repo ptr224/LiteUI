@@ -12,12 +12,6 @@
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True"/>
     </Style>
-    <Style TargetType="{x:Type ld:ToolbarItem}">
-        <Setter Property="MinWidth" Value="{DynamicResource WindowButtonWidth}"/>
-        <Setter Property="Width" Value="Auto"/>
-        <Setter Property="TextBlock.FontSize" Value="{DynamicResource WindowBarFontSize}"/>
-        <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True"/>
-    </Style>
     <Style TargetType="{x:Type ld:LiteWindow}">
         <Setter Property="WindowStyle" Value="None"/>
         <Setter Property="AllowsTransparency" Value="True"/>

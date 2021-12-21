@@ -9,7 +9,7 @@
 
         <!-- Carica stili -->
         <ResourceDictionary Source="/LiteUI;component/Themes/Styles/Border.xaml"/>
-        <!--ResourceDictionary Source="/LiteUI;component/Styles/Button.xaml"/ Incluso in LiteWindow -->
+        <!-- Incluso in LiteWindow - ResourceDictionary Source="/LiteUI;component/Styles/Button.xaml"/-->
         <ResourceDictionary Source="/LiteUI;component/Themes/Styles/CheckBox.xaml"/>
         <ResourceDictionary Source="/LiteUI;component/Themes/Styles/ComboBox.xaml"/>
         <ResourceDictionary Source="/LiteUI;component/Themes/Styles/ComboBoxItem.xaml"/>
@@ -19,10 +19,10 @@
         <ResourceDictionary Source="/LiteUI;component/Themes/Styles/ListBox.xaml"/>
         <ResourceDictionary Source="/LiteUI;component/Themes/Styles/ListBoxItem.xaml"/>
         <!--ResourceDictionary Source="/LiteUI;component/Themes/Styles/ListView.xaml"/>
-        <ResourceDictionary Source="/LiteUI;component/Themes/Styles/ListViewItem.xaml"/ -->
+        <ResourceDictionary Source="/LiteUI;component/Themes/Styles/ListViewItem.xaml"/-->
         <ResourceDictionary Source="/LiteUI;component/Themes/Styles/LiteNavigationWindow.xaml"/>
         <ResourceDictionary Source="/LiteUI;component/Themes/Styles/LitePopup.xaml"/>
-        <!--ResourceDictionary Source="/LiteUI;component/Themes/Styles/LiteWindow.xaml"/ Incluso in LiteNavigationWindow -->
+        <!-- Incluso in LiteNavigationWindow - ResourceDictionary Source="/LiteUI;component/Themes/Styles/LiteWindow.xaml"/-->
         <ResourceDictionary Source="/LiteUI;component/Themes/Styles/ProgressBar.xaml"/>
         <ResourceDictionary Source="/LiteUI;component/Themes/Styles/RadioButton.xaml"/>
         <ResourceDictionary Source="/LiteUI;component/Themes/Styles/ScrollBar.xaml"/>
@@ -31,5 +31,6 @@
         <ResourceDictionary Source="/LiteUI;component/Themes/Styles/TabItem.xaml"/>
         <ResourceDictionary Source="/LiteUI;component/Themes/Styles/TextBox.xaml"/>
         <ResourceDictionary Source="/LiteUI;component/Themes/Styles/ToggleButton.xaml"/>
+        <ResourceDictionary Source="/LiteUI;component/Themes/Styles/ToolbarItem.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>
