@@ -124,6 +124,8 @@ namespace LiteUI
                     Button_Cancel.Content = Helper.GetCancel();
 
                     Button_OK.Focus();
+
+                    LiteTheming.SetAccented(Button_OK, true);
                     break;
                 case MessageBoxButton.YesNo:
                     Button_OK.Visibility = Visibility.Collapsed;
@@ -133,6 +135,8 @@ namespace LiteUI
                     Button_No.Content = Helper.GetNo();
 
                     Button_Yes.Focus();
+
+                    LiteTheming.SetAccented(Button_Yes, true);
                     break;
                 case MessageBoxButton.YesNoCancel:
                     Button_OK.Visibility = Visibility.Collapsed;
