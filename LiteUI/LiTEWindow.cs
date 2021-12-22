@@ -1,33 +1,29 @@
 ﻿using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Media;
 
 namespace LiteUI
 {
-    public record LiteWindowTheme(Color Active, Color Inactive, Color Background, Color AccentForeground, Color AccentBackground)
-    {
-        public static readonly LiteWindowTheme Light = new(
-            Color.FromRgb(0x26, 0x26, 0x26),
-            Color.FromRgb(0x7F, 0x7F, 0x7F),
-            Color.FromRgb(0xFF, 0xFF, 0xFF),
-            Color.FromRgb(0xFF, 0xFF, 0xFF),
-            Color.FromRgb(0x00, 0x7A, 0xCC)
-        );
-
-        public static readonly LiteWindowTheme Dark = new(
-            Color.FromRgb(0xFF, 0xFF, 0xFF),
-            Color.FromRgb(0x7F, 0x7F, 0x7F),
-            Color.FromRgb(0x00, 0x00, 0x00),
-            Color.FromRgb(0xFF, 0xFF, 0xFF),
-            Color.FromRgb(0x00, 0x96, 0xF3)
-        );
-    }
-
     public enum WindowBarStyle { Hidden, Normal, Big }
 
     public class LiteWindow : Window
     {
+        #region Theme
+
+        internal LiteTheme Theme { get; private set; }
+
+        /// <summary>
+        /// Imposta il tema della finestra corrente.
+        /// </summary>
+        /// <param name="theme">Il tema da usare.</param>
+        public void SetTheme(LiteTheme theme)
+        {
+            Theme = theme;
+            LiteTheming.UpdateResources(Resources, theme);
+        }
+
+        #endregion
+
         #region Style and properties
 
         static LiteWindow()
@@ -90,59 +86,6 @@ namespace LiteUI
         {
             get => (ToolbarItemsCollection)GetValue(ToolbarProperty);
             set => SetValue(ToolbarProperty, value);
-        }
-
-        #endregion
-
-        #region Theme
-
-        // Calcola valori per tutte le chiavi dei colori
-        private static void SetTheme(ResourceDictionary resources, LiteWindowTheme theme)
-        {
-            // Genera il colore di accento del tema
-            var special = theme.Active * 0.2f + theme.Background * 0.8f;
-
-            // Regola la palette per temi chiari e temi scuri
-            var ac = System.Drawing.Color.FromArgb(0xFF, theme.Active.R, theme.Active.G, theme.Active.B);
-            var bc = System.Drawing.Color.FromArgb(0xFF, theme.Background.R, theme.Background.G, theme.Background.B);
-            var (accent1, accent2, window) = ac.GetBrightness() > bc.GetBrightness()
-                ? (special, special * 0.2f, theme.Background) // Temi scuri
-                : (theme.Background, special, special * 0.6f); // Temi chiari
-
-            // Rimuovi eventuali trasparenze
-            accent1.A = byte.MaxValue;
-            accent2.A = byte.MaxValue;
-            window.A = byte.MaxValue;
-
-            // Setta colori
-            resources["ActiveColor"] = new SolidColorBrush(theme.Active);
-            resources["InactiveColor"] = new SolidColorBrush(theme.Inactive);
-            resources["HighlightedColor"] = new SolidColorBrush(accent1);
-            resources["BackgroundColor"] = new SolidColorBrush(accent2);
-            resources["WindowColor"] = new SolidColorBrush(window);
-            resources["AccentForeground"] = new SolidColorBrush(theme.AccentForeground);
-            resources["AccentBackground"] = new SolidColorBrush(theme.AccentBackground);
-        }
-
-        /// <summary>
-        /// Imposta il tema globale dell'applicazione.
-        /// </summary>
-        /// <param name="theme">Il tema da usare.</param>
-        public static void SetGlobalTheme(LiteWindowTheme theme)
-        {
-            SetTheme(Application.Current.Resources, theme);
-        }
-
-        internal LiteWindowTheme Theme { get; private set; }
-
-        /// <summary>
-        /// Imposta il tema della finestra corrente.
-        /// </summary>
-        /// <param name="theme">Il tema da usare.</param>
-        public void SetTheme(LiteWindowTheme theme)
-        {
-            Theme = theme;
-            SetTheme(Resources, theme);
         }
 
         #endregion

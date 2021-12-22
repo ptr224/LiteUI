@@ -32,10 +32,10 @@ namespace LiteUI.Test
             switch (me.SelectedIndex)
             {
                 case 0:
-                    GetWindow()?.SetTheme(LiteWindowTheme.Light);
+                    GetWindow()?.SetTheme(LiteTheme.Light);
                     return;
                 case 1:
-                    GetWindow()?.SetTheme(LiteWindowTheme.Dark);
+                    GetWindow()?.SetTheme(LiteTheme.Dark);
                     return;
                 case 2:
                     GetWindow()?.SetTheme(new(

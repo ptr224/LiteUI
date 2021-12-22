@@ -98,13 +98,13 @@
             Ottiene un riferimento alla finestra contenente la pagina.
             </summary>
         </member>
-        <member name="M:LiteUI.LiteWindow.SetGlobalTheme(LiteUI.LiteWindowTheme)">
+        <member name="M:LiteUI.LiteTheming.SetGlobalTheme(LiteUI.LiteTheme)">
             <summary>
             Imposta il tema globale dell'applicazione.
             </summary>
             <param name="theme">Il tema da usare.</param>
         </member>
-        <member name="M:LiteUI.LiteWindow.SetTheme(LiteUI.LiteWindowTheme)">
+        <member name="M:LiteUI.LiteWindow.SetTheme(LiteUI.LiteTheme)">
             <summary>
             Imposta il tema della finestra corrente.
             </summary>

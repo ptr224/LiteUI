@@ -13,7 +13,7 @@ namespace LiteUI.Test
 
             DataContext = null;
 
-            SetGlobalTheme(new(
+            LiteTheming.SetGlobalTheme(new(
                 Color.FromRgb(0xFF, 0xFF, 0xFF),
                 Color.FromRgb(0x7F, 0x7F, 0x7F),
                 Color.FromRgb(0x27, 0x27, 0x27),
