@@ -8,12 +8,12 @@ namespace LiteUI.Controls
 
     public class Window : System.Windows.Window
     {
-        #region Style and properties
-
         static Window()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(Window), new FrameworkPropertyMetadata(typeof(Window)));
         }
+
+        // IsFullscreen
 
         public static readonly DependencyProperty IsFullscreenProperty = DependencyProperty.Register(
             nameof(IsFullscreen),
@@ -42,6 +42,8 @@ namespace LiteUI.Controls
             }
         }
 
+        // BarStyle
+
         public static readonly DependencyProperty BarStyleProperty = DependencyProperty.Register(
             nameof(BarStyle),
             typeof(WindowBarStyle),
@@ -56,6 +58,8 @@ namespace LiteUI.Controls
             get => (WindowBarStyle)GetValue(BarStyleProperty);
             set => SetValue(BarStyleProperty, value);
         }
+
+        // Toolbar
 
         public static readonly DependencyProperty ToolbarProperty = DependencyProperty.Register(
             nameof(Toolbar),
@@ -72,7 +76,7 @@ namespace LiteUI.Controls
             set => SetValue(ToolbarProperty, value);
         }
 
-        #endregion
+        //
 
         public Window()
         {

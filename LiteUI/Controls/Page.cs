@@ -11,6 +11,8 @@ namespace LiteUI.Controls
     /// </summary>
     public class Page : UserControl
     {
+        // Title
+
         public static readonly DependencyProperty TitleProperty = DependencyProperty.Register(
             nameof(Title),
             typeof(string),
@@ -26,6 +28,8 @@ namespace LiteUI.Controls
             set => SetValue(TitleProperty, value);
         }
 
+        // Toolbar
+
         public static readonly DependencyProperty ToolbarProperty = DependencyProperty.Register(
             nameof(Toolbar),
             typeof(ToolbarItemsCollection),
@@ -40,6 +44,8 @@ namespace LiteUI.Controls
             get => (ToolbarItemsCollection)GetValue(ToolbarProperty);
             set => SetValue(ToolbarProperty, value);
         }
+
+        //
 
         /// <summary>
         /// L'oggetto <see cref="Navigation.NavigationService"/> che la pagina sta usando per supportare la navigazione o <see langword="null"/> se questa non è visualizzata.
@@ -62,6 +68,12 @@ namespace LiteUI.Controls
         /// </summary>
         public event CancelEventHandler Closing;
 
+        /// <summary>
+        /// Ottiene un riferimento alla finestra contenente la pagina.
+        /// </summary>
+        protected NavigationWindow GetWindow()
+            => System.Windows.Window.GetWindow(this) as NavigationWindow;
+
         internal void CallCreated(NavigationParams extras)
             => Created?.Invoke(this, extras);
 
@@ -74,11 +86,5 @@ namespace LiteUI.Controls
             Closing?.Invoke(this, e);
             return e.Cancel;
         }
-
-        /// <summary>
-        /// Ottiene un riferimento alla finestra contenente la pagina.
-        /// </summary>
-        protected NavigationWindow GetWindow()
-            => System.Windows.Window.GetWindow(this) as NavigationWindow;
     }
 }

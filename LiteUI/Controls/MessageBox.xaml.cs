@@ -16,21 +16,18 @@ namespace LiteUI.Controls
         /// <param name="icon">A MessageBoxImage value that specifies the icon to display.</param>
         /// <param name="button">A MessageBoxButton value that specifies which button or buttons to display.</param>
         /// <param name="caption">A string that specifies the title bar caption to display.</param>
-        public static MessageBoxResult Show(Window owner, string messageBoxText, MessageBoxImage icon = MessageBoxImage.None, MessageBoxButton button = MessageBoxButton.OK, string caption = null)
+        public static MessageBoxResult Show(System.Windows.Window owner, string messageBoxText, MessageBoxImage icon = MessageBoxImage.None, MessageBoxButton button = MessageBoxButton.OK, string caption = null)
         {
             var msg = new MessageBoxWindow(messageBoxText, caption, button, icon);
 
             // Imposta l'owner e usa lo stesso tema
-            if (owner != null)
+            if (owner is not null)
             {
                 msg.Owner = owner;
                 msg.WindowStartupLocation = WindowStartupLocation.CenterOwner;
 
-                /*
-                var theme = owner.Theme;
-                if (theme is not null)
-                    msg.SetTheme(theme);
-                */
+                if (Theming.GetTheme(owner) is Theme theme)
+                    Theming.SetTheme(msg, theme);
             }
 
             // Attendi la risposta

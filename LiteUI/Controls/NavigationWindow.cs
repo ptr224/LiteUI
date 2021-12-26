@@ -11,7 +11,7 @@ namespace LiteUI.Controls
     /// </summary>
     public class NavigationWindow : Window
     {
-        public class BackRelayCommand : ICommand
+        private class BackRelayCommand : ICommand
         {
             private readonly NavigationService _navigationService;
 
@@ -42,6 +42,8 @@ namespace LiteUI.Controls
             DefaultStyleKeyProperty.OverrideMetadata(typeof(NavigationWindow), new FrameworkPropertyMetadata(typeof(NavigationWindow)));
         }
 
+        // HideNavigationButton
+
         public static readonly DependencyProperty HideNavigationButtonProperty = DependencyProperty.Register(
             nameof(HideNavigationButton),
             typeof(bool),
@@ -56,6 +58,8 @@ namespace LiteUI.Controls
             get => (bool)GetValue(HideNavigationButtonProperty);
             set => SetValue(HideNavigationButtonProperty, value);
         }
+
+        // StartupPage
 
         public static readonly DependencyProperty StartupPageProperty = DependencyProperty.Register(
             nameof(StartupPage),
@@ -72,8 +76,10 @@ namespace LiteUI.Controls
             set => SetValue(StartupPageProperty, value);
         }
 
+        //
+
         public NavigationService NavigationService { get; }
-        public BackRelayCommand BackCommand { get; }
+        public ICommand BackCommand { get; }
 
         public NavigationWindow()
         {

@@ -13,6 +13,8 @@ namespace LiteUI.Controls
             DefaultStyleKeyProperty.OverrideMetadata(typeof(Popup), new FrameworkPropertyMetadata(typeof(Popup)));
         }
 
+        // Shadow
+
         public static readonly DependencyProperty ShadowProperty = DependencyProperty.Register(
             nameof(Shadow),
             typeof(PopupShadow),

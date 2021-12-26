@@ -4,7 +4,7 @@
         <name>LiteUI</name>
     </assembly>
     <members>
-        <member name="M:LiteUI.Controls.MessageBox.Show(LiteUI.Controls.Window,System.String,System.Windows.MessageBoxImage,System.Windows.MessageBoxButton,System.String)">
+        <member name="M:LiteUI.Controls.MessageBox.Show(System.Windows.Window,System.String,System.Windows.MessageBoxImage,System.Windows.MessageBoxButton,System.String)">
             <summary>
             Displays a message box that has a message, title bar caption, button, and icon; and that returns a result.
             </summary>

@@ -45,15 +45,13 @@ namespace LiteUI.Controls
             UpdateResources(Application.Current.Resources, theme);
         }
 
-        #region Attached Properties
-
         // Theme
 
         public static readonly DependencyProperty ThemeProperty = DependencyProperty.RegisterAttached(
             "Theme",
             typeof(Theme),
             typeof(Theming),
-            new FrameworkPropertyMetadata(Theme.Light, FrameworkPropertyMetadataOptions.AffectsRender, ThemeChanged)
+            new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.AffectsRender, ThemeChanged)
         );
 
         private static void ThemeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -88,7 +86,5 @@ namespace LiteUI.Controls
 
         public static void SetAccented(UIElement target, bool value)
             => target.SetValue(AccentedProperty, value);
-
-        #endregion
     }
 }

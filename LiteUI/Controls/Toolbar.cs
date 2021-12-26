@@ -9,7 +9,7 @@ namespace LiteUI.Controls
 
     public enum ToolbarPosition { Left, Right }
 
-    public class ToolbarItem : Decorator
+    public sealed class ToolbarItem : Decorator
     {
         static ToolbarItem()
         {

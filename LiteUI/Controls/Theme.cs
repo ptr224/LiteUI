@@ -2,7 +2,7 @@
 
 namespace LiteUI.Controls
 {
-    public class Theme
+    public sealed class Theme
     {
         public static readonly Theme Light = new();
 
