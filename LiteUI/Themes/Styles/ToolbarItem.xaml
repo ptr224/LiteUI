@@ -2,12 +2,16 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:lite="clr-namespace:LiteUI.Controls">
     <Style TargetType="{x:Type lite:ToolbarItem}">
+        <Setter Property="DockPanel.Dock" Value="Left"/>
         <Setter Property="Margin" Value="2.5"/>
         <Setter Property="MinWidth" Value="{DynamicResource WindowButtonWidth}"/>
         <Setter Property="Width" Value="Auto"/>
         <Setter Property="TextBlock.FontSize" Value="{DynamicResource WindowBarFontSize}"/>
         <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True"/>
         <Style.Triggers>
+            <Trigger Property="Position" Value="Right">
+                <Setter Property="DockPanel.Dock" Value="Right"/>
+            </Trigger>
             <DataTrigger Binding="{Binding BarStyle, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type lite:Window}}}" Value="{x:Static lite:WindowBarStyle.Big}">
                 <Setter Property="Margin" Value="2.5,5"/>
             </DataTrigger>

@@ -81,7 +81,10 @@ namespace LiteUI.Test
 
         private void tbb_Click(object sender, RoutedEventArgs e)
         {
-            pop.IsOpen = !pop.IsOpen;
+            //pop.IsOpen = !pop.IsOpen;
+            var button = sender as Button;
+            var item = button.Parent as ToolbarItem;
+            item.Position = item.Position == ToolbarPosition.Left ? ToolbarPosition.Right : ToolbarPosition.Left;
         }
     }
 }

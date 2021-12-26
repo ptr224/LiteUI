@@ -20,7 +20,7 @@ namespace LiteUI.Controls
             nameof(Position),
             typeof(ToolbarPosition),
             typeof(ToolbarItem),
-            new FrameworkPropertyMetadata(ToolbarPosition.Left, FrameworkPropertyMetadataOptions.AffectsRender, PositionChanged));
+            new FrameworkPropertyMetadata(ToolbarPosition.Left, FrameworkPropertyMetadataOptions.AffectsRender));
 
         [Bindable(true)]
         [Category(nameof(LiteUI))]
@@ -28,19 +28,6 @@ namespace LiteUI.Controls
         {
             get => (ToolbarPosition)GetValue(PositionProperty);
             set => SetValue(PositionProperty, value);
-        }
-
-        private static void PositionChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            switch ((ToolbarPosition)e.NewValue)
-            {
-                case ToolbarPosition.Left:
-                    DockPanel.SetDock((ToolbarItem)d, Dock.Left);
-                    break;
-                case ToolbarPosition.Right:
-                    DockPanel.SetDock((ToolbarItem)d, Dock.Right);
-                    break;
-            }
         }
     }
 }
