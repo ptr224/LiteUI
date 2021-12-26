@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
 
-namespace LiteUI
+namespace LiteUI.Navigation
 {
     /// <summary>
     /// Collezione di parametri passati dal <see cref="NavigationService"/>.
     /// </summary>
     public sealed class NavigationParams
     {
-        private readonly Dictionary<string, object> extras = new Dictionary<string, object>();
+        private readonly Dictionary<string, object> extras = new();
 
         /// <summary>
         /// Aggiunge un parametro.

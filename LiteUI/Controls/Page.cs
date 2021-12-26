@@ -1,48 +1,11 @@
-﻿using System;
+﻿using LiteUI.Navigation;
+using System;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 
 namespace LiteUI.Controls
 {
-    /// <summary>
-    /// Descrive le modalità di lancio di una pagina.
-    /// </summary>
-    public enum PageLaunchMode
-    {
-        /// <summary>
-        /// Crea una nuova pagina che non viene salvata nella cronologia.
-        /// </summary>
-        Ignore,
-
-        /// <summary>
-        /// Crea ogni volta una nuova pagina.
-        /// </summary>
-        Normal,
-
-        /// <summary>
-        /// Se la pagina è attualmente in primo piano viene richiamata la stessa istanza.
-        /// </summary>
-        SingleTop,
-
-        /// <summary>
-        /// Se la pagina è presente nella cronologia richiama la stessa istanza ed elimina tutte le pagine accodate successivamente.
-        /// </summary>
-        SingleInstance
-    }
-
-    /// <summary>
-    /// Specifica le opzioni relative alla <see cref="Page"/>.
-    /// </summary>
-    [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = true)]
-    public sealed class PageOptionsAttribute : Attribute
-    {
-        /// <summary>
-        /// Specifica le modalità di lancio della pagina.
-        /// </summary>
-        public PageLaunchMode LaunchMode { get; set; } = PageLaunchMode.Normal;
-    }
-
     /// <summary>
     /// Una pagina di contenuto visualizzabile in una <see cref="NavigationWindow"/>.
     /// </summary>
@@ -79,7 +42,7 @@ namespace LiteUI.Controls
         }
 
         /// <summary>
-        /// L'oggetto <see cref="LiteUI.NavigationService"/> che la pagina sta usando per supportare la navigazione o <see langword="null"/> se questa non è visualizzata.
+        /// L'oggetto <see cref="Navigation.NavigationService"/> che la pagina sta usando per supportare la navigazione o <see langword="null"/> se questa non è visualizzata.
         /// </summary>
         public NavigationService NavigationService
             => GetWindow()?.NavigationService;
@@ -116,6 +79,6 @@ namespace LiteUI.Controls
         /// Ottiene un riferimento alla finestra contenente la pagina.
         /// </summary>
         protected NavigationWindow GetWindow()
-            => Window.GetWindow(this) as NavigationWindow;
+            => System.Windows.Window.GetWindow(this) as NavigationWindow;
     }
 }

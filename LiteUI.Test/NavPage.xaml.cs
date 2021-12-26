@@ -1,4 +1,5 @@
 ﻿using LiteUI.Controls;
+using LiteUI.Navigation;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;

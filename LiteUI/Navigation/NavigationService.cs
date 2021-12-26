@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace LiteUI
+namespace LiteUI.Navigation
 {
     public sealed class NavigationService
     {
