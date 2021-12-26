@@ -3,12 +3,12 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
 
-namespace LiteUI
+namespace LiteUI.Controls
 {
     /// <summary>
-    /// Una speciale <see cref="LiteWindow"/> che contiene e naviga tra delle <see cref="LitePage"/>.
+    /// Una speciale <see cref="Window"/> che contiene e naviga tra delle <see cref="Page"/>.
     /// </summary>
-    public class LiteNavigationWindow : LiteWindow
+    public class NavigationWindow : Window
     {
         public class BackRelayCommand : ICommand
         {
@@ -36,20 +36,20 @@ namespace LiteUI
             }
         }
 
-        static LiteNavigationWindow()
+        static NavigationWindow()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(LiteNavigationWindow), new FrameworkPropertyMetadata(typeof(LiteNavigationWindow)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(NavigationWindow), new FrameworkPropertyMetadata(typeof(NavigationWindow)));
         }
 
         public static readonly DependencyProperty HideNavigationButtonProperty = DependencyProperty.Register(
             nameof(HideNavigationButton),
             typeof(bool),
-            typeof(LiteNavigationWindow),
+            typeof(NavigationWindow),
             new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsRender)
         );
 
         [Bindable(true)]
-        [Category(nameof(LiteWindow))]
+        [Category(nameof(LiteUI))]
         public bool HideNavigationButton
         {
             get => (bool)GetValue(HideNavigationButtonProperty);
@@ -59,12 +59,12 @@ namespace LiteUI
         public static readonly DependencyProperty StartupPageProperty = DependencyProperty.Register(
             nameof(StartupPage),
             typeof(Type),
-            typeof(LiteNavigationWindow),
+            typeof(NavigationWindow),
             new FrameworkPropertyMetadata(null)
         );
 
         [Bindable(false)]
-        [Category(nameof(LiteWindow))]
+        [Category(nameof(LiteUI))]
         public Type StartupPage
         {
             get => (Type)GetValue(StartupPageProperty);
@@ -74,7 +74,7 @@ namespace LiteUI
         public NavigationService NavigationService { get; }
         public BackRelayCommand BackCommand { get; }
 
-        public LiteNavigationWindow()
+        public NavigationWindow()
         {
             // Inizializza NavigationService e comando Back
             NavigationService = new NavigationService(page => DataContext = page);

@@ -1,33 +1,15 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace LiteUI
+namespace LiteUI.Controls
 {
-    public record LiteTheme(Color Active, Color Inactive, Color Background, Color AccentForeground, Color AccentBackground)
-    {
-        public static readonly LiteTheme Light = new(
-            Color.FromRgb(0x26, 0x26, 0x26),
-            Color.FromRgb(0x7F, 0x7F, 0x7F),
-            Color.FromRgb(0xFF, 0xFF, 0xFF),
-            Color.FromRgb(0xFF, 0xFF, 0xFF),
-            Color.FromRgb(0x00, 0x7A, 0xCC)
-        );
-
-        public static readonly LiteTheme Dark = new(
-            Color.FromRgb(0xFF, 0xFF, 0xFF),
-            Color.FromRgb(0x7F, 0x7F, 0x7F),
-            Color.FromRgb(0x00, 0x00, 0x00),
-            Color.FromRgb(0xFF, 0xFF, 0xFF),
-            Color.FromRgb(0x00, 0x96, 0xF3)
-        );
-    }
-
-    public static class LiteTheming
+    public static class Theming
     {
         // Calcola valori per tutte le chiavi dei colori
-        internal static void UpdateResources(ResourceDictionary resources, LiteTheme theme)
+        private static void UpdateResources(ResourceDictionary resources, Theme theme)
         {
             // Genera il colore di accento del tema
             var special = theme.Active * 0.2f + theme.Background * 0.8f;
@@ -58,26 +40,53 @@ namespace LiteUI
         /// Imposta il tema globale dell'applicazione.
         /// </summary>
         /// <param name="theme">Il tema da usare.</param>
-        public static void SetGlobalTheme(LiteTheme theme)
+        public static void SetGlobalTheme(Theme theme)
         {
             UpdateResources(Application.Current.Resources, theme);
         }
 
         #region Attached Properties
 
+        // Theme
+
+        public static readonly DependencyProperty ThemeProperty = DependencyProperty.RegisterAttached(
+            "Theme",
+            typeof(Theme),
+            typeof(Theming),
+            new FrameworkPropertyMetadata(Theme.Light, FrameworkPropertyMetadataOptions.AffectsRender, ThemeChanged)
+        );
+
+        private static void ThemeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is FrameworkElement element && e.NewValue is Theme theme)
+                UpdateResources(element.Resources, theme);
+            else
+                throw new NotSupportedException();
+        }
+
+        [AttachedPropertyBrowsableForType(typeof(FrameworkElement))]
+        [Category(nameof(LiteUI))]
+        public static Theme GetTheme(UIElement target)
+            => (Theme)target.GetValue(ThemeProperty);
+
+        public static void SetTheme(UIElement target, Theme value)
+            => target.SetValue(ThemeProperty, value);
+
+        // Accented
+
         public static readonly DependencyProperty AccentedProperty = DependencyProperty.RegisterAttached(
             "Accented",
             typeof(bool),
-            typeof(LiteTheming),
+            typeof(Theming),
             new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsRender)
         );
 
         [AttachedPropertyBrowsableForType(typeof(Button))]
-        [Category(nameof(LiteTheming))]
-        public static bool GetAccented(Button target)
+        [Category(nameof(LiteUI))]
+        public static bool GetAccented(UIElement target)
             => (bool)target.GetValue(AccentedProperty);
 
-        public static void SetAccented(Button target, bool value)
+        public static void SetAccented(UIElement target, bool value)
             => target.SetValue(AccentedProperty, value);
 
         #endregion

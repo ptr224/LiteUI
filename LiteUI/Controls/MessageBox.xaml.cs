@@ -4,9 +4,9 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows;
 
-namespace LiteUI
+namespace LiteUI.Controls
 {
-    public static class LiteMessageBox
+    public static class MessageBox
     {
         /// <summary>
         /// Displays a message box that has a message, title bar caption, button, and icon; and that returns a result.
@@ -16,9 +16,9 @@ namespace LiteUI
         /// <param name="icon">A MessageBoxImage value that specifies the icon to display.</param>
         /// <param name="button">A MessageBoxButton value that specifies which button or buttons to display.</param>
         /// <param name="caption">A string that specifies the title bar caption to display.</param>
-        public static MessageBoxResult Show(LiteWindow owner, string messageBoxText, MessageBoxImage icon = MessageBoxImage.None, MessageBoxButton button = MessageBoxButton.OK, string caption = null)
+        public static MessageBoxResult Show(Window owner, string messageBoxText, MessageBoxImage icon = MessageBoxImage.None, MessageBoxButton button = MessageBoxButton.OK, string caption = null)
         {
-            var msg = new LiteMessageBoxWindow(messageBoxText, caption, button, icon);
+            var msg = new MessageBoxWindow(messageBoxText, caption, button, icon);
 
             // Imposta l'owner e usa lo stesso tema
             if (owner != null)
@@ -26,9 +26,11 @@ namespace LiteUI
                 msg.Owner = owner;
                 msg.WindowStartupLocation = WindowStartupLocation.CenterOwner;
 
+                /*
                 var theme = owner.Theme;
                 if (theme is not null)
                     msg.SetTheme(theme);
+                */
             }
 
             // Attendi la risposta
@@ -46,7 +48,7 @@ namespace LiteUI
         /// <param name="caption">A string that specifies the title bar caption to display.</param>
         public static MessageBoxResult Show(string messageBoxText, MessageBoxImage icon = MessageBoxImage.None, MessageBoxButton button = MessageBoxButton.OK, string caption = null)
         {
-            var msg = new LiteMessageBoxWindow(messageBoxText, caption, button, icon);
+            var msg = new MessageBoxWindow(messageBoxText, caption, button, icon);
 
             // Attendi la risposta
             msg.ShowDialog();
@@ -55,7 +57,7 @@ namespace LiteUI
         }
     }
 
-    internal partial class LiteMessageBoxWindow : LiteWindow
+    internal partial class MessageBoxWindow : Window
     {
         // Classe usata per ricavare il testo dei bottoni
         private class Helper
@@ -105,7 +107,7 @@ namespace LiteUI
 
         internal MessageBoxResult Result { get; private set; } = MessageBoxResult.Cancel;
 
-        internal LiteMessageBoxWindow(string message, string caption, MessageBoxButton button, MessageBoxImage icon)
+        internal MessageBoxWindow(string message, string caption, MessageBoxButton button, MessageBoxImage icon)
         {
             InitializeComponent();
 
@@ -125,7 +127,7 @@ namespace LiteUI
 
                     Button_OK.Focus();
 
-                    LiteTheming.SetAccented(Button_OK, true);
+                    Theming.SetAccented(Button_OK, true);
                     break;
                 case MessageBoxButton.YesNo:
                     Button_OK.Visibility = Visibility.Collapsed;
@@ -136,7 +138,7 @@ namespace LiteUI
 
                     Button_Yes.Focus();
 
-                    LiteTheming.SetAccented(Button_Yes, true);
+                    Theming.SetAccented(Button_Yes, true);
                     break;
                 case MessageBoxButton.YesNoCancel:
                     Button_OK.Visibility = Visibility.Collapsed;

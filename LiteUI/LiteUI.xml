@@ -4,7 +4,7 @@
         <name>LiteUI</name>
     </assembly>
     <members>
-        <member name="M:LiteUI.LiteMessageBox.Show(LiteUI.LiteWindow,System.String,System.Windows.MessageBoxImage,System.Windows.MessageBoxButton,System.String)">
+        <member name="M:LiteUI.Controls.MessageBox.Show(LiteUI.Controls.Window,System.String,System.Windows.MessageBoxImage,System.Windows.MessageBoxButton,System.String)">
             <summary>
             Displays a message box that has a message, title bar caption, button, and icon; and that returns a result.
             </summary>
@@ -14,7 +14,7 @@
             <param name="button">A MessageBoxButton value that specifies which button or buttons to display.</param>
             <param name="caption">A string that specifies the title bar caption to display.</param>
         </member>
-        <member name="M:LiteUI.LiteMessageBox.Show(System.String,System.Windows.MessageBoxImage,System.Windows.MessageBoxButton,System.String)">
+        <member name="M:LiteUI.Controls.MessageBox.Show(System.String,System.Windows.MessageBoxImage,System.Windows.MessageBoxButton,System.String)">
             <summary>
             Displays a message box that has a message, title bar caption, button, and icon; and that returns a result.
             </summary>
@@ -23,90 +23,84 @@
             <param name="button">A MessageBoxButton value that specifies which button or buttons to display.</param>
             <param name="caption">A string that specifies the title bar caption to display.</param>
         </member>
-        <member name="M:LiteUI.LiteMessageBoxWindow.InitializeComponent">
+        <member name="M:LiteUI.Controls.MessageBoxWindow.InitializeComponent">
             <summary>
             InitializeComponent
             </summary>
         </member>
-        <member name="T:LiteUI.LiteNavigationWindow">
+        <member name="T:LiteUI.Controls.NavigationWindow">
             <summary>
-            Una speciale <see cref="T:LiteUI.LiteWindow"/> che contiene e naviga tra delle <see cref="T:LiteUI.LitePage"/>.
+            Una speciale <see cref="T:LiteUI.Controls.Window"/> che contiene e naviga tra delle <see cref="T:LiteUI.Controls.Page"/>.
             </summary>
         </member>
-        <member name="T:LiteUI.PageLaunchMode">
+        <member name="T:LiteUI.Controls.PageLaunchMode">
             <summary>
             Descrive le modalità di lancio di una pagina.
             </summary>
         </member>
-        <member name="F:LiteUI.PageLaunchMode.Ignore">
+        <member name="F:LiteUI.Controls.PageLaunchMode.Ignore">
             <summary>
             Crea una nuova pagina che non viene salvata nella cronologia.
             </summary>
         </member>
-        <member name="F:LiteUI.PageLaunchMode.Normal">
+        <member name="F:LiteUI.Controls.PageLaunchMode.Normal">
             <summary>
             Crea ogni volta una nuova pagina.
             </summary>
         </member>
-        <member name="F:LiteUI.PageLaunchMode.SingleTop">
+        <member name="F:LiteUI.Controls.PageLaunchMode.SingleTop">
             <summary>
             Se la pagina è attualmente in primo piano viene richiamata la stessa istanza.
             </summary>
         </member>
-        <member name="F:LiteUI.PageLaunchMode.SingleInstance">
+        <member name="F:LiteUI.Controls.PageLaunchMode.SingleInstance">
             <summary>
             Se la pagina è presente nella cronologia richiama la stessa istanza ed elimina tutte le pagine accodate successivamente.
             </summary>
         </member>
-        <member name="T:LiteUI.PageOptionsAttribute">
+        <member name="T:LiteUI.Controls.PageOptionsAttribute">
             <summary>
-            Specifica le opzioni relative alla <see cref="T:LiteUI.LitePage"/>.
+            Specifica le opzioni relative alla <see cref="T:LiteUI.Controls.Page"/>.
             </summary>
         </member>
-        <member name="P:LiteUI.PageOptionsAttribute.LaunchMode">
+        <member name="P:LiteUI.Controls.PageOptionsAttribute.LaunchMode">
             <summary>
             Specifica le modalità di lancio della pagina.
             </summary>
         </member>
-        <member name="T:LiteUI.LitePage">
+        <member name="T:LiteUI.Controls.Page">
             <summary>
-            Una pagina di contenuto visualizzabile in una <see cref="T:LiteUI.LiteNavigationWindow"/>.
+            Una pagina di contenuto visualizzabile in una <see cref="T:LiteUI.Controls.NavigationWindow"/>.
             </summary>
         </member>
-        <member name="P:LiteUI.LitePage.NavigationService">
+        <member name="P:LiteUI.Controls.Page.NavigationService">
             <summary>
             L'oggetto <see cref="T:LiteUI.NavigationService"/> che la pagina sta usando per supportare la navigazione o <see langword="null"/> se questa non è visualizzata.
             </summary>
         </member>
-        <member name="E:LiteUI.LitePage.Created">
+        <member name="E:LiteUI.Controls.Page.Created">
             <summary>
             Evento chiamato alla creazione della pagina.
             </summary>
         </member>
-        <member name="E:LiteUI.LitePage.Retrieved">
+        <member name="E:LiteUI.Controls.Page.Retrieved">
             <summary>
             Evento chiamato quando la pagina viene richiamata.
             </summary>
         </member>
-        <member name="E:LiteUI.LitePage.Closing">
+        <member name="E:LiteUI.Controls.Page.Closing">
             <summary>
             Evento chiamato quando la pagina sta per essere lasciata.
             </summary>
         </member>
-        <member name="M:LiteUI.LitePage.GetWindow">
+        <member name="M:LiteUI.Controls.Page.GetWindow">
             <summary>
             Ottiene un riferimento alla finestra contenente la pagina.
             </summary>
         </member>
-        <member name="M:LiteUI.LiteTheming.SetGlobalTheme(LiteUI.LiteTheme)">
+        <member name="M:LiteUI.Controls.Theming.SetGlobalTheme(LiteUI.Controls.Theme)">
             <summary>
             Imposta il tema globale dell'applicazione.
-            </summary>
-            <param name="theme">Il tema da usare.</param>
-        </member>
-        <member name="M:LiteUI.LiteWindow.SetTheme(LiteUI.LiteTheme)">
-            <summary>
-            Imposta il tema della finestra corrente.
             </summary>
             <param name="theme">Il tema da usare.</param>
         </member>
@@ -163,7 +157,7 @@
             <param name="type">Il tipo della pagina da aprire.</param>
             <param name="extras">I parametri da passare alla pagina.</param>
             <exception cref="T:System.ArgumentNullException">Il tipo della pagina non può essere <see langword="null"/>.</exception>
-            <exception cref="T:System.ArgumentException">Il tipo della pagina deve essere sottoclasse di <see cref="T:LiteUI.LitePage"/>.</exception>
+            <exception cref="T:System.ArgumentException">Il tipo della pagina deve essere sottoclasse di <see cref="T:LiteUI.Controls.Page"/>.</exception>
         </member>
         <member name="M:LiteUI.NavigationService.Navigate``1(LiteUI.NavigationParams)">
             <summary>

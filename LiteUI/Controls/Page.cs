@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace LiteUI
+namespace LiteUI.Controls
 {
     /// <summary>
     /// Descrive le modalità di lancio di una pagina.
@@ -32,7 +32,7 @@ namespace LiteUI
     }
 
     /// <summary>
-    /// Specifica le opzioni relative alla <see cref="LitePage"/>.
+    /// Specifica le opzioni relative alla <see cref="Page"/>.
     /// </summary>
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = true)]
     public sealed class PageOptionsAttribute : Attribute
@@ -44,19 +44,19 @@ namespace LiteUI
     }
 
     /// <summary>
-    /// Una pagina di contenuto visualizzabile in una <see cref="LiteNavigationWindow"/>.
+    /// Una pagina di contenuto visualizzabile in una <see cref="NavigationWindow"/>.
     /// </summary>
-    public class LitePage : UserControl
+    public class Page : UserControl
     {
         public static readonly DependencyProperty TitleProperty = DependencyProperty.Register(
             nameof(Title),
             typeof(string),
-            typeof(LitePage),
-            new FrameworkPropertyMetadata(nameof(LitePage), FrameworkPropertyMetadataOptions.AffectsRender)
+            typeof(Page),
+            new FrameworkPropertyMetadata(nameof(Page), FrameworkPropertyMetadataOptions.AffectsRender)
         );
 
         [Bindable(true)]
-        [Category(nameof(LitePage))]
+        [Category(nameof(LiteUI))]
         public string Title
         {
             get => (string)GetValue(TitleProperty);
@@ -66,12 +66,12 @@ namespace LiteUI
         public static readonly DependencyProperty ToolbarProperty = DependencyProperty.Register(
             nameof(Toolbar),
             typeof(ToolbarItemsCollection),
-            typeof(LitePage),
-            new FrameworkPropertyMetadata(new ToolbarItemsCollection(), FrameworkPropertyMetadataOptions.AffectsRender)
+            typeof(Page),
+            new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.AffectsRender)
         );
 
         [Bindable(true)]
-        [Category(nameof(LitePage))]
+        [Category(nameof(LiteUI))]
         public ToolbarItemsCollection Toolbar
         {
             get => (ToolbarItemsCollection)GetValue(ToolbarProperty);
@@ -115,7 +115,7 @@ namespace LiteUI
         /// <summary>
         /// Ottiene un riferimento alla finestra contenente la pagina.
         /// </summary>
-        protected LiteNavigationWindow GetWindow()
-            => Window.GetWindow(this) as LiteNavigationWindow;
+        protected NavigationWindow GetWindow()
+            => Window.GetWindow(this) as NavigationWindow;
     }
 }

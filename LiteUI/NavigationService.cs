@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LiteUI.Controls;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -6,19 +7,19 @@ namespace LiteUI
 {
     public sealed class NavigationService
     {
-        private readonly Action<LitePage> _onLoadPageCallBack;
-        private readonly Stack<LitePage> history;
+        private readonly Action<Page> _onLoadPageCallBack;
+        private readonly Stack<Page> history;
 
-        private LitePage current;
+        private Page current;
         private bool saveCurrent = true;
 
-        internal NavigationService(Action<LitePage> onLoadPageCallBack)
+        internal NavigationService(Action<Page> onLoadPageCallBack)
         {
             _onLoadPageCallBack = onLoadPageCallBack;
-            history = new Stack<LitePage>();
+            history = new Stack<Page>();
         }
 
-        private void LoadCurrent(LitePage page)
+        private void LoadCurrent(Page page)
         {
             // Imposta nuova pagina come corrente e carica in finestra
             current = page;
@@ -77,7 +78,7 @@ namespace LiteUI
         /// <param name="type">Il tipo della pagina da aprire.</param>
         /// <param name="extras">I parametri da passare alla pagina.</param>
         /// <exception cref="ArgumentNullException">Il tipo della pagina non può essere <see langword="null"/>.</exception>
-        /// <exception cref="ArgumentException">Il tipo della pagina deve essere sottoclasse di <see cref="LitePage"/>.</exception>
+        /// <exception cref="ArgumentException">Il tipo della pagina deve essere sottoclasse di <see cref="Page"/>.</exception>
         public void Navigate(Type type, NavigationParams extras = null)
         {
             // Leggi LaunchMode del tipo, se assente imposta su Normal
@@ -169,7 +170,7 @@ namespace LiteUI
 
             void CreatePage()
             {
-                var page = (LitePage)Activator.CreateInstance(type);
+                var page = (Page)Activator.CreateInstance(type);
                 page.CallCreated(extras);
                 LoadCurrent(page);
             }
@@ -180,7 +181,7 @@ namespace LiteUI
         /// </summary>
         /// <typeparam name="T">Il tipo della pagina da aprire.</typeparam>
         /// <param name="extras">I parametri da passare alla pagina.</param>
-        public void Navigate<T>(NavigationParams extras) where T : LitePage
+        public void Navigate<T>(NavigationParams extras) where T : Page
             => Navigate(typeof(T), extras);
 
         /// <summary>
@@ -188,7 +189,7 @@ namespace LiteUI
         /// </summary>
         /// <typeparam name="T">Il tipo della pagina da aprire.</typeparam>
         /// <param name="extras">I parametri da passare alla pagina.</param>
-        public void Navigate<T>(params (string key, object value)[] extras) where T : LitePage
+        public void Navigate<T>(params (string key, object value)[] extras) where T : Page
         {
             // Ricrea l'oggetto parametro dai valori passati
             var param = new NavigationParams();
@@ -203,7 +204,7 @@ namespace LiteUI
         /// Naviga ad una pagina del tipo dato senza passare alcun parametro.
         /// </summary>
         /// <typeparam name="T">Il tipo della pagina da aprire.</typeparam>
-        public void Navigate<T>() where T : LitePage
+        public void Navigate<T>() where T : Page
             => Navigate(typeof(T));
     }
 }

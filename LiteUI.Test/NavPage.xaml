@@ -1,30 +1,32 @@
-﻿<ld:LitePage x:Class="LiteUI.Test.NavPage"
+﻿<lite:Page x:Class="LiteUI.Test.NavPage"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:LiteUI.Test"
-             xmlns:ld="clr-namespace:LiteUI;assembly=LiteUI"
+             xmlns:lite="clr-namespace:LiteUI.Controls;assembly=LiteUI"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800" Title="NavPage" Created="LitePage_Created" Retrieved="LitePage_Retrieved">
-    <ld:LitePage.Toolbar>
-        <ld:ToolbarItem Position="Right">
-            <Button x:Name="tbb" Content="&#xE71B;" FontFamily="Segoe MDL2 Assets" ToolTip="n1" Click="tbb_Click" ld:LiteTheming.Accented="True"/>
-        </ld:ToolbarItem>
-        <ld:ToolbarItem ToolTip="n2" Position="Right">
-            <Image Source="file:///D:/ptr22/OneDrive/Immagini/Programmi/LiTE/LiTE.png" Stretch="Uniform"/>
-        </ld:ToolbarItem>
-        <ld:ToolbarItem ToolTip="n3">
-            <ComboBox Width="120" SelectedIndex="0">
-                <ComboBoxItem Content="1"/>
-                <ComboBoxItem Content="2"/>
-                <ComboBoxItem Content="3"/>
-            </ComboBox>
-        </ld:ToolbarItem>
-        <ld:ToolbarItem ToolTip="n4" Position="Left">
-            <TextBox/>
-        </ld:ToolbarItem>
-    </ld:LitePage.Toolbar>
+    <lite:Page.Toolbar>
+        <lite:ToolbarItemsCollection>
+            <lite:ToolbarItem Position="Right">
+                <Button x:Name="tbb" Content="&#xE71B;" FontFamily="Segoe MDL2 Assets" ToolTip="n1" Click="tbb_Click" lite:Theming.Accented="True"/>
+            </lite:ToolbarItem>
+            <lite:ToolbarItem ToolTip="n2" Position="Right">
+                <Image Source="file:///D:/ptr22/OneDrive/Immagini/Programmi/LiTE/LiTE.png" Stretch="Uniform"/>
+            </lite:ToolbarItem>
+            <lite:ToolbarItem ToolTip="n3">
+                <ComboBox Width="120" SelectedIndex="0">
+                    <ComboBoxItem Content="1"/>
+                    <ComboBoxItem Content="2"/>
+                    <ComboBoxItem Content="3"/>
+                </ComboBox>
+            </lite:ToolbarItem>
+            <lite:ToolbarItem ToolTip="n4" Position="Left">
+                <TextBox/>
+            </lite:ToolbarItem>
+        </lite:ToolbarItemsCollection>
+    </lite:Page.Toolbar>
     <Grid>
         <ListBox x:Name="listBox" IsEnabled="{Binding IsChecked, ElementName=checkBox}" HorizontalAlignment="Left" Margin="10,41,0,10" Width="180" SelectedIndex="0" SelectionChanged="ListBox_SelectionChanged" HorizontalContentAlignment="Left">
             <ListBoxItem Content="Chiaro"/>
@@ -36,7 +38,7 @@
         <GroupBox Header="Cose che non fanno nulla" HorizontalAlignment="Left" Height="195" Margin="215,41,0,0" VerticalAlignment="Top" Width="198" IsEnabled="{Binding IsChecked, ElementName=checkBox}">
             <ScrollViewer>
                 <Grid VerticalAlignment="Top" Height="200">
-                    <Button Content="Button" HorizontalAlignment="Left" Margin="52,93,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click" ld:LiteTheming.Accented="True"/>
+                    <Button Content="Button" HorizontalAlignment="Left" Margin="52,93,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click" lite:Theming.Accented="True"/>
                     <ComboBox HorizontalAlignment="Left" Margin="29,50,0,0" VerticalAlignment="Top" Width="120" SelectedIndex="0" Cursor="Hand">
                         <ComboBoxItem Content="1"/>
                         <ComboBoxItem Content="2"/>
@@ -49,17 +51,17 @@
             </ScrollViewer>
         </GroupBox>
         <CheckBox x:Name="checkBox" Content="Abilita cose" HorizontalAlignment="Left" Margin="270,257,0,0" VerticalAlignment="Top" IsChecked="True"/>
-        <CheckBox IsChecked="{Binding IsFullscreen, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ld:LiteWindow}}}" Content="Fullscreen" HorizontalAlignment="Left" Margin="215,16,0,0" VerticalAlignment="Top" Cursor="Hand"/>
+        <CheckBox IsChecked="{Binding IsFullscreen, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type lite:Window}}}" Content="Fullscreen" HorizontalAlignment="Left" Margin="215,16,0,0" VerticalAlignment="Top" Cursor="Hand"/>
         <Button Content="Apri pagina" Click="Button_Click_1" HorizontalAlignment="Left" Margin="251,295,0,0" VerticalAlignment="Top"/>
         <Popup x:Name="popup" Placement="Center" AllowsTransparency="True" StaysOpen="True" IsOpen="False">
-            <ld:LitePopup Shadow="NoTop">
+            <lite:Popup Shadow="NoTop">
                 <Label Content="dwerew"/>
-            </ld:LitePopup>
+            </lite:Popup>
         </Popup>
         <Popup x:Name="pop" AllowsTransparency="True" IsOpen="False" StaysOpen="False" Placement="Bottom" PlacementTarget="{Binding ElementName=tbb}">
-            <ld:LitePopup Shadow="NoTop">
+            <lite:Popup Shadow="NoTop">
                 <Label Content="wellawella"/>
-            </ld:LitePopup>
+            </lite:Popup>
         </Popup>
         <Expander IsEnabled="{Binding IsChecked, ElementName=checkBox}" Header="Expander" HorizontalAlignment="Left" Height="100" Margin="459,140,0,0" VerticalAlignment="Top" Width="100" ExpandDirection="Down">
             <Grid Background="#FFE5E5E5"/>
@@ -77,4 +79,4 @@
             </TabItem>
         </TabControl>
     </Grid>
-</ld:LitePage>
+</lite:Page>

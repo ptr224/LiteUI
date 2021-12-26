@@ -2,44 +2,28 @@
 using System.Windows;
 using System.Windows.Input;
 
-namespace LiteUI
+namespace LiteUI.Controls
 {
     public enum WindowBarStyle { Hidden, Normal, Big }
 
-    public class LiteWindow : Window
+    public class Window : System.Windows.Window
     {
-        #region Theme
-
-        internal LiteTheme Theme { get; private set; }
-
-        /// <summary>
-        /// Imposta il tema della finestra corrente.
-        /// </summary>
-        /// <param name="theme">Il tema da usare.</param>
-        public void SetTheme(LiteTheme theme)
-        {
-            Theme = theme;
-            LiteTheming.UpdateResources(Resources, theme);
-        }
-
-        #endregion
-
         #region Style and properties
 
-        static LiteWindow()
+        static Window()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(LiteWindow), new FrameworkPropertyMetadata(typeof(LiteWindow)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(Window), new FrameworkPropertyMetadata(typeof(Window)));
         }
 
         public static readonly DependencyProperty IsFullscreenProperty = DependencyProperty.Register(
             nameof(IsFullscreen),
             typeof(bool),
-            typeof(LiteWindow),
+            typeof(Window),
             new FrameworkPropertyMetadata(true, FrameworkPropertyMetadataOptions.AffectsRender, FullscreenChanged)
         );
 
         [Bindable(true)]
-        [Category(nameof(LiteWindow))]
+        [Category(nameof(LiteUI))]
         public bool IsFullscreen
         {
             get => (bool)GetValue(IsFullscreenProperty);
@@ -48,7 +32,7 @@ namespace LiteUI
 
         private static void FullscreenChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var window = (LiteWindow)d;
+            var window = (Window)d;
             window.MaxHeight = (bool)e.NewValue ? double.PositiveInfinity : SystemParameters.WorkArea.Height + 8;
 
             if (window.WindowState == WindowState.Maximized)
@@ -61,12 +45,12 @@ namespace LiteUI
         public static readonly DependencyProperty BarStyleProperty = DependencyProperty.Register(
             nameof(BarStyle),
             typeof(WindowBarStyle),
-            typeof(LiteWindow),
+            typeof(Window),
             new FrameworkPropertyMetadata(WindowBarStyle.Normal, FrameworkPropertyMetadataOptions.AffectsRender)
         );
 
         [Bindable(true)]
-        [Category(nameof(LiteWindow))]
+        [Category(nameof(LiteUI))]
         public WindowBarStyle BarStyle
         {
             get => (WindowBarStyle)GetValue(BarStyleProperty);
@@ -76,12 +60,12 @@ namespace LiteUI
         public static readonly DependencyProperty ToolbarProperty = DependencyProperty.Register(
             nameof(Toolbar),
             typeof(ToolbarItemsCollection),
-            typeof(LiteWindow),
-            new FrameworkPropertyMetadata(new ToolbarItemsCollection(), FrameworkPropertyMetadataOptions.AffectsRender)
+            typeof(Window),
+            new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.AffectsRender)
         );
 
         [Bindable(true)]
-        [Category(nameof(LiteWindow))]
+        [Category(nameof(LiteUI))]
         public ToolbarItemsCollection Toolbar
         {
             get => (ToolbarItemsCollection)GetValue(ToolbarProperty);
@@ -90,7 +74,7 @@ namespace LiteUI
 
         #endregion
 
-        public LiteWindow()
+        public Window()
         {
             // Forza aggiornamento dell'altezza massima
             IsFullscreen = false;

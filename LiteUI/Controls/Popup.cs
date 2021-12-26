@@ -2,26 +2,26 @@
 using System.Windows;
 using System.Windows.Controls;
 
-namespace LiteUI
+namespace LiteUI.Controls
 {
     public enum PopupShadow { All, NoLeft, NoTop, NoRight, NoBottom }
 
-    public class LitePopup : ContentControl
+    public class Popup : ContentControl
     {
-        static LitePopup()
+        static Popup()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(LitePopup), new FrameworkPropertyMetadata(typeof(LitePopup)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(Popup), new FrameworkPropertyMetadata(typeof(Popup)));
         }
 
         public static readonly DependencyProperty ShadowProperty = DependencyProperty.Register(
             nameof(Shadow),
             typeof(PopupShadow),
-            typeof(LitePopup),
+            typeof(Popup),
             new FrameworkPropertyMetadata(PopupShadow.All, FrameworkPropertyMetadataOptions.AffectsRender)
         );
 
         [Bindable(true)]
-        [Category(nameof(LitePopup))]
+        [Category(nameof(LiteUI))]
         public PopupShadow Shadow
         {
             get => (PopupShadow)GetValue(ShadowProperty);
