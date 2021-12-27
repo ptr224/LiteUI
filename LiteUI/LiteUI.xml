@@ -109,13 +109,7 @@
             <typeparam name="T">Il tipo del parametro.</typeparam>
             <param name="key">La chiave del parametro.</param>
         </member>
-        <member name="M:LiteUI.Navigation.NavigationService.CancelClosing">
-            <summary>
-            Comunica se sia necessario restare sulla pagina corrente.
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="P:LiteUI.Navigation.NavigationService.Current">
+        <member name="P:LiteUI.Navigation.NavigationService.CurrentPage">
             <summary>
             La pagina attualmente visualizzata.
             </summary>

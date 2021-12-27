@@ -33,10 +33,10 @@ namespace LiteUI.Controls
             => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
         public string Title
-            => NavigationService.Current?.Title;
+            => NavigationService.CurrentPage?.Title;
 
         public ToolbarItemsCollection Toolbar
-            => NavigationService.Current?.Toolbar;
+            => NavigationService.CurrentPage?.Toolbar;
 
         /// <summary>
         /// L'oggetto <see cref="Navigation.NavigationService"/> che la pagina sta usando per supportare la navigazione o <see langword="null"/> se questa non è visualizzata.
@@ -62,6 +62,12 @@ namespace LiteUI.Controls
             // Naviga a StartupPage se dichiarata
             if (StartupPage is not null)
                 NavigationService.Navigate(StartupPage);
+        }
+
+        public bool CancelClosing()
+        {
+            // Comunica se sia necessario restare sulla pagina corrente
+            return NavigationService.CancelClosing();
         }
 
         public virtual void Dispose()
