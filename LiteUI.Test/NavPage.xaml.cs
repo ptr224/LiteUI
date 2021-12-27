@@ -1,5 +1,6 @@
 ﻿using LiteUI.Controls;
 using LiteUI.Navigation;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -10,11 +11,16 @@ namespace LiteUI.Test
     /// Logica di interazione per NavPage.xaml
     /// </summary>
     [PageOptions(LaunchMode = PageLaunchMode.Normal)]
-    public partial class NavPage : Controls.Page
+    public partial class NavPage : Controls.Page, IDisposable
     {
         public NavPage()
         {
             InitializeComponent();
+        }
+
+        public void Dispose()
+        {
+            frame.Dispose();
         }
 
         private void LitePage_Created(object sender, NavigationParams e)
@@ -25,6 +31,11 @@ namespace LiteUI.Test
         private void LitePage_Retrieved(object sender, NavigationParams e)
         {
             Title = e.Get<string>("Title", "Default") + "R";
+        }
+
+        private void Page_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = frame.NavigationService.CancelClosing();
         }
 
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)

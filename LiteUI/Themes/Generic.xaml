@@ -11,6 +11,7 @@
         <ResourceDictionary Source="/LiteUI;component/Themes/Styles/ComboBox.xaml"/>
         <ResourceDictionary Source="/LiteUI;component/Themes/Styles/ComboBoxItem.xaml"/>
         <ResourceDictionary Source="/LiteUI;component/Themes/Styles/Expander.xaml"/>
+        <ResourceDictionary Source="/LiteUI;component/Themes/Styles/Frame.xaml"/>
         <ResourceDictionary Source="/LiteUI;component/Themes/Styles/GroupBox.xaml"/>
         <ResourceDictionary Source="/LiteUI;component/Themes/Styles/Label.xaml"/>
         <ResourceDictionary Source="/LiteUI;component/Themes/Styles/ListBox.xaml"/>

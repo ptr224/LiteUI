@@ -4,6 +4,11 @@
         <name>LiteUI</name>
     </assembly>
     <members>
+        <member name="P:LiteUI.Controls.Frame.NavigationService">
+            <summary>
+            L'oggetto <see cref="T:LiteUI.Navigation.NavigationService"/> che la pagina sta usando per supportare la navigazione o <see langword="null"/> se questa non è visualizzata.
+            </summary>
+        </member>
         <member name="M:LiteUI.Controls.MessageBox.Show(System.Windows.Window,System.String,System.Windows.MessageBoxImage,System.Windows.MessageBoxButton,System.String)">
             <summary>
             Displays a message box that has a message, title bar caption, button, and icon; and that returns a result.
@@ -103,6 +108,17 @@
             </summary>
             <typeparam name="T">Il tipo del parametro.</typeparam>
             <param name="key">La chiave del parametro.</param>
+        </member>
+        <member name="M:LiteUI.Navigation.NavigationService.CancelClosing">
+            <summary>
+            Comunica se sia necessario restare sulla pagina corrente.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:LiteUI.Navigation.NavigationService.Current">
+            <summary>
+            La pagina attualmente visualizzata.
+            </summary>
         </member>
         <member name="P:LiteUI.Navigation.NavigationService.CanGoBack">
             <summary>

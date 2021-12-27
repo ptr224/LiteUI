@@ -10,7 +10,6 @@ namespace LiteUI.Navigation
         private readonly Action<Page> _onLoadPageCallBack;
         private readonly Stack<Page> history;
 
-        private Page current;
         private bool saveCurrent = true;
 
         internal NavigationService(Action<Page> onLoadPageCallBack)
@@ -22,26 +21,34 @@ namespace LiteUI.Navigation
         private void LoadCurrent(Page page)
         {
             // Imposta nuova pagina come corrente e carica in finestra
-            current = page;
+            Current = page;
             _onLoadPageCallBack(page);
         }
 
-        internal bool CancelClosing()
+        /// <summary>
+        /// Comunica se sia necessario restare sulla pagina corrente.
+        /// </summary>
+        /// <returns></returns>
+        public bool CancelClosing()
         {
-            // Comunica alla finestra se va annullata la chiusura
-            return current?.CallClosing() ?? false;
+            return Current?.CallClosing() ?? false;
         }
 
         internal void Dispose()
         {
             // Disponi la pagina corrente e quelle nella cronologia
-            if (current is IDisposable disposableCurrent)
+            if (Current is IDisposable disposableCurrent)
                 disposableCurrent.Dispose();
 
             while (history.TryPop(out var page))
                 if (page is IDisposable disposablePage)
                     disposablePage.Dispose();
         }
+
+        /// <summary>
+        /// La pagina attualmente visualizzata.
+        /// </summary>
+        public Page Current { get; private set; }
 
         /// <summary>
         /// Controlla se sia presente almeno una pagina nella cronologia di navigazione.
@@ -58,11 +65,11 @@ namespace LiteUI.Navigation
                 throw new InvalidOperationException("La cronologia di navigazione è vuota.");
 
             // Se la pagina non va abbandonata termina
-            if (current.CallClosing())
+            if (Current.CallClosing())
                 return;
 
             // Se la pagina implementa IDisposable eseguilo
-            if (current is IDisposable disposable)
+            if (Current is IDisposable disposable)
                 disposable.Dispose();
 
             // Se è nella cronologia è certamente una pagina da salvare
@@ -109,8 +116,8 @@ namespace LiteUI.Navigation
                 case PageLaunchMode.SingleTop:
                     // Se current ha il tipo richiesto chiama direttamente
                     // altrimenti controlla che la pagina corrente si possa terminare e creala
-                    if (current?.GetType() == type)
-                        current.CallRetrieved(extras);
+                    if (Current?.GetType() == type)
+                        Current.CallRetrieved(extras);
                     else if (SaveCurrent())
                         return;
                     else
@@ -122,11 +129,11 @@ namespace LiteUI.Navigation
                     // Se current ha il tipo richiesto chiama direttamente
                     // altrimenti controlla se è presente nella cronologia e inizia a disporre le pagine
                     // altrimenti controlla che la pagina corrente si possa terminare e creala
-                    if (current?.GetType() == type)
-                        current.CallRetrieved(extras);
+                    if (Current?.GetType() == type)
+                        Current.CallRetrieved(extras);
                     else if(history.Any(p => p.GetType() == type))
                     {
-                        var page = current;
+                        var page = Current;
 
                         do
                         {
@@ -154,15 +161,15 @@ namespace LiteUI.Navigation
 
             bool SaveCurrent()
             {
-                if (current != null)
+                if (Current is not null)
                 {
                     // Se la pagina non va abbandonata termina
-                    if (current.CallClosing())
+                    if (Current.CallClosing())
                         return true;
 
                     // Se la pagina non è da ignorare aggiungila alla cronologia
                     if (saveCurrent)
-                        history.Push(current);
+                        history.Push(Current);
                 }
 
                 return false;
