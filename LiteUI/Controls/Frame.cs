@@ -45,7 +45,6 @@ namespace LiteUI.Controls
 
         public Frame()
         {
-            // Inizializza NavigationService e comando Back
             NavigationService = new NavigationService(OnLoadPageCallback);
         }
 
