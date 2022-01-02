@@ -21,11 +21,18 @@ namespace LiteUI.Navigation
 
         private void LoadCurrent(Page page)
         {
-            // Imposta nuova pagina come corrente e carica in finestra
+            // Salva pagina attuale e scarica navigationservice se necessario
             var old = current;
+            if (old is not null)
+                old.NavigationService = null;
+
+            // Imposta la nuova pagina come corrente, ingetta navigationservice e chiama callback
             current = page;
+            current.NavigationService = this;
             _onLoadPageCallBack(page);
-            old.CallLeft();
+
+            // Esegui evento pagina abbandonata su vecchia se necessario
+            old?.CallLeft();
         }
 
         internal bool CancelLeaving()

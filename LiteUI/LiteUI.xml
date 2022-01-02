@@ -9,11 +9,16 @@
             L'oggetto <see cref="T:LiteUI.Navigation.NavigationService"/> che la pagina sta usando per supportare la navigazione o <see langword="null"/> se questa non è visualizzata.
             </summary>
         </member>
+        <member name="M:LiteUI.Controls.Frame.CancelLeaving">
+            <summary>
+            Comunica se sia necessario restare sulla pagina corrente.
+            </summary>
+        </member>
         <member name="M:LiteUI.Controls.MessageBox.Show(System.Windows.Window,System.String,System.Windows.MessageBoxImage,System.Windows.MessageBoxButton,System.String)">
             <summary>
             Displays a message box that has a message, title bar caption, button, and icon; and that returns a result.
             </summary>
-            <param name="owner">A Window that represents the owner window of the message box.</param>
+            <param name="owner">The window owning the message box.</param>
             <param name="messageBoxText">A string that specifies the text to display.</param>
             <param name="icon">A MessageBoxImage value that specifies the icon to display.</param>
             <param name="button">A MessageBoxButton value that specifies which button or buttons to display.</param>
@@ -58,14 +63,14 @@
             Evento chiamato quando la pagina viene richiamata.
             </summary>
         </member>
-        <member name="E:LiteUI.Controls.Page.Closing">
+        <member name="E:LiteUI.Controls.Page.Leaving">
             <summary>
             Evento chiamato quando la pagina sta per essere lasciata.
             </summary>
         </member>
-        <member name="M:LiteUI.Controls.Page.GetWindow">
+        <member name="E:LiteUI.Controls.Page.Left">
             <summary>
-            Ottiene un riferimento alla finestra contenente la pagina.
+            Evento chiamato quando la pagina è stata abbandonata.
             </summary>
         </member>
         <member name="M:LiteUI.Controls.Theming.SetGlobalTheme(LiteUI.Controls.Theme)">

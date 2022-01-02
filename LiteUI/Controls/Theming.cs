@@ -64,10 +64,10 @@ namespace LiteUI.Controls
 
         [AttachedPropertyBrowsableForType(typeof(FrameworkElement))]
         [Category(nameof(LiteUI))]
-        public static Theme GetTheme(UIElement target)
+        public static Theme GetTheme(DependencyObject target)
             => (Theme)target.GetValue(ThemeProperty);
 
-        public static void SetTheme(UIElement target, Theme value)
+        public static void SetTheme(DependencyObject target, Theme value)
             => target.SetValue(ThemeProperty, value);
 
         // Accented
@@ -81,10 +81,10 @@ namespace LiteUI.Controls
 
         [AttachedPropertyBrowsableForType(typeof(Button))]
         [Category(nameof(LiteUI))]
-        public static bool GetAccented(UIElement target)
+        public static bool GetAccented(DependencyObject target)
             => (bool)target.GetValue(AccentedProperty);
 
-        public static void SetAccented(UIElement target, bool value)
+        public static void SetAccented(DependencyObject target, bool value)
             => target.SetValue(AccentedProperty, value);
     }
 }

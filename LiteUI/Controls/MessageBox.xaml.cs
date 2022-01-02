@@ -11,7 +11,7 @@ namespace LiteUI.Controls
         /// <summary>
         /// Displays a message box that has a message, title bar caption, button, and icon; and that returns a result.
         /// </summary>
-        /// <param name="owner">A Window that represents the owner window of the message box.</param>
+        /// <param name="owner">The window owning the message box.</param>
         /// <param name="messageBoxText">A string that specifies the text to display.</param>
         /// <param name="icon">A MessageBoxImage value that specifies the icon to display.</param>
         /// <param name="button">A MessageBoxButton value that specifies which button or buttons to display.</param>

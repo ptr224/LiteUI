@@ -40,7 +40,7 @@ namespace LiteUI.Test
 
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var window = GetWindow();
+            var window = System.Windows.Window.GetWindow(this);
 
             if (window is null)
                 return;
@@ -75,7 +75,7 @@ namespace LiteUI.Test
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Controls.MessageBox.Show(GetWindow(), "Ciao", MessageBoxImage.Question, MessageBoxButton.OK);
+            Controls.MessageBox.Show(System.Windows.Window.GetWindow(this), "Ciao", MessageBoxImage.Question, MessageBoxButton.OK);
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)

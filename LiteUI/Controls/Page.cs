@@ -50,8 +50,7 @@ namespace LiteUI.Controls
         /// <summary>
         /// L'oggetto <see cref="Navigation.NavigationService"/> che la pagina sta usando per supportare la navigazione o <see langword="null"/> se questa non è visualizzata.
         /// </summary>
-        public NavigationService NavigationService
-            => GetWindow()?.NavigationService;
+        public NavigationService NavigationService { get; internal set; }
 
         /// <summary>
         /// Evento chiamato alla creazione della pagina.
@@ -72,12 +71,6 @@ namespace LiteUI.Controls
         /// Evento chiamato quando la pagina è stata abbandonata.
         /// </summary>
         public event EventHandler Left;
-
-        /// <summary>
-        /// Ottiene un riferimento alla finestra contenente la pagina.
-        /// </summary>
-        protected NavigationWindow GetWindow()
-            => System.Windows.Window.GetWindow(this) as NavigationWindow;
 
         internal void CallCreated(NavigationParams extras)
             => Created?.Invoke(this, extras);
