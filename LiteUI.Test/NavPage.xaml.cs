@@ -35,7 +35,7 @@ namespace LiteUI.Test
 
         private void Page_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            e.Cancel = frame.CancelClosing();
+            e.Cancel = frame.CancelLeaving();
         }
 
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)

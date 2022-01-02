@@ -95,7 +95,7 @@ namespace LiteUI.Controls
         private void LiteNavigationWindow_Closing(object sender, CancelEventArgs e)
         {
             // Se la pagina corrente non va chiusa non chiudere nemmeno la finestra
-            e.Cancel = NavigationService.CancelClosing();
+            e.Cancel = NavigationService.CancelLeaving();
         }
 
         private void LiteNavigationWindow_Closed(object sender, EventArgs e)

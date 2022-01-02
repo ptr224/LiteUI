@@ -63,10 +63,12 @@ namespace LiteUI.Controls
                 NavigationService.Navigate(StartupPage);
         }
 
-        public bool CancelClosing()
+        /// <summary>
+        /// Comunica se sia necessario restare sulla pagina corrente.
+        /// </summary>
+        public bool CancelLeaving()
         {
-            // Comunica se sia necessario restare sulla pagina corrente
-            return NavigationService.CancelClosing();
+            return NavigationService.CancelLeaving();
         }
 
         public virtual void Dispose()

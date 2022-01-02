@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:LiteUI.Test"
              xmlns:lite="clr-namespace:LiteUI.Controls;assembly=LiteUI"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800" Title="NavPage" Created="LitePage_Created" Retrieved="LitePage_Retrieved" Closing="Page_Closing">
+             d:DesignHeight="450" d:DesignWidth="800" Title="NavPage" Created="LitePage_Created" Retrieved="LitePage_Retrieved" Leaving="Page_Closing">
     <lite:Page.Toolbar>
         <lite:ToolbarItemsCollection>
             <lite:ToolbarItem Position="Right">

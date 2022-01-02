@@ -22,14 +22,16 @@ namespace LiteUI.Navigation
         private void LoadCurrent(Page page)
         {
             // Imposta nuova pagina come corrente e carica in finestra
+            var old = current;
             current = page;
             _onLoadPageCallBack(page);
+            old.CallLeft();
         }
 
-        internal bool CancelClosing()
+        internal bool CancelLeaving()
         {
             // Comunica se sia necessario restare sulla pagina corrente
-            return current?.CallClosing() ?? false;
+            return current?.CallLeaving() ?? false;
         }
 
         internal void Dispose()
@@ -63,7 +65,7 @@ namespace LiteUI.Navigation
                 throw new InvalidOperationException("La cronologia di navigazione è vuota.");
 
             // Se la pagina non va abbandonata termina
-            if (current.CallClosing())
+            if (current.CallLeaving())
                 return;
 
             // Se la pagina implementa IDisposable eseguilo
@@ -136,7 +138,7 @@ namespace LiteUI.Navigation
                         do
                         {
                             // Se la pagina non va abbandonata termina
-                            if (page.CallClosing())
+                            if (page.CallLeaving())
                                 return;
 
                             // Se la pagina implementa IDisposable eseguilo
@@ -162,7 +164,7 @@ namespace LiteUI.Navigation
                 if (current is not null)
                 {
                     // Se la pagina non va abbandonata termina
-                    if (current.CallClosing())
+                    if (current.CallLeaving())
                         return true;
 
                     // Se la pagina non è da ignorare aggiungila alla cronologia
@@ -175,7 +177,7 @@ namespace LiteUI.Navigation
 
             void CreatePage()
             {
-                var page = (Page)Activator.CreateInstance(type);
+                var page = Activator.CreateInstance(type) as Page;
                 page.CallCreated(extras);
                 LoadCurrent(page);
             }

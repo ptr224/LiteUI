@@ -66,7 +66,12 @@ namespace LiteUI.Controls
         /// <summary>
         /// Evento chiamato quando la pagina sta per essere lasciata.
         /// </summary>
-        public event CancelEventHandler Closing;
+        public event CancelEventHandler Leaving;
+
+        /// <summary>
+        /// Evento chiamato quando la pagina è stata abbandonata.
+        /// </summary>
+        public event EventHandler Left;
 
         /// <summary>
         /// Ottiene un riferimento alla finestra contenente la pagina.
@@ -80,11 +85,14 @@ namespace LiteUI.Controls
         internal void CallRetrieved(NavigationParams extras)
             => Retrieved?.Invoke(this, extras);
 
-        internal bool CallClosing()
+        internal bool CallLeaving()
         {
             var e = new CancelEventArgs();
-            Closing?.Invoke(this, e);
+            Leaving?.Invoke(this, e);
             return e.Cancel;
         }
+
+        internal void CallLeft()
+            => Left?.Invoke(this, new());
     }
 }
