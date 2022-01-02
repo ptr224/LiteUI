@@ -47,10 +47,13 @@ namespace LiteUI.Controls
 
         //
 
+        private NavigationService navigationService;
+
         /// <summary>
         /// L'oggetto <see cref="Navigation.NavigationService"/> che la pagina sta usando per supportare la navigazione o <see langword="null"/> se questa non è visualizzata.
         /// </summary>
-        public NavigationService NavigationService { get; internal set; }
+        public NavigationService NavigationService
+            => navigationService;
 
         /// <summary>
         /// Evento chiamato alla creazione della pagina.
@@ -71,6 +74,9 @@ namespace LiteUI.Controls
         /// Evento chiamato quando la pagina è stata abbandonata.
         /// </summary>
         public event EventHandler Left;
+
+        internal void SetNavigationService(NavigationService service)
+            => navigationService = service;
 
         internal void CallCreated(NavigationParams extras)
             => Created?.Invoke(this, extras);

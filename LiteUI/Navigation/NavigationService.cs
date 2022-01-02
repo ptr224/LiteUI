@@ -23,12 +23,11 @@ namespace LiteUI.Navigation
         {
             // Salva pagina attuale e scarica navigationservice se necessario
             var old = current;
-            if (old is not null)
-                old.NavigationService = null;
+            old?.SetNavigationService(null);
 
             // Imposta la nuova pagina come corrente, ingetta navigationservice e chiama callback
             current = page;
-            current.NavigationService = this;
+            current.SetNavigationService(this);
             _onLoadPageCallBack(page);
 
             // Esegui evento pagina abbandonata su vecchia se necessario
