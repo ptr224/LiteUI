@@ -30,7 +30,7 @@ namespace LiteUI.Test
 
         private void LitePage_Retrieved(object sender, NavigationParams e)
         {
-            Title = $"{e.Get(1, Title)} <- {e.Id}R";
+            Title = $"{e.Get(1, Title)} {(e.Id == NavigationParams.DEFAULT_ID ? "<-" : "->")} {e.Id}R";
         }
 
         private void Page_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -96,6 +96,12 @@ namespace LiteUI.Test
             var button = sender as Button;
             var item = button.Parent as ToolbarItem;
             item.Position = item.Position == ToolbarPosition.Left ? ToolbarPosition.Right : ToolbarPosition.Left;
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            if (NavigationService.CanGoBack)
+                NavigationService.GoBack((1, Title));
         }
     }
 }
