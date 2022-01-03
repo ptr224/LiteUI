@@ -95,9 +95,26 @@ namespace LiteUI.Navigation
         /// <summary>
         /// Ritorna alla pagina precedente nella cronologia di navigazione con i parametri dati.<para/>Se la pagina implementa <see cref="IDisposable"/> verrà disposta automaticamente.
         /// </summary>
+        /// <param name="id">L'Id della transazione</param>
         /// <param name="extras">I parametri da passare alla pagina.</param>
         /// <exception cref="InvalidOperationException">La cronologia di navigazione è vuota.</exception>
-        public void GoBack(params (string key, object value)[] extras)
+        public void GoBack(int id, params (int key, object value)[] extras)
+        {
+            // Ricrea l'oggetto parametro dai valori passati
+            var param = new NavigationParams(id);
+
+            foreach (var (key, value) in extras)
+                param.Add(key, value);
+
+            GoBack(param);
+        }
+
+        /// <summary>
+        /// Ritorna alla pagina precedente nella cronologia di navigazione con i parametri dati.<para/>Se la pagina implementa <see cref="IDisposable"/> verrà disposta automaticamente.
+        /// </summary>
+        /// <param name="extras">I parametri da passare alla pagina.</param>
+        /// <exception cref="InvalidOperationException">La cronologia di navigazione è vuota.</exception>
+        public void GoBack(params (int key, object value)[] extras)
         {
             // Ricrea l'oggetto parametro dai valori passati
             var param = new NavigationParams();
@@ -224,8 +241,25 @@ namespace LiteUI.Navigation
         /// Naviga ad una pagina del tipo dato con i parametri dati.
         /// </summary>
         /// <typeparam name="T">Il tipo della pagina da aprire.</typeparam>
+        /// <param name="id">L'Id della transazione.</param>
         /// <param name="extras">I parametri da passare alla pagina.</param>
-        public void Navigate<T>(params (string key, object value)[] extras) where T : Page
+        public void Navigate<T>(int id, params (int key, object value)[] extras) where T : Page
+        {
+            // Ricrea l'oggetto parametro dai valori passati
+            var param = new NavigationParams(id);
+
+            foreach (var (key, value) in extras)
+                param.Add(key, value);
+
+            Navigate<T>(param);
+        }
+
+        /// <summary>
+        /// Naviga ad una pagina del tipo dato con i parametri dati.
+        /// </summary>
+        /// <typeparam name="T">Il tipo della pagina da aprire.</typeparam>
+        /// <param name="extras">I parametri da passare alla pagina.</param>
+        public void Navigate<T>(params (int key, object value)[] extras) where T : Page
         {
             // Ricrea l'oggetto parametro dai valori passati
             var param = new NavigationParams();

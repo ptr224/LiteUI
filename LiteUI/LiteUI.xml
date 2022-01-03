@@ -84,22 +84,35 @@
             Collezione di parametri passati dal <see cref="T:LiteUI.Navigation.NavigationService"/>.
             </summary>
         </member>
-        <member name="M:LiteUI.Navigation.NavigationParams.Add(System.String,System.Object)">
+        <member name="F:LiteUI.Navigation.NavigationParams.DEFAULT_ID">
+            <summary>
+            Id di default. Non usare questo valore se si vuole assegnare un'identità alla transazione.
+            </summary>
+        </member>
+        <member name="P:LiteUI.Navigation.NavigationParams.Id">
+            <summary>
+            Identificativo della transazione.
+            </summary>
+        </member>
+        <member name="M:LiteUI.Navigation.NavigationParams.#ctor(System.Int32)">
+            <summary>
+            Crea una nuova transazione specificando l'Id.
+            </summary>
+            <param name="id">L'Id della transazione.</param>
+        </member>
+        <member name="M:LiteUI.Navigation.NavigationParams.#ctor">
+            <summary>
+            Crea una nuova transazione con Id di default.
+            </summary>
+        </member>
+        <member name="M:LiteUI.Navigation.NavigationParams.Add(System.Int32,System.Object)">
             <summary>
             Aggiunge un parametro.
             </summary>
             <param name="key">La chiave del parametro.</param>
             <param name="value">Il valore del parametro.</param>
         </member>
-        <member name="M:LiteUI.Navigation.NavigationParams.Get(System.String,System.Object)">
-            <summary>
-            Preleva un parametro o un valore di default.
-            </summary>
-            <param name="key">La chiave del parametro.</param>
-            <param name="defaultValue">Il valore di default nel caso in cui il parametro sia assente.</param>
-            <returns></returns>
-        </member>
-        <member name="M:LiteUI.Navigation.NavigationParams.Get``1(System.String,System.Object)">
+        <member name="M:LiteUI.Navigation.NavigationParams.Get``1(System.Int32,``0)">
             <summary>
             Preleva un parametro o un valore di default.
             </summary>
@@ -107,7 +120,7 @@
             <param name="key">La chiave del parametro.</param>
             <param name="defaultValue">Il valore di default nel caso in cui il parametro sia assente.</param>
         </member>
-        <member name="M:LiteUI.Navigation.NavigationParams.Get``1(System.String)">
+        <member name="M:LiteUI.Navigation.NavigationParams.Get``1(System.Int32)">
             <summary>
             Preleva un parametro o il valore di default di quel tipo.
             </summary>
@@ -131,7 +144,15 @@
             <param name="extras">I parametri da ritornare alla pagina.</param>
             <exception cref="T:System.InvalidOperationException">La cronologia di navigazione è vuota.</exception>
         </member>
-        <member name="M:LiteUI.Navigation.NavigationService.GoBack(System.ValueTuple{System.String,System.Object}[])">
+        <member name="M:LiteUI.Navigation.NavigationService.GoBack(System.Int32,System.ValueTuple{System.Int32,System.Object}[])">
+            <summary>
+            Ritorna alla pagina precedente nella cronologia di navigazione con i parametri dati.<para/>Se la pagina implementa <see cref="T:System.IDisposable"/> verrà disposta automaticamente.
+            </summary>
+            <param name="id">L'Id della transazione</param>
+            <param name="extras">I parametri da passare alla pagina.</param>
+            <exception cref="T:System.InvalidOperationException">La cronologia di navigazione è vuota.</exception>
+        </member>
+        <member name="M:LiteUI.Navigation.NavigationService.GoBack(System.ValueTuple{System.Int32,System.Object}[])">
             <summary>
             Ritorna alla pagina precedente nella cronologia di navigazione con i parametri dati.<para/>Se la pagina implementa <see cref="T:System.IDisposable"/> verrà disposta automaticamente.
             </summary>
@@ -154,7 +175,15 @@
             <typeparam name="T">Il tipo della pagina da aprire.</typeparam>
             <param name="extras">I parametri da passare alla pagina.</param>
         </member>
-        <member name="M:LiteUI.Navigation.NavigationService.Navigate``1(System.ValueTuple{System.String,System.Object}[])">
+        <member name="M:LiteUI.Navigation.NavigationService.Navigate``1(System.Int32,System.ValueTuple{System.Int32,System.Object}[])">
+            <summary>
+            Naviga ad una pagina del tipo dato con i parametri dati.
+            </summary>
+            <typeparam name="T">Il tipo della pagina da aprire.</typeparam>
+            <param name="id">L'Id della transazione.</param>
+            <param name="extras">I parametri da passare alla pagina.</param>
+        </member>
+        <member name="M:LiteUI.Navigation.NavigationService.Navigate``1(System.ValueTuple{System.Int32,System.Object}[])">
             <summary>
             Naviga ad una pagina del tipo dato con i parametri dati.
             </summary>

@@ -25,12 +25,12 @@ namespace LiteUI.Test
 
         private void LitePage_Created(object sender, NavigationParams e)
         {
-            Title = e.Get<string>("Title", "Default") + "C";
+            Title = $"{e.Get(1, "X")} -> {e.Id}C";
         }
 
         private void LitePage_Retrieved(object sender, NavigationParams e)
         {
-            Title = e.Get<string>("Title", "Default") + "R";
+            Title = $"{e.Get(1, Title)} <- {e.Id}R";
         }
 
         private void Page_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -87,7 +87,7 @@ namespace LiteUI.Test
 
             GetWindow().BarStyle = (Arr.Length == j) ? Arr[0] : Arr[j];*/
 
-            NavigationService.Navigate<NavPage>(("Title", Title));
+            NavigationService.Navigate<NavPage>(1, (1, Title));
         }
 
         private void tbb_Click(object sender, RoutedEventArgs e)

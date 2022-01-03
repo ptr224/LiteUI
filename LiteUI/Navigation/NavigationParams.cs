@@ -7,14 +7,39 @@ namespace LiteUI.Navigation
     /// </summary>
     public sealed class NavigationParams
     {
-        private readonly Dictionary<string, object> extras = new();
+        /// <summary>
+        /// Id di default. Non usare questo valore se si vuole assegnare un'identità alla transazione.
+        /// </summary>
+        public const int DEFAULT_ID = -1;
+
+        private readonly Dictionary<int, object> extras = new();
+
+        /// <summary>
+        /// Identificativo della transazione.
+        /// </summary>
+        public int Id { get; }
+
+        /// <summary>
+        /// Crea una nuova transazione specificando l'Id.
+        /// </summary>
+        /// <param name="id">L'Id della transazione.</param>
+        public NavigationParams(int id)
+        {
+            Id = id;
+        }
+
+        /// <summary>
+        /// Crea una nuova transazione con Id di default.
+        /// </summary>
+        public NavigationParams() : this(DEFAULT_ID)
+        { }
 
         /// <summary>
         /// Aggiunge un parametro.
         /// </summary>
         /// <param name="key">La chiave del parametro.</param>
         /// <param name="value">Il valore del parametro.</param>
-        public NavigationParams Add(string key, object value)
+        public NavigationParams Add(int key, object value)
         {
             extras.Add(key, value);
             return this;
@@ -23,32 +48,23 @@ namespace LiteUI.Navigation
         /// <summary>
         /// Preleva un parametro o un valore di default.
         /// </summary>
-        /// <param name="key">La chiave del parametro.</param>
-        /// <param name="defaultValue">Il valore di default nel caso in cui il parametro sia assente.</param>
-        /// <returns></returns>
-        public object Get(string key, object defaultValue)
-        {
-            if (extras.TryGetValue(key, out var value))
-                return value;
-            else
-                return defaultValue;
-        }
-
-        /// <summary>
-        /// Preleva un parametro o un valore di default.
-        /// </summary>
         /// <typeparam name="T">Il tipo del parametro.</typeparam>
         /// <param name="key">La chiave del parametro.</param>
         /// <param name="defaultValue">Il valore di default nel caso in cui il parametro sia assente.</param>
-        public T Get<T>(string key, object defaultValue)
-            => (T)Get(key, defaultValue);
+        public T Get<T>(int key, T defaultValue)
+        {
+            if (extras.TryGetValue(key, out var value))
+                return (T)value;
+            else
+                return defaultValue;
+        }
 
         /// <summary>
         /// Preleva un parametro o il valore di default di quel tipo.
         /// </summary>
         /// <typeparam name="T">Il tipo del parametro.</typeparam>
         /// <param name="key">La chiave del parametro.</param>
-        public T Get<T>(string key)
-            => (T)Get(key, default(T));
+        public T Get<T>(int key)
+            => Get(key, default(T));
     }
 }
