@@ -62,10 +62,11 @@ namespace LiteUI.Navigation
         public bool CanGoBack => history.Count > 0;
 
         /// <summary>
-        /// Ritorna alla pagina precedente nella cronologia di navigazione.<para/>Se la pagina implementa <see cref="IDisposable"/> verrà disposta automaticamente.
+        /// Ritorna alla pagina precedente nella cronologia di navigazione con i parametri dati.<para/>Se la pagina implementa <see cref="IDisposable"/> verrà disposta automaticamente.
         /// </summary>
-        /// <exception cref="ArgumentOutOfRangeException">La cronologia di navigazione è vuota.</exception>
-        public void GoBack()
+        /// <param name="extras">I parametri da ritornare alla pagina.</param>
+        /// <exception cref="InvalidOperationException">La cronologia di navigazione è vuota.</exception>
+        public void GoBack(NavigationParams extras = null)
         {
             if (!CanGoBack)
                 throw new InvalidOperationException("La cronologia di navigazione è vuota.");
@@ -74,6 +75,10 @@ namespace LiteUI.Navigation
             if (current.CallLeaving())
                 return;
 
+            // Se non sono stati passati parametri crea vuoto
+            if (extras is null)
+                extras = new();
+
             // Se la pagina implementa IDisposable eseguilo
             if (current is IDisposable disposable)
                 disposable.Dispose();
@@ -81,8 +86,26 @@ namespace LiteUI.Navigation
             // Se è nella cronologia è certamente una pagina da salvare
             saveCurrent = true;
 
-            // Preleva l'ultima pagina dalla cronologia e caricala
-            LoadCurrent(history.Pop());
+            // Preleva l'ultima pagina dalla cronologia, passa i parametri restituiti e caricala
+            var page = history.Pop();
+            page.CallRetrieved(extras);
+            LoadCurrent(page);
+        }
+
+        /// <summary>
+        /// Ritorna alla pagina precedente nella cronologia di navigazione con i parametri dati.<para/>Se la pagina implementa <see cref="IDisposable"/> verrà disposta automaticamente.
+        /// </summary>
+        /// <param name="extras">I parametri da passare alla pagina.</param>
+        /// <exception cref="InvalidOperationException">La cronologia di navigazione è vuota.</exception>
+        public void GoBack(params (string key, object value)[] extras)
+        {
+            // Ricrea l'oggetto parametro dai valori passati
+            var param = new NavigationParams();
+
+            foreach (var (key, value) in extras)
+                param.Add(key, value);
+
+            GoBack(param);
         }
 
         /// <summary>
@@ -101,7 +124,7 @@ namespace LiteUI.Navigation
 
             // Se non sono stati passati parametri crea vuoto
             if (extras is null)
-                extras = new NavigationParams();
+                extras = new();
 
             switch (launchMode)
             {

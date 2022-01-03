@@ -124,11 +124,19 @@
             Controlla se sia presente almeno una pagina nella cronologia di navigazione.
             </summary>
         </member>
-        <member name="M:LiteUI.Navigation.NavigationService.GoBack">
+        <member name="M:LiteUI.Navigation.NavigationService.GoBack(LiteUI.Navigation.NavigationParams)">
             <summary>
-            Ritorna alla pagina precedente nella cronologia di navigazione.<para/>Se la pagina implementa <see cref="T:System.IDisposable"/> verrà disposta automaticamente.
+            Ritorna alla pagina precedente nella cronologia di navigazione con i parametri dati.<para/>Se la pagina implementa <see cref="T:System.IDisposable"/> verrà disposta automaticamente.
             </summary>
-            <exception cref="T:System.ArgumentOutOfRangeException">La cronologia di navigazione è vuota.</exception>
+            <param name="extras">I parametri da ritornare alla pagina.</param>
+            <exception cref="T:System.InvalidOperationException">La cronologia di navigazione è vuota.</exception>
+        </member>
+        <member name="M:LiteUI.Navigation.NavigationService.GoBack(System.ValueTuple{System.String,System.Object}[])">
+            <summary>
+            Ritorna alla pagina precedente nella cronologia di navigazione con i parametri dati.<para/>Se la pagina implementa <see cref="T:System.IDisposable"/> verrà disposta automaticamente.
+            </summary>
+            <param name="extras">I parametri da passare alla pagina.</param>
+            <exception cref="T:System.InvalidOperationException">La cronologia di navigazione è vuota.</exception>
         </member>
         <member name="M:LiteUI.Navigation.NavigationService.Navigate(System.Type,LiteUI.Navigation.NavigationParams)">
             <summary>
