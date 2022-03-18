@@ -109,7 +109,7 @@ namespace LiteUI.Controls
             base.OnApplyTemplate();
 
             // Naviga a StartupPage se dichiarata
-            if (StartupPage is not null)
+            if (StartupPage != null)
                 NavigationService.Navigate(StartupPage);
         }
     }

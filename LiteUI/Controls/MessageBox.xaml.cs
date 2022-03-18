@@ -21,7 +21,7 @@ namespace LiteUI.Controls
             var msg = new MessageBoxWindow(messageBoxText, caption, button, icon);
 
             // Imposta l'owner e usa lo stesso tema
-            if (owner is not null)
+            if (owner != null)
             {
                 msg.Owner = owner;
                 msg.WindowStartupLocation = WindowStartupLocation.CenterOwner;
@@ -158,17 +158,26 @@ namespace LiteUI.Controls
             }
 
             // Imposta icona
-            Image.Content = icon switch
-            {
-                MessageBoxImage.Exclamation => "\uE7BA",    // Enumeration value 48 - also covers "Warning"
-                MessageBoxImage.Error => "\uEA39",          // Enumeration value 16, also covers "Hand" and "Stop"
-                MessageBoxImage.Information => "\uE946",    // Enumeration value 64 - also covers "Asterisk"
-                MessageBoxImage.Question => "\uE9CE",
-                _ => null
-            };
 
-            if (Image.Content is not null)
-                Image.Visibility = Visibility.Visible;
+            switch (icon)
+            {
+                case MessageBoxImage.Exclamation: // Enumeration value 48 - also covers "Warning"
+                    Image.Content = "\uE7BA";
+                    Image.Visibility = Visibility.Visible;
+                    break;
+                case MessageBoxImage.Error: // Enumeration value 16, also covers "Hand" and "Stop"
+                    Image.Content = "\uEA39";
+                    Image.Visibility = Visibility.Visible;
+                    break;
+                case MessageBoxImage.Information: // Enumeration value 64 - also covers "Asterisk"
+                    Image.Content = "\uE946";
+                    Image.Visibility = Visibility.Visible;
+                    break;
+                case MessageBoxImage.Question:
+                    Image.Content = "\uE9CE";
+                    Image.Visibility = Visibility.Visible;
+                    break;
+            }
         }
 
         private void Button_OK_Click(object sender, RoutedEventArgs e)

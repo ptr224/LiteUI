@@ -4,9 +4,9 @@ namespace LiteUI.Controls
 {
     public sealed class Theme
     {
-        public static readonly Theme Light = new();
+        public static readonly Theme Light = new Theme();
 
-        public static readonly Theme Dark = new()
+        public static readonly Theme Dark = new Theme()
         {
             Active = Color.FromRgb(0xFF, 0xFF, 0xFF),
             Inactive = Color.FromRgb(0x7F, 0x7F, 0x7F),

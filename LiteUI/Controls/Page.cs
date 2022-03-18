@@ -92,6 +92,6 @@ namespace LiteUI.Controls
         }
 
         internal void CallLeft()
-            => Left?.Invoke(this, new());
+            => Left?.Invoke(this, new EventArgs());
     }
 }

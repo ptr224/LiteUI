@@ -46,8 +46,8 @@ namespace LiteUI.Navigation
             if (current is IDisposable disposableCurrent)
                 disposableCurrent.Dispose();
 
-            while (history.TryPop(out var page))
-                if (page is IDisposable disposablePage)
+            while (history.Count > 0)
+                if (history.Pop() is IDisposable disposablePage)
                     disposablePage.Dispose();
         }
 
@@ -77,7 +77,7 @@ namespace LiteUI.Navigation
 
             // Se non sono stati passati parametri crea vuoto
             if (extras is null)
-                extras = new();
+                extras = new NavigationParams();
 
             // Se la pagina implementa IDisposable eseguilo
             if (current is IDisposable disposable)
@@ -141,7 +141,7 @@ namespace LiteUI.Navigation
 
             // Se non sono stati passati parametri crea vuoto
             if (extras is null)
-                extras = new();
+                extras = new NavigationParams();
 
             switch (launchMode)
             {
@@ -207,7 +207,7 @@ namespace LiteUI.Navigation
 
             bool SaveCurrent()
             {
-                if (current is not null)
+                if (current != null)
                 {
                     // Se la pagina non va abbandonata termina
                     if (current.CallLeaving())

@@ -12,7 +12,7 @@ namespace LiteUI.Navigation
         /// </summary>
         public const int DEFAULT_ID = -1;
 
-        private readonly Dictionary<int, object> extras = new();
+        private readonly Dictionary<int, object> extras = new Dictionary<int, object>();
 
         /// <summary>
         /// Identificativo della transazione.
