@@ -1,7 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Media;
 
 namespace LiteUI.Controls
@@ -79,12 +78,31 @@ namespace LiteUI.Controls
             new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsRender)
         );
 
-        [AttachedPropertyBrowsableForType(typeof(Button))]
+        [AttachedPropertyBrowsableForType(typeof(FrameworkElement))]
         [Category(nameof(LiteUI))]
         public static bool GetAccented(DependencyObject target)
             => (bool)target.GetValue(AccentedProperty);
 
         public static void SetAccented(DependencyObject target, bool value)
             => target.SetValue(AccentedProperty, value);
+
+        // GroupPosition
+
+        public enum GroupPosition { None, LeftTop, Top, RightTop, Left, Center, Right, LeftBottom, Bottom, RightBottom }
+
+        public static readonly DependencyProperty GroupPositionProperty = DependencyProperty.RegisterAttached(
+            "GroupPosition",
+            typeof(GroupPosition),
+            typeof(Theming),
+            new FrameworkPropertyMetadata(GroupPosition.None, FrameworkPropertyMetadataOptions.AffectsRender)
+        );
+
+        [AttachedPropertyBrowsableForType(typeof(FrameworkElement))]
+        [Category(nameof(LiteUI))]
+        public static GroupPosition GetGroupPosition(DependencyObject target)
+            => (GroupPosition)target.GetValue(GroupPositionProperty);
+
+        public static void SetGroupPosition(DependencyObject target, GroupPosition value)
+            => target.SetValue(GroupPositionProperty, value);
     }
 }

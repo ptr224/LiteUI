@@ -1,7 +1,37 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:lite="clr-namespace:LiteUI.Controls">
     <Style TargetType="{x:Type Border}">
         <Setter Property="CornerRadius" Value="3"/>
         <Setter Property="BorderBrush" Value="{DynamicResource ActiveColor}"/>
+        <Style.Triggers>
+            <Trigger Property="lite:Theming.GroupPosition" Value="Bottom">
+                <Setter Property="CornerRadius" Value="0,0,3,3"/>
+            </Trigger>
+            <Trigger Property="lite:Theming.GroupPosition" Value="Center">
+                <Setter Property="CornerRadius" Value="0"/>
+            </Trigger>
+            <Trigger Property="lite:Theming.GroupPosition" Value="Left">
+                <Setter Property="CornerRadius" Value="3,0,0,3"/>
+            </Trigger>
+            <Trigger Property="lite:Theming.GroupPosition" Value="LeftBottom">
+                <Setter Property="CornerRadius" Value="0,0,0,3"/>
+            </Trigger>
+            <Trigger Property="lite:Theming.GroupPosition" Value="LeftTop">
+                <Setter Property="CornerRadius" Value="3,0,0,0"/>
+            </Trigger>
+            <Trigger Property="lite:Theming.GroupPosition" Value="Right">
+                <Setter Property="CornerRadius" Value="0,3,3,0"/>
+            </Trigger>
+            <Trigger Property="lite:Theming.GroupPosition" Value="RightBottom">
+                <Setter Property="CornerRadius" Value="0,0,3,0"/>
+            </Trigger>
+            <Trigger Property="lite:Theming.GroupPosition" Value="RightTop">
+                <Setter Property="CornerRadius" Value="0,3,0,0"/>
+            </Trigger>
+            <Trigger Property="lite:Theming.GroupPosition" Value="Top">
+                <Setter Property="CornerRadius" Value="3,3,0,0"/>
+            </Trigger>
+        </Style.Triggers>
     </Style>
 </ResourceDictionary>

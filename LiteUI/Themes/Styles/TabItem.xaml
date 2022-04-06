@@ -1,5 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:lite="clr-namespace:LiteUI.Controls">
     <Style x:Key="FocusVisual">
         <Setter Property="Control.Template">
             <Setter.Value>
@@ -12,8 +13,9 @@
     <Style TargetType="{x:Type TabItem}">
         <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
         <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="BorderBrush" Value="{DynamicResource ActiveColor}"/>
         <Setter Property="Foreground" Value="{DynamicResource ActiveColor}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource ActiveColor}"/>
+        <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Margin" Value="0"/>
         <Setter Property="Padding" Value="6,2"/>
         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
@@ -22,7 +24,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TabItem}">
                     <Grid x:Name="templateRoot" SnapsToDevicePixels="true">
-                        <Border x:Name="mainBorder" CornerRadius="3,3,0,0" BorderBrush="Transparent" BorderThickness="1,1,1,0" Background="{TemplateBinding Background}" Margin="0"/>
+                        <Border x:Name="mainBorder" lite:Theming.GroupPosition="Top" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="Transparent" Background="{TemplateBinding Background}"/>
                         <ContentPresenter x:Name="contentPresenter" TextElement.Foreground="{TemplateBinding Foreground}" ContentSource="Header" Focusable="False" HorizontalAlignment="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
                     </Grid>
                     <ControlTemplate.Triggers>
@@ -36,16 +38,13 @@
                             <Setter Property="BorderBrush" Value="{DynamicResource InactiveColor}"/>
                         </Trigger>
                         <Trigger Property="TabStripPlacement" Value="Left">
-                            <Setter Property="CornerRadius" Value="3,0,0,3" TargetName="mainBorder"/>
-                            <Setter Property="BorderThickness" TargetName="mainBorder" Value="1,1,0,1"/>
+                            <Setter TargetName="mainBorder" Property="lite:Theming.GroupPosition" Value="Left"/>
                         </Trigger>
                         <Trigger Property="TabStripPlacement" Value="Bottom">
-                            <Setter Property="CornerRadius" Value="0,0,3,3" TargetName="mainBorder"/>
-                            <Setter Property="BorderThickness" TargetName="mainBorder" Value="1,0,1,1"/>
+                            <Setter TargetName="mainBorder" Property="lite:Theming.GroupPosition" Value="Bottom"/>
                         </Trigger>
                         <Trigger Property="TabStripPlacement" Value="Right">
-                            <Setter Property="CornerRadius" Value="0,3,3,0" TargetName="mainBorder"/>
-                            <Setter Property="BorderThickness" TargetName="mainBorder" Value="0,1,1,1"/>
+                            <Setter TargetName="mainBorder" Property="lite:Theming.GroupPosition" Value="Right"/>
                         </Trigger>
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>

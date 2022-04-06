@@ -52,7 +52,6 @@
         </GroupBox>
         <CheckBox x:Name="checkBox" Content="Abilita cose" HorizontalAlignment="Left" Margin="270,257,0,0" VerticalAlignment="Top" IsChecked="True"/>
         <CheckBox IsChecked="{Binding IsFullscreen, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type lite:Window}}}" Content="Fullscreen" HorizontalAlignment="Left" Margin="215,16,0,0" VerticalAlignment="Top" Cursor="Hand"/>
-        <Button Content="Apri pagina" Click="Button_Click_1" HorizontalAlignment="Left" Margin="251,295,0,0" VerticalAlignment="Top"/>
         <Popup x:Name="popup" Placement="Center" AllowsTransparency="True" StaysOpen="True" IsOpen="False">
             <lite:Popup Shadow="NoTop">
                 <Label Content="dwerew"/>
@@ -80,6 +79,40 @@
                 <Grid Background="{DynamicResource BackgroundColor}"/>
             </TabItem>
         </TabControl>
-        <Button Content="Chiudi pagina" HorizontalAlignment="Left" Margin="251,324,0,0" VerticalAlignment="Top" Click="Button_Click_2"/>
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Left" Margin="251,295,0,0" VerticalAlignment="Top">
+            <Button Content="Apri pagina" Click="Button_Click_1" lite:Theming.GroupPosition="Top"/>
+            <Button Content="Chiudi pagina" Click="Button_Click_2" lite:Theming.GroupPosition="Bottom" Cursor="Hand"/>
+        </StackPanel>
+        <Grid HorizontalAlignment="Left" Margin="232,355,0,0" VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Button Content="T" lite:Theming.GroupPosition="Top" Grid.Column="1"/>
+            <Button Content="L" lite:Theming.GroupPosition="Left" Grid.Row="1"/>
+            <Button Content="C" lite:Theming.GroupPosition="Center" Grid.Row="1" Grid.Column="1"/>
+            <Button Content="R" lite:Theming.GroupPosition="Right" Grid.Row="1" Grid.Column="2"/>
+            <Button Content="B" lite:Theming.GroupPosition="Bottom" Grid.Row="2" Grid.Column="1"/>
+        </Grid>
+        <Grid HorizontalAlignment="Left" Margin="350,355,0,0" VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Button Content="LT" lite:Theming.GroupPosition="LeftTop"/>
+            <Button Content="RT" lite:Theming.GroupPosition="RightTop" Grid.Column="1"/>
+            <Button Content="LB" lite:Theming.GroupPosition="LeftBottom" Grid.Row="1"/>
+            <Button Content="RB" lite:Theming.GroupPosition="RightBottom" Grid.Row="1" Grid.Column="1"/>
+        </Grid>
     </Grid>
 </lite:Page>

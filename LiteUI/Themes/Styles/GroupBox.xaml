@@ -22,7 +22,7 @@
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="6"/>
                         </Grid.RowDefinitions>
-                        <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Grid.ColumnSpan="4" CornerRadius="3" Grid.Row="1" Grid.RowSpan="3">
+                        <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Grid.ColumnSpan="4" Grid.Row="1" Grid.RowSpan="3">
                             <Border.OpacityMask>
                                 <MultiBinding ConverterParameter="7" Converter="{StaticResource BorderGapMaskConverter}">
                                     <Binding ElementName="Header" Path="ActualWidth"/>
