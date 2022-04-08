@@ -19,6 +19,7 @@
         <!--ResourceDictionary Source="/LiteUI;component/Themes/Styles/ListView.xaml"/>
         <ResourceDictionary Source="/LiteUI;component/Themes/Styles/ListViewItem.xaml"/-->
         <ResourceDictionary Source="/LiteUI;component/Themes/Styles/NavigationWindow.xaml"/>
+        <ResourceDictionary Source="/LiteUI;component/Themes/Styles/PasswordBox.xaml"/>
         <ResourceDictionary Source="/LiteUI;component/Themes/Styles/Popup.xaml"/>
         <ResourceDictionary Source="/LiteUI;component/Themes/Styles/ProgressBar.xaml"/>
         <ResourceDictionary Source="/LiteUI;component/Themes/Styles/RadioButton.xaml"/>

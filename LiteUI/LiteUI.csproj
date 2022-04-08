@@ -10,7 +10,7 @@
     <Description>Custom interface styles and Android-like page navigation windows for WPF.</Description>
     <RepositoryUrl>https://github.com/ptr224/LiteUI</RepositoryUrl>
     <PackageProjectUrl>https://github.com/ptr224/LiteUI</PackageProjectUrl>
-    <Version>2.1.0</Version>
+    <Version>2.1.1</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
