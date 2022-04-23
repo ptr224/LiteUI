@@ -28,7 +28,6 @@
         <ResourceDictionary Source="/LiteUI;component/Themes/Styles/TabControl.xaml"/>
         <ResourceDictionary Source="/LiteUI;component/Themes/Styles/TabItem.xaml"/>
         <ResourceDictionary Source="/LiteUI;component/Themes/Styles/TextBox.xaml"/>
-        <ResourceDictionary Source="/LiteUI;component/Themes/Styles/ToggleButton.xaml"/>
         <ResourceDictionary Source="/LiteUI;component/Themes/Styles/ToolbarItem.xaml"/>
         <!-- Incluso in NavigationWindow - ResourceDictionary Source="/LiteUI;component/Themes/Styles/Window.xaml"/-->
     </ResourceDictionary.MergedDictionaries>
